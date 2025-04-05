@@ -63,22 +63,28 @@ application {
 tasks.register("setVersion") {
 
 	doFirst {
-		val resourcesDir = "app/src/main/resources/"
+		val command = "git describe --tags --long"
 
-		val processBuilder: ProcessBuilder = ProcessBuilder("git describe")
+		val processBuilder: ProcessBuilder = ProcessBuilder(command.split(' '))
 		processBuilder.redirectErrorStream(true)
+		processBuilder.directory(rootProject.projectDir)
 
 		val shell: Process = processBuilder.start()
 		val shellReader: BufferedReader = BufferedReader(InputStreamReader(shell.getInputStream()))
 
 		val gitVersionString = shellReader.readLine()
 
+		println("$command gives: $gitVersionString")
+
 		val versionElements: List<String> = gitVersionString.split("-")
 		val versionProperty = if (versionElements[1] == "0") versionElements[0] else gitVersionString
 
-		println("Detected version string: " + versionProperty)
+		println("Using version string: " + versionProperty)
 
-		for (outputFilename: String in arrayOf("app/gradle.properties", resourcesDir + "version.properties")) {
+		for (outputFilename: String in arrayOf(
+			rootProject.projectDir.getAbsolutePath() + "/app/gradle.properties",
+			rootProject.projectDir.getAbsolutePath() + "/app/src/main/resources/version.properties"
+			)) {
 
 			val outputFile: Path = Paths.get(outputFilename)
 			if (Files.exists(outputFile)) {
