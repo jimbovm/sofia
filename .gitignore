@@ -1,0 +1,6 @@
+**/build
+.gradle
+.kotlin
+app/gradle.properties
+/app/main/
+app/src/main/resources/version.properties
