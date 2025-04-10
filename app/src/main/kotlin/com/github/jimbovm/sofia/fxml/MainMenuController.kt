@@ -17,45 +17,43 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia;
+package com.github.jimbovm.sofia.fxml;
 
 import java.util.ResourceBundle
 
-import javafx.application.Application
-import javafx.beans.property.ReadOnlyListWrapper
-import javafx.collections.ObservableList
+import javafx.fxml.FXMLLoader
+import javafx.event.ActionEvent
 import javafx.scene.Scene
-import javafx.scene.image.Image
-import javafx.scene.layout.Pane
+import javafx.scene.layout.HBox
+import javafx.stage.Popup
+import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.StageStyle
-import javafx.fxml.FXMLLoader
 
-/**
- * Main launcher for the Sofia GUI.
- */
-class Main() : Application() {
+class MainMenuController {
 
-	override fun start(primaryStage: Stage?) {
+	public fun initialize() {
 
-		val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
-		val fxmlLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/main.fxml"), uiBundle)
-
-		val mainPane: Pane = fxmlLoader.load()
-		val scene = Scene(mainPane)
-
-		primaryStage?.getIcons()?.add(Image("img/icon_128x128.png"))
-		primaryStage?.getIcons()?.add(Image("img/icon_64x64.png"))
-		primaryStage?.getIcons()?.add(Image("img/icon_32x32.png"))
-		primaryStage?.getIcons()?.add(Image("img/icon_16x16.png"))
-
-		primaryStage?.title = "Sofia"
-		primaryStage?.scene = scene
-		primaryStage?.show()
 	}
 
-	companion object {
-		
-		fun run(args: Array<String>): Unit = Application.launch(Main::class.java, *args)
+	/**
+	 * Spawn and show the "About Sofia" dialog.
+	 *
+	 * param[event] A click event received from the associated menu item.
+	 */
+	public fun showAboutDialog(event: ActionEvent): Unit {
+
+		val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
+		val fxmlLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/about.fxml"), uiBundle)
+
+		val aboutPane: HBox = fxmlLoader.load()
+
+		val aboutStage = Stage().apply {
+			title = uiBundle?.getString("about_title")
+			scene = Scene(aboutPane)
+		}
+		aboutStage.setResizable(false)
+		aboutStage.initModality(Modality.APPLICATION_MODAL)
+		aboutStage.show()
 	}
 }

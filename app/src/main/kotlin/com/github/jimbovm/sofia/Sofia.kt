@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: MIT-0
 
-Copyright 2025 Jimbo Brierley.
+Ⓒ 2025 Jimbo Brierley.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -19,21 +19,30 @@ SOFTWARE. */
 
 package com.github.jimbovm.sofia;
 
-import java.util.ResourceBundle
+import java.io.File
+import java.io.FileInputStream
+import java.io.IOException
 import java.util.Properties
-
 import javafx.application.Application
-import javafx.scene.Scene
-import javafx.scene.layout.BorderPane
-import javafx.stage.Stage
-import javafx.fxml.FXMLLoader
 
 import com.github.jimbovm.sofia.Main
 
+/**
+ * Entry point for the Sofia GUI.
+ *
+ * @param[args] Arguments supplied from the command line. 
+ */
 fun main(args: Array<String>) {
 
-	val bundle: ResourceBundle? = ResourceBundle.getBundle("version")
-	val version = bundle?.getString("version") ?: "(version unknown)"
+	var buildInfo: Properties? = Properties()
+
+	try {
+		buildInfo?.load(ClassLoader.getSystemResourceAsStream("build_info.properties"))
+	} catch (e: IOException) {
+		buildInfo = null
+	}
+
+	val version = buildInfo?.getProperty("sofiaVersion") ?: "(version unknown)"
 
 	println("Hello from Sofia ${version}!")
 	Main.run(args)

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+
+<MenuBar xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+	BorderPane.alignment="CENTER" fx:controller="com.github.jimbovm.sofia.fxml.MainMenuController">
+	<menus>
+		<Menu mnemonicParsing="false" text="%main_menu_file">
+			<items>
+				<MenuItem mnemonicParsing="false" text="%main_menu_file_new" />
+				<MenuItem mnemonicParsing="false" text="%main_menu_file_open" />
+				<MenuItem mnemonicParsing="false" text="%main_menu_file_save" />
+				<MenuItem mnemonicParsing="false" text="%main_menu_file_save_as" />
+				<SeparatorMenuItem />
+				<MenuItem mnemonicParsing="false" text="%main_menu_file_export" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="%main_menu_edit">
+			<items>
+				<MenuItem mnemonicParsing="false" text="%undo" />
+				<MenuItem mnemonicParsing="false" text="%redo" />
+				<SeparatorMenuItem />
+				<MenuItem mnemonicParsing="false" text="%cut" />
+				<MenuItem mnemonicParsing="false" text="%copy" />
+				<MenuItem mnemonicParsing="false" text="%paste" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="%main_menu_insert">
+			<items>
+				<MenuItem mnemonicParsing="false" text="%tab_enemies" />
+				<MenuItem mnemonicParsing="false" text="%tab_enemies" />
+				<MenuItem mnemonicParsing="false" text="%tab_enemies" />
+				<MenuItem mnemonicParsing="false" text="%tab_enemies" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="%main_menu_game">
+			<items>
+				<MenuItem mnemonicParsing="false" text="%main_menu_game_scenario" />
+				<MenuItem mnemonicParsing="false" text="%main_menu_game_1_up_costs" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="%main_menu_help">
+			<items>
+				<MenuItem mnemonicParsing="false" text="%main_menu_help_about" onAction="#showAboutDialog" />
+			</items>
+		</Menu>
+	</menus>
+</MenuBar>
