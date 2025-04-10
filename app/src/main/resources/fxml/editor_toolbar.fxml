@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
+
+<ToolBar xmlns="http://javafx.com/javafx/21"
+	xmlns:fx="http://javafx.com/fxml/1" prefHeight="40.0"
+	prefWidth="200.0">
+	<items>
+		<Label
+			text="%editor_toolbar_environment">
+			<padding>
+				<Insets
+					right="4.0" />
+			</padding>
+		</Label>
+		<ChoiceBox>
+			<tooltip>
+				<Tooltip text="%editor_toolbar_environment_tooltip" />
+			</tooltip>
+		</ChoiceBox><Label
+			layoutX="151.0"
+			layoutY="16.0"
+			text="%editor_toolbar_fill">
+		</Label>
+		<ChoiceBox>
+			<tooltip>
+				<Tooltip text="%editor_toolbar_fill_tooltip" />
+			</tooltip>
+		</ChoiceBox>
+		<Label
+			text="%editor_toolbar_scenery">
+		</Label>
+		<ChoiceBox>
+			<tooltip>
+				<Tooltip text="%editor_toolbar_scenery_tooltip" />
+			</tooltip>
+		</ChoiceBox>
+		<Label
+			text="%editor_toolbar_platform">
+		</Label>
+		<ChoiceBox
+			layoutX="376.0"
+			layoutY="12.0">
+			<tooltip>
+				<Tooltip text="%editor_toolbar_platform_tooltip" />
+			</tooltip>
+		</ChoiceBox>
+		<CheckBox
+			mnemonicParsing="false"
+			text="%editor_toolbar_sky_area">
+			<tooltip>
+				<Tooltip text="%editor_toolbar_sky_area_tooltip" />
+			</tooltip>
+		</CheckBox>
+		<Separator
+			orientation="VERTICAL" />
+		<Label
+			text="%editor_toolbar_start_position">
+		</Label>
+		<ChoiceBox>
+			<tooltip>
+				<Tooltip text="%editor_toolbar_start_position_tooltip" />
+			</tooltip>
+		</ChoiceBox>
+		<Label
+			layoutX="299.0"
+			layoutY="16.0"
+			text="%editor_toolbar_time">
+		</Label>
+		<ChoiceBox
+			layoutX="376.0"
+			layoutY="12.0">
+			<tooltip>
+				<Tooltip text="%editor_toolbar_time_tooltip" />
+			</tooltip>
+		</ChoiceBox>
+		<Separator
+			orientation="VERTICAL" />
+		<CheckBox
+			mnemonicParsing="false"
+			text="%editor_toolbar_autowalk">
+			<tooltip>
+				<Tooltip text="%editor_toolbar_autowalk_tooltip" />
+			</tooltip>
+		</CheckBox>
+	</items>
+</ToolBar>
