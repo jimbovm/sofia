@@ -24,6 +24,7 @@ import java.util.ResourceBundle
 import javafx.fxml.FXMLLoader
 import javafx.event.ActionEvent
 import javafx.scene.Scene
+import javafx.scene.image.Image 
 import javafx.scene.layout.HBox
 import javafx.stage.Popup
 import javafx.stage.Modality
@@ -51,9 +52,12 @@ class MainMenuController {
 		val aboutStage = Stage().apply {
 			title = uiBundle?.getString("about_title")
 			scene = Scene(aboutPane)
-		}
-		aboutStage.setResizable(false)
-		aboutStage.initModality(Modality.APPLICATION_MODAL)
-		aboutStage.show()
+			this.setResizable(false)
+			this.initModality(Modality.APPLICATION_MODAL)
+			this.getIcons()?.add(Image("img/icon_128x128.png"))
+			this.getIcons()?.add(Image("img/icon_64x64.png"))
+			this.getIcons()?.add(Image("img/icon_32x32.png"))
+			this.getIcons()?.add(Image("img/icon_16x16.png"))
+		}.show()
 	}
 }
