@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.control.Tooltip?>
+
+<Tab xmlns="http://javafx.com/javafx/21"
+	xmlns:fx="http://javafx.com/fxml/1" text="%tab_enemies">
+	<fx:define>
+		<Image fx:id="sprites"
+			url="@/img/smb_sprite.png" />
+	</fx:define>
+	<content>
+		<TilePane prefColumns="3" prefRows="3"
+			prefTileHeight="48.0" prefTileWidth="48.0"
+			scaleShape="false">
+			<children>
+				<ImageView fx:id="enemy_goomba"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false">
+					<fx:reference source="sprites" />
+					<viewport>
+						<Rectangle2D
+							height="16.0"
+							minX="640.0"
+							minY="65.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView
+					fx:id="enemy_green_troopa"
+					fitHeight="24.0"
+					fitWidth="16.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" x="1.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="24.0"
+							minX="688.0"
+							minY="96.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView fx:id="enemy_red_troopa"
+					fitHeight="24.0"
+					fitWidth="16.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" x="2.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="24.0"
+							minX="688.0"
+							minY="72.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView
+					fx:id="enemy_buzzy_beetle"
+					fitHeight="24.0"
+					fitWidth="16.0"
+					layoutX="82.0"
+					layoutY="14.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" y="3.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="16.0"
+							minX="640.0"
+							minY="80.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView fx:id="enemy_spiny"
+					fitHeight="24.0"
+					fitWidth="16.0"
+					layoutX="170.0"
+					layoutY="23.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" y="3.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="16.0"
+							minX="848.0"
+							minY="144.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView
+					fx:id="enemy_green_paratroopa"
+					fitHeight="24.0"
+					fitWidth="16.0"
+					layoutX="50.0"
+					layoutY="18.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" y="1.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="24.0"
+							minX="720.0"
+							minY="97.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView
+					fx:id="enemy_red_paratroopa"
+					fitHeight="24.0"
+					fitWidth="16.0"
+					layoutX="18.0"
+					layoutY="20.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" x="1.0"
+					y="1.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="24.0"
+							minX="720.0"
+							minY="73.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView fx:id="enemy_hammer_bro"
+					fitHeight="32.0"
+					fitWidth="16.0"
+					layoutX="21.0"
+					layoutY="65.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" x="1.0"
+					y="1.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="32.0"
+							minX="926.0"
+							minY="86.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView fx:id="enemy_red_cheep"
+					fitHeight="24.0"
+					fitWidth="16.0"
+					layoutX="121.0"
+					layoutY="117.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" x="1.0"
+					y="1.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="16.0"
+							minX="971.0"
+							minY="80.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView fx:id="enemy_bloober"
+					fitHeight="32.0"
+					fitWidth="16.0"
+					layoutX="61.0"
+					layoutY="53.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" x="1.0"
+					y="1.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="24.0"
+							minX="640.0"
+							minY="97.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView fx:id="enemy_podoboo"
+					fitHeight="16.0"
+					fitWidth="16.0"
+					layoutX="26.0"
+					layoutY="26.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="16.0"
+							minX="880.0"
+							minY="80.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView fx:id="enemy_lakitu"
+					fitHeight="24.0"
+					fitWidth="16.0"
+					layoutX="133.0"
+					layoutY="57.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" x="1.0"
+					y="1.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="24.0"
+							minX="816.0"
+							minY="97.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+				<ImageView fx:id="enemy_bowser"
+					fitHeight="32.0"
+					fitWidth="32.0"
+					layoutX="61.0"
+					layoutY="53.0"
+					pickOnBounds="true"
+					preserveRatio="true"
+					smooth="false" x="1.0"
+					y="1.0">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D
+							height="32.0"
+							minX="1002.0"
+							minY="88.0"
+							width="32.0" />
+					</viewport>
+				</ImageView>
+			</children>
+			<cursor>
+				<Cursor fx:constant="OPEN_HAND" />
+			</cursor>
+		</TilePane>
+	</content>
+	<tooltip>
+		<Tooltip text="Place enemies and allies" />
+	</tooltip>
+	<graphic>
+		<ImageView id="icon_enemies" fx:id="icon_enemies"
+			pickOnBounds="true" preserveRatio="true"
+			smooth="false">
+			<image>
+				<fx:reference source="sprites" />
+			</image>
+			<viewport>
+				<Rectangle2D height="16.0"
+					minX="640.0" minY="64.0"
+					width="16.0" />
+			</viewport>
+		</ImageView>
+	</graphic>
+</Tab>
