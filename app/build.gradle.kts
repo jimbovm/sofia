@@ -1,100 +1,94 @@
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.nio.charset.Charset
-import java.nio.file.Path
-import java.nio.file.Paths
-import java.nio.file.Files
+import java.io.FileWriter
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 group = "com.github.jimbovm"
 
 plugins {
-	// Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-	kotlin("jvm") version "2.0.0"
-
-	// Apply the application plugin to add support for building a CLI application in Java.
 	application
-  	id("org.openjfx.javafxplugin") version "0.1.0"
+	id("org.jetbrains.kotlin.jvm") version "2.1.20"
+	id("org.openjfx.javafxplugin") version "0.1.0"
+	id("com.palantir.git-version") version "3.2.0"
 }
 
-repositories {
-	// Use Maven Central for resolving dependencies.
-	mavenCentral()
+val gitVersion: groovy.lang.Closure<String> by extra
+version = gitVersion()
+
+tasks.register("outputBuildInfo")
+
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+}
+
+application {
+	mainClass = "com.github.jimbovm.sofia.SofiaKt"
 }
 
 java {
 	toolchain {
 		languageVersion.set(JavaLanguageVersion.of(21))
+		vendor = JvmVendorSpec.IBM
+		implementation = JvmImplementation.J9
+	}
+}
+
+tasks.withType<Jar> {
+	manifest {
+		attributes["Main-Class"] = "com.github.jimbovm.sofia.SofiaKt"
 	}
 }
 
 javafx {
-    version = "21"
-    modules = mutableListOf("javafx.controls", "javafx.base", "javafx.graphics", "javafx.fxml")
+	modules = mutableListOf("javafx.controls", "javafx.base", "javafx.graphics", "javafx.fxml")
 }
 
 kotlin {
 	sourceSets {
 		dependencies {
-			// Align versions of all Kotlin components
 			implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
-			// Use the Kotlin JDK 8 standard library.
 			implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+			implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
 
-			// Use the Kotlin test library.
 			testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-			// Use the Kotlin JUnit integration.
 			testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 		}
 	}
 }
 
 dependencies {
-		// https://mvnrepository.com/artifact/org.openjfx/javafx
-		implementation("org.openjfx:javafx:21")
+	implementation("org.openjfx:javafx:24")
 }
 
-application {
-	// Define the main class for the application.
-	mainClass.set("com.github.jimbovm.sofia.SofiaKt")
-}
-
-tasks.register("setVersion") {
+tasks.named("outputBuildInfo") {
+	group = "build"
+	description = "Generate build information properties file."
+	outputs.file(layout.buildDirectory.file("resources/main/build_info.properties"))
 
 	doFirst {
-		val command = "git describe --tags --long"
+		val sofiaVersion = version
+		val jvmVersion = org.gradle.internal.jvm.Jvm.current().toString()
+		val gradleVersion = GradleVersion.current().toString()
+		val buildDateTime = LocalDateTime.now(ZoneOffset.UTC).toString()
 
-		val processBuilder: ProcessBuilder = ProcessBuilder(command.split(' '))
-		processBuilder.redirectErrorStream(true)
-		processBuilder.directory(rootProject.projectDir)
+		val propertiesText = """|
+			|sofiaVersion=$sofiaVersion
+			|gradleVersion=$gradleVersion
+			|jvmVersion=$jvmVersion
+			|buildDateTime=$buildDateTime
+		|""".trimMargin()
 
-		val shell: Process = processBuilder.start()
-		val shellReader: BufferedReader = BufferedReader(InputStreamReader(shell.getInputStream()))
-
-		val gitVersionString = shellReader.readLine()
-
-		println("$command gives: $gitVersionString")
-
-		val versionElements: List<String> = gitVersionString.split("-")
-		val versionProperty = if (versionElements[1] == "0") versionElements[0] else gitVersionString
-
-		println("Using version string: " + versionProperty)
-
-		for (outputFilename: String in arrayOf(
-			rootProject.projectDir.getAbsolutePath() + "/app/gradle.properties",
-			rootProject.projectDir.getAbsolutePath() + "/app/src/main/resources/version.properties"
-			)) {
-
-			val outputFile: Path = Paths.get(outputFilename)
-			if (Files.exists(outputFile)) {
-				Files.delete(outputFile)
-			}
-			
-			val propertiesFile = Files.createFile(outputFile)
-			val property = "version=$versionProperty"
-			Files.write(propertiesFile, property.toByteArray())
+		if (outputs.files.singleFile.exists()) {
+			outputs.files.singleFile.delete()
 		}
+
+		outputs.files.singleFile.writeText(propertiesText)
 	}
-	dependsOn(tasks.compileKotlin)
+	finalizedBy("jar")
+}
+
+tasks.named("run") {
+	dependsOn("outputBuildInfo")
 }
