@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<Menu xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" text="%main_menu_insert">
+	<fx:define>
+		<Image fx:id="sprites"
+			url="@/img/smb_sprite.png" />
+	</fx:define>
+	<items>
+		<MenuItem mnemonicParsing="false" text="%new_area" />
+		<SeparatorMenuItem />
+		<!-- Actors submenus -->
+		<fx:include fx:id="menu_insert_enemies" source="insert_menu_enemies.fxml" />
+		<Menu mnemonicParsing="false" text="%tab_blocks_items">
+			<graphic>
+				<ImageView id="icon_blocks_items" fx:id="icon_blocks_items"
+					pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D height="16.0"
+							minX="128.0" minY="96.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+			</graphic>
+		</Menu>
+		<Menu mnemonicParsing="false" text="%tab_structures">
+			<graphic>
+				<ImageView id="icon_structures" fx:id="icon_structures"
+					pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D height="16.0"
+							minX="336.0" minY="64.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+			</graphic>
+		</Menu>
+		<Menu mnemonicParsing="false" text="%tab_scenery">
+			<graphic>
+				<ImageView id="icon_scenery" fx:id="icon_scenery"
+					pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D height="16.0"
+							minX="224.0" minY="80.0"
+							width="16.0" />
+					</viewport>
+				</ImageView>
+			</graphic>
+		</Menu>
+		<Menu mnemonicParsing="false" text="%tab_fill">
+			<graphic>
+				<ImageView id="icon_terrain_fill" fx:id="icon_terrain_fill"
+					pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D height="16.0"
+							minY="64.0" width="16.0" />
+					</viewport>
+				</ImageView>
+			</graphic>
+		</Menu>
+		<Menu mnemonicParsing="false" text="%tab_exits_loops">
+			<graphic>
+				<ImageView id="icon_exits_loops" fx:id="icon_exits_loops"
+					pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<fx:reference source="sprites" />
+					</image>
+					<viewport>
+						<Rectangle2D height="16.0"
+							minX="1267" minY="104.0" width="16.0" />
+					</viewport>
+				</ImageView>
+			</graphic>
+		</Menu>
+	</items>
+</Menu>

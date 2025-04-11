@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 
 <MenuBar xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
 	BorderPane.alignment="CENTER" fx:controller="com.github.jimbovm.sofia.fxml.MainMenuController">
+	<fx:define>
+		<Image fx:id="sprites"
+			url="@/img/smb_sprite.png" />
+	</fx:define>
 	<menus>
 		<Menu mnemonicParsing="false" text="%main_menu_file">
 			<items>
@@ -29,23 +36,40 @@
 				<MenuItem mnemonicParsing="false" text="%paste" />
 			</items>
 		</Menu>
-		<Menu mnemonicParsing="false" text="%main_menu_insert">
-			<items>
-				<MenuItem mnemonicParsing="false" text="%tab_enemies" />
-				<MenuItem mnemonicParsing="false" text="%tab_enemies" />
-				<MenuItem mnemonicParsing="false" text="%tab_enemies" />
-				<MenuItem mnemonicParsing="false" text="%tab_enemies" />
-			</items>
-		</Menu>
+		<fx:include fx:id="menu_insert" source="insert_menu.fxml" />
 		<Menu mnemonicParsing="false" text="%main_menu_game">
 			<items>
 				<MenuItem mnemonicParsing="false" text="%main_menu_game_scenario" />
-				<MenuItem mnemonicParsing="false" text="%main_menu_game_1_up_costs" />
+				<MenuItem mnemonicParsing="false" text="%main_menu_game_1_up_costs">
+					<graphic>
+						<ImageView fx:id="icon_hidden_1_up_costs"
+							pickOnBounds="true" preserveRatio="true"
+							smooth="false">
+							<image>
+								<fx:reference source="sprites" />
+							</image>
+							<viewport>
+								<Rectangle2D height="16.0"
+									minX="1130.0" minY="104.0" width="16.0" />
+							</viewport>
+						</ImageView>
+					</graphic>
+				</MenuItem>
 			</items>
 		</Menu>
 		<Menu mnemonicParsing="false" text="%main_menu_help">
 			<items>
-				<MenuItem mnemonicParsing="false" text="%main_menu_help_about" onAction="#showAboutDialog" />
+				<MenuItem mnemonicParsing="false" text="%main_menu_help_about" onAction="#showAboutDialog">
+					<graphic>
+						<ImageView fx:id="icon_about"
+							pickOnBounds="true" preserveRatio="true"
+							smooth="false">
+							<image>
+								<Image url="@/img/icon_16x16.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
 			</items>
 		</Menu>
 	</menus>
