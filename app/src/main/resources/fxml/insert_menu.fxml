@@ -9,7 +9,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<Menu xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" text="%main_menu_insert">
+<Menu xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+	text="%main_menu_insert">
 	<fx:define>
 		<Image fx:id="sprites"
 			url="@/img/smb_sprite.png" />
@@ -19,6 +20,7 @@
 		<SeparatorMenuItem />
 		<!-- Actors submenus -->
 		<fx:include fx:id="menu_insert_enemies" source="insert_menu_enemies.fxml" />
+		<fx:include fx:id="menu_insert_generators" source="insert_menu_generators.fxml" />
 		<Menu mnemonicParsing="false" text="%tab_blocks_items">
 			<graphic>
 				<ImageView id="icon_blocks_items" fx:id="icon_blocks_items"

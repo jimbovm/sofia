@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<Menu mnemonicParsing="false" text="%tab_generators" xmlns="http://javafx.com/javafx/21"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<fx:define>
+		<Image fx:id="sprites"
+			url="@/img/smb_sprite.png" />
+	</fx:define>
+	<graphic>
+		<ImageView fx:id="icon_menu_insert_generators"
+			pickOnBounds="true"
+			preserveRatio="true"
+			smooth="false">
+			<image>
+				<fx:reference source="sprites" />
+			</image>
+			<viewport>
+				<Rectangle2D
+					height="16.0"
+					minX="672.0"
+					minY="96.0"
+					width="16.0" />
+			</viewport>
+		</ImageView>
+	</graphic>
+	<items>
+		<MenuItem text="%generator_bullet_bill_cheep">
+			<graphic>
+				<VBox>
+					<ImageView fx:id="icon_menu_insert_generators"
+						pickOnBounds="true"
+						preserveRatio="true"
+						smooth="false">
+						<image>
+							<fx:reference source="sprites" />
+						</image>
+						<viewport>
+							<Rectangle2D
+								height="16.0"
+								minX="672.0"
+								minY="96.0"
+								width="16.0" />
+						</viewport>
+					</ImageView>
+					<ImageView
+						pickOnBounds="true"
+						preserveRatio="true"
+						smooth="false">
+						<image>
+							<fx:reference source="sprites" />
+						</image>
+						<viewport>
+							<Rectangle2D
+								height="16.0"
+								minX="971.0"
+								minY="103.0"
+								width="16.0" />
+						</viewport>
+					</ImageView>
+				</VBox>
+			</graphic>
+		</MenuItem>
+		<MenuItem text="%generator_flying_cheep">
+			<graphic>
+					<ImageView
+						pickOnBounds="true"
+						preserveRatio="true"
+						smooth="false">
+						<image>
+							<fx:reference source="sprites" />
+						</image>
+						<viewport>
+							<Rectangle2D
+								height="16.0"
+								minX="971.0"
+								minY="80.0"
+								width="16.0" />
+						</viewport>
+					</ImageView>
+			</graphic>
+		</MenuItem>
+		<MenuItem text="%generator_bowser_breath">
+			<graphic>
+					<ImageView
+						pickOnBounds="true"
+						preserveRatio="true"
+						smooth="false">
+						<image>
+							<fx:reference source="sprites" />
+						</image>
+						<viewport>
+							<Rectangle2D
+								height="8.0"
+								minX="816.0"
+								minY="136.0"
+								width="24.0" />
+						</viewport>
+					</ImageView>
+			</graphic>
+		</MenuItem>
+	</items>
+</Menu>
