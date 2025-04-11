@@ -18,6 +18,7 @@ tasks.register("outputBuildInfo")
 
 allprojects {
 	repositories {
+		mavenLocal()
 		mavenCentral()
 	}
 }
@@ -50,7 +51,7 @@ kotlin {
 			implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
 			implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-			implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
+			implementation("org.jetbrains.kotlinx:kotlinx-datetime:0+")
 
 			testImplementation("org.jetbrains.kotlin:kotlin-test")
 			testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
@@ -59,7 +60,10 @@ kotlin {
 }
 
 dependencies {
-	implementation("org.openjfx:javafx:24")
+	implementation("org.openjfx:javafx:24+")
+	implementation("org.apache.logging.log4j:log4j-api:2+")
+	implementation("org.apache.logging.log4j:log4j-core:2+")
+	implementation("com.github.jimbovm:isobel:0.+")
 }
 
 tasks.named("outputBuildInfo") {
