@@ -5,3 +5,11 @@ Some dependencies have different licence terms.
 The following dependencies are used subject to the terms of the GNU General Public Licence Version 2 with Classpath Exception (GPLv2+CE):
 
 * OpenJFX JavaFX
+
+The following dependencies are used subject to the terms of the Apache Licence 2.0 (Apache-2.0):
+
+* Gradle and its build scripts
+
+The following dependencies are used subject to the terms of the GNU Lesser General Public Licence 2.1 or later (LGPL-2.1+)
+
+* Icons derived from the GNOME High Contrast icon theme
