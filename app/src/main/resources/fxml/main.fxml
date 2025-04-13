@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
@@ -31,35 +33,15 @@
 								<ScrollPane pannable="true"
 									vbarPolicy="ALWAYS">
 									<content>
-										<ImageView
-											nodeOrientation="INHERIT"
-											pickOnBounds="true"
-											smooth="false">
-											<image>
-												<Image
-													url="@/img/smb_1-1.png" />
-											</image>
-											<cursor>
-												<Cursor
-													fx:constant="CROSSHAIR" />
-											</cursor>
-										</ImageView>
+										<Group fx:id="canvasContainer" />
 									</content>
+									<cursor>
+										<Cursor
+											fx:constant="CROSSHAIR" />
+									</cursor>
 								</ScrollPane>
 							</items>
 						</SplitPane>
-					</content>
-				</TitledPane>
-				<TitledPane animated="false" text="untitled 2">
-					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0"
-							prefHeight="180.0" prefWidth="200.0" />
-					</content>
-				</TitledPane>
-				<TitledPane animated="false" text="untitled 3">
-					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0"
-							prefHeight="180.0" prefWidth="200.0" />
 					</content>
 				</TitledPane>
 			</panes>

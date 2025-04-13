@@ -24,17 +24,38 @@ import java.util.ResourceBundle
 import javafx.application.Application
 import javafx.beans.property.ReadOnlyListWrapper
 import javafx.collections.ObservableList
+import javafx.scene.Group
 import javafx.scene.Scene
+import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 import javafx.scene.layout.Pane
+import javafx.scene.paint.Color
 import javafx.stage.Stage
 import javafx.stage.StageStyle
 import javafx.fxml.FXMLLoader
+
+import com.github.jimbovm.sofia.presenter.editor.TerrainRenderer
 
 /**
  * Main launcher for the Sofia GUI.
  */
 class Main() : Application() {
+
+	private fun setUpCanvas(container: Group): Unit {
+
+		val canvas: Canvas = Canvas(256.0 * 5.0, 240.0)
+		canvas?.graphicsContext2D?.apply {
+			fill = Color.BLACK
+		}
+
+		canvas.graphicsContext2D.fillRect(0.0, 0.0, canvas.width, canvas.height)
+
+		container.getChildren().add(canvas)
+
+		val renderer = TerrainRenderer(canvas, 5)
+		renderer.demo()
+		
+	}
 
 	override fun start(primaryStage: Stage?) {
 
@@ -43,6 +64,8 @@ class Main() : Application() {
 
 		val mainPane: Pane = fxmlLoader.load()
 		val scene = Scene(mainPane)
+		val canvasContainer: Group = fxmlLoader.namespace.get("canvasContainer") as Group
+		setUpCanvas(canvasContainer)
 
 		primaryStage?.getIcons()?.add(Image("img/icon_128x128.png"))
 		primaryStage?.getIcons()?.add(Image("img/icon_64x64.png"))
