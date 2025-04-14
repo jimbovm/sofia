@@ -62,6 +62,8 @@ kotlin {
 dependencies {
 	implementation("org.openjfx:javafx:24+")
 	implementation("com.github.jimbovm:isobel:0.+")
+	implementation("org.apache.logging.log4j:log4j-api:2.+")
+	implementation("org.apache.logging.log4j:log4j-core:2.+")
 }
 
 tasks.named("outputBuildInfo") {
