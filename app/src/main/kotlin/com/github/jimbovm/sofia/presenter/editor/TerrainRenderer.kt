@@ -16,9 +16,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.presenter.editor;
-
-import kotlin.math.max
+package com.github.jimbovm.sofia.presenter.editor
 
 import java.util.ArrayDeque
 import java.util.ArrayList
@@ -44,7 +42,7 @@ import com.github.jimbovm.sofia.presenter.editor.Skin
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-public class TerrainRenderer {
+public class TerrainRenderer : Renderer {
 
 	companion object {
 
@@ -78,50 +76,22 @@ public class TerrainRenderer {
 	}
 
 	/** The Isobel area class(render. */
-	private var area: Area = Area()
+	override var area: Area = Area()
 
 	/** The canvas onto which level data is rendered. */
-	private final var canvas: Canvas? = null
+	override var canvas: Canvas = Canvas()
 
 	/** The number of pages (16-block wide screens) to be rendered. */
-	private var pages: Int = 0
+	override var pages: Int = 0
 
 	/** The skin to use for rendering terrain. */
-	private var skin: Skin = Skin.of(this.area)
+	override var skin: Skin = Skin.of(this.area)
 
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas?, area: Area = Area()) {
+	constructor(canvas: Canvas, area: Area = Area()) {
 		this.canvas = canvas
 		this.pages = this.calculatePages(area)
 		this.area = area
-	}
-
-	private fun calculatePages(area: Area): Int {
-
-		val rightmostGeographyActorX: Int = area.geography.fold(0, {acc: Int, a: Actor -> max(a.x, acc)})
-		val rightmostPopulationActorX: Int = area.population.fold(0, {acc: Int, a: Actor -> max(a.x, acc)})
-		val rightmostActor = intArrayOf(rightmostGeographyActorX, rightmostPopulationActorX).max()
-
-		return (rightmostActor / 16) + 1
-	}
-
-	/** Draw a block sprite at the given coordinates. */
-	private fun drawBlock(tile: Sprite, column: Int, row: Int): Unit {
-
-		val cursorX = 16.0 * column
-		val cursorY = row * 16.0
-
-		this.canvas?.getGraphicsContext2D()?.drawImage(
-			this.skin.spriteSheet,
-			tile.x,
-			tile.y,
-			tile.width,
-			tile.height,
-			cursorX,
-			cursorY,
-			tile.width,
-			tile.height
-		)
 	}
 
 	private fun drawColumn(fill: Fill, column: Int): Unit {
@@ -136,11 +106,11 @@ public class TerrainRenderer {
 				else -> this.skin.fillTile
 			}
 
-			this.drawBlock(sprite, column, row)
+			this.drawSprite(sprite, column, row)
 		}
 	}
 
-	public fun render(): Unit {
+	public override fun render(): Unit {
 
 		// draw first column with initial fill
 		var currentFill: Fill = Fill.from(this.area.header.fill)
@@ -194,17 +164,15 @@ public class TerrainRenderer {
 
 		this.skin = Skin.of(this.area)
 
-		canvas?.apply {
+		canvas.apply {
 			width = 256.0 * pages
 			height = 240.0
 		}
 
-		canvas?.graphicsContext2D?.apply {
+		canvas.graphicsContext2D?.apply {
 			fill = skin.backgroundColor
 			fillRect(0.0, 0.0, canvas.width, canvas.height)
 		}
-
-		val spriteSheet = Image(ClassLoader.getSystemResourceAsStream("img/smb_sprite.png"))
 
 		this.render()
 	}
