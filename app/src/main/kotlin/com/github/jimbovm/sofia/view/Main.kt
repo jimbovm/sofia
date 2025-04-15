@@ -43,16 +43,11 @@ class Main() : Application() {
 
 	private fun setUpCanvas(container: Group): Unit {
 
-		val canvas: Canvas = Canvas(256.0 * 5.0, 240.0)
-		canvas?.graphicsContext2D?.apply {
-			fill = Color.BLACK
-		}
-
-		canvas.graphicsContext2D.fillRect(0.0, 0.0, canvas.width, canvas.height)
+		val canvas: Canvas = Canvas(256.0, 240.0)
 
 		container.getChildren().add(canvas)
 
-		val renderer = TerrainRenderer(canvas, 5)
+		val renderer = TerrainRenderer(canvas)
 		renderer.demo()
 		
 	}
