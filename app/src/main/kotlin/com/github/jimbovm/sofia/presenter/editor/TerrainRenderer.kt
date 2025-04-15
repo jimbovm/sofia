@@ -75,24 +75,8 @@ public class TerrainRenderer : Renderer {
 		}
 	}
 
-	/** The Isobel area class. */
-	override var area: Area = Area()
-
-	/** The canvas onto which level data is rendered. */
-	override var canvas: Canvas = Canvas()
-
-	/** The number of pages (16-block wide screens) to be rendered. */
-	override var pages: Int = 0
-
-	/** The skin to use for rendering terrain. */
-	override var skin: Skin = Skin.of(this.area)
-
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas, area: Area = Area()) {
-		this.canvas = canvas
-		this.pages = this.calculatePages(area)
-		this.area = area
-	}
+	constructor(canvas: Canvas, area: Area = Area()) : super(canvas, area)
 
 	private fun drawColumn(fill: Fill, column: Int): Unit {
 
@@ -112,6 +96,9 @@ public class TerrainRenderer : Renderer {
 
 	public override fun render(): Unit {
 
+		canvas.width = 256.0 * this.pages
+		canvas.height = 240.0
+
 		// draw first column with initial fill
 		var currentFill: Fill = Fill.from(this.area.header.fill)
 		drawColumn(currentFill ?: Fill.FILL_ALL, 0)
@@ -120,7 +107,7 @@ public class TerrainRenderer : Renderer {
 		val actors: Deque<GeographyActor> = ArrayDeque<GeographyActor>(area.geography)
 		var currentActor: GeographyActor? = actors.poll()
 
-		val finalColumn = (this.pages * 16)
+		val finalColumn = this.pages * 16
 
 		for (column in (1..finalColumn)) {
 
@@ -131,49 +118,5 @@ public class TerrainRenderer : Renderer {
 
 			drawColumn(currentFill, column)
 		}
-	}
-
-	public fun demo() {
-		
-		area = Area()
-
-		area.header = AreaHeader().apply {
-			background = AreaHeader.Background.NONE
-			fill = AreaHeader.Fill.FILL_ALL
-			platform = AreaHeader.Platform.TREE
-			scenery = AreaHeader.Scenery.NONE
-			startPosition = AreaHeader.StartPosition.BOTTOM
-			ticks = 400
-		}
-		area.apply {
-			environment = Area.Environment.UNDERWATER
-			geography = ArrayList<GeographyActor>().apply {
-				add(FillSceneryModifier.create(1, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.NONE))
-				add(FillSceneryModifier.create(5, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE))
-				add(FillSceneryModifier.create(11, AreaHeader.Fill.FILL_0BF_1BC, AreaHeader.Scenery.NONE))
-				add(FillSceneryModifier.create(13, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE))
-				add(FillSceneryModifier.create(15, AreaHeader.Fill.FILL_0BF_1BC, AreaHeader.Scenery.NONE))
-				add(FillSceneryModifier.create(17, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE))
-				add(FillSceneryModifier.create(18, AreaHeader.Fill.FILL_0BF_1BC, AreaHeader.Scenery.NONE))
-				add(FillSceneryModifier.create(21, AreaHeader.Fill.FILL_ALL, AreaHeader.Scenery.NONE))
-			}
-		}
-
-		this.area = area
-		this.pages = calculatePages(area)
-
-		this.skin = Skin.of(this.area)
-
-		canvas.apply {
-			width = 256.0 * pages
-			height = 240.0
-		}
-
-		canvas.graphicsContext2D?.apply {
-			fill = skin.backgroundColor
-			fillRect(0.0, 0.0, canvas.width, canvas.height)
-		}
-
-		this.render()
 	}
 }

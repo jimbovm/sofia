@@ -32,10 +32,21 @@ import com.github.jimbovm.sofia.presenter.editor.Sprite
  */
 abstract class Renderer {
 
-	abstract var canvas: Canvas
-	abstract var skin: Skin
-	abstract var area: Area
-	abstract var pages: Int
+	internal var canvas: Canvas = Canvas()
+	internal var area: Area = Area()
+	internal var skin: Skin = Skin.of(area)
+	internal var pages: Int get() = this.calculatePages(this.area)
+
+	/** Create a new renderer object. */
+	constructor(canvas: Canvas, area: Area = Area()) {
+		
+		this.canvas = canvas
+		this.area = area
+		
+		this.pages = this.calculatePages(area)
+		
+		this.skin = Skin.of(area)
+	}
 
 	/** Draw a sprite at the given coordinates. */
 	fun drawSprite(tile: Sprite, column: Int, row: Int): Unit {
@@ -43,7 +54,7 @@ abstract class Renderer {
 		val cursorX = 16.0 * column
 		val cursorY = row * 16.0
 
-		this.canvas?.getGraphicsContext2D()?.drawImage(
+		this.canvas.getGraphicsContext2D().drawImage(
 			this.skin.spriteSheet,
 			tile.x,
 			tile.y,
