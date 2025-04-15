@@ -82,7 +82,7 @@ final data class Skin(
 	}
 
 	/**
-	 * Style in which to render the background.
+	 * Offsets from the Y origin for the style in which to render the background.
 	 */
 	private final enum class BackgroundOffset(val y: Double) {
 		UNDERWATER(1200.0),
@@ -104,7 +104,7 @@ final data class Skin(
 	}
 
 	/**
-	 * Style of scenery to render.
+	 * Offsets from the Y origin for the type of scenery to render.
 	 */
 	private final enum class SceneryOffset(val y: Double) {
 		CLOUDS(448.0),
