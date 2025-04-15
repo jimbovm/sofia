@@ -34,6 +34,12 @@ import javafx.stage.Stage
 import javafx.stage.StageStyle
 import javafx.fxml.FXMLLoader
 
+import com.github.jimbovm.isobel.common.Area
+import com.github.jimbovm.isobel.common.AreaHeader
+import com.github.jimbovm.isobel.actor.geography.GeographyActor
+import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
+
+import com.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
 import com.github.jimbovm.sofia.presenter.editor.TerrainRenderer
 
 /**
@@ -47,9 +53,31 @@ class Main() : Application() {
 
 		container.getChildren().add(canvas)
 
-		val renderer = TerrainRenderer(canvas)
-		renderer.demo()
-		
+		val area = Area().apply {
+			header = AreaHeader().apply {
+				background = AreaHeader.Background.NONE
+				fill = AreaHeader.Fill.FILL_ALL
+				platform = AreaHeader.Platform.TREE
+				scenery = AreaHeader.Scenery.NONE
+				startPosition = AreaHeader.StartPosition.FALL
+				ticks = 400
+			}
+			environment = Area.Environment.UNDERGROUND
+			geography = mutableListOf(
+				FillSceneryModifier.create(1, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.NONE),
+				FillSceneryModifier.create(5, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE),
+				FillSceneryModifier.create(11, AreaHeader.Fill.FILL_0BF_1BC, AreaHeader.Scenery.NONE),
+				FillSceneryModifier.create(13, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE),
+				FillSceneryModifier.create(15, AreaHeader.Fill.FILL_0BF_1BC, AreaHeader.Scenery.NONE),
+				FillSceneryModifier.create(17, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE),
+				FillSceneryModifier.create(18, AreaHeader.Fill.FILL_0BF_1BC, AreaHeader.Scenery.NONE),
+				FillSceneryModifier.create(21, AreaHeader.Fill.FILL_ALL, AreaHeader.Scenery.NONE))
+		}
+
+		val terrainRenderer = TerrainRenderer(canvas, area)
+		terrainRenderer.render()
+		val startPositionRenderer = StartPositionRenderer(canvas, area)
+		startPositionRenderer.render()
 	}
 
 	override fun start(primaryStage: Stage?) {
