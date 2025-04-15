@@ -75,7 +75,7 @@ public class TerrainRenderer : Renderer {
 		}
 	}
 
-	/** The Isobel area class(render. */
+	/** The Isobel area class. */
 	override var area: Area = Area()
 
 	/** The canvas onto which level data is rendered. */
