@@ -32,7 +32,7 @@ class Sprite(
 		val width: Double,
 		val height: Double) {
 
-	public final enum class Tile(val data: Sprite) {
+	public final enum class Metatile(val data: Sprite) {
 		AXE(Sprite(160.0, 48.0, 16.0, 16.0)),
 		BLANK(Sprite(160.0, 0.0, 16.0, 16.0)),
 		BLOCK(Sprite(0.0, 16.0, 16.0, 16.0)),
@@ -77,12 +77,33 @@ class Sprite(
 		UPRIGHT_PIPE_BODY_LEFT(Sprite(320.0, 16.0, 16.0, 16.0)),
 		UPRIGHT_PIPE_BODY_RIGHT(Sprite(336.0, 16.0, 16.0, 16.0)),
 		UPRIGHT_PIPE_BODY(Sprite(320.0, 16.0, 32.0, 16.0)),
-		UPRIGHT_PIPE_MOUTH(Sprite(320.0, 0.0, 32.0, 16.0));
+		UPRIGHT_PIPE_MOUTH(Sprite(320.0, 0.0, 32.0, 16.0)),
+		MARIO_STAND(Sprite(480.0, 0.0, 16.0, 16.0)),
+		MARIO_FALL(Sprite(496.0, 0.0, 16.0, 16.0)),
+		GOOMBA(Sprite(640.0, 0.0, 16.0, 16.0)),
+		BUZZY_BEETLE(Sprite(640.0, 16.0, 16.0, 16.0)),
+		BLOOBER(Sprite(640.0, 32.0, 16.0, 24.0)),
+		GREEN_TROOPA(Sprite(688.0, 32.0, 16.0, 24.0)),
+		RED_TROOPA(Sprite(688.0, 8.0, 16.0, 24.0)),
+		GREEN_PARATROOPA(Sprite(720.0, 32.0, 16.0, 24.0)),
+		RED_PARATROOPA(Sprite(720.0, 8.0, 16.0, 24.0)),
+		PIRANHA_PLANT(Sprite(784.0, 32.0, 16.0, 24.0)),
+		LAKITU(Sprite(816.0, 32.0, 16.0, 24.0)),
+		SPINY(Sprite(848.0, 16.0, 16.0, 16.0)),
+		PODOBOO(Sprite(880.0, 16.0, 16.0, 16.0)),
+		HAMMER_BRO(Sprite(927.0, 22.0, 16.0, 34.0)),
+		RED_CHEEP(Sprite(975.0, 16.0, 16.0, 16.0)),
+		GREEN_CHEEP(Sprite(975.0, 39.0, 16.0, 16.0)),
+		BOWSER(Sprite(1006.0, 24.0, 32.0, 32.0));
 	}
 
 	companion object {
 	
-		fun get(tile: Tile, area: Area): Sprite {
+		fun get(tile: Metatile, area: Area): Sprite {
+
+			if (tile in listOf(Metatile.MARIO_STAND, Metatile.MARIO_FALL)) {
+				return tile.data
+			}
 			
 			val xOffset = if (area.header.platform == AreaHeader.Platform.MUSHROOM) {
 				352.0
@@ -103,14 +124,14 @@ class Sprite(
 		fun lowerFloorTileOf(area: Area): Sprite {
 
 			if (area.header.platform == AreaHeader.Platform.CLOUD) {
-				return get(Tile.BLANK, area)
+				return get(Metatile.BLANK, area)
 			}
 
 			val tile = when (area.environment) {
-				Area.Environment.UNDERWATER -> get(Tile.SEAFLOOR, area)
-				Area.Environment.OVERWORLD -> get(Tile.GROUND, area)
-				Area.Environment.UNDERGROUND -> get(Tile.GROUND, area)
-				Area.Environment.CASTLE -> get(Tile.CASTLE_BRICK, area)
+				Area.Environment.UNDERWATER -> get(Metatile.SEAFLOOR, area)
+				Area.Environment.OVERWORLD -> get(Metatile.GROUND, area)
+				Area.Environment.UNDERGROUND -> get(Metatile.GROUND, area)
+				Area.Environment.CASTLE -> get(Metatile.CASTLE_BRICK, area)
 			}
 			return tile
 		}
@@ -118,7 +139,7 @@ class Sprite(
 		fun upperFloorTileOf(area: Area): Sprite {
 
 			if (area.header.platform == AreaHeader.Platform.CLOUD) {
-				return get(Tile.BLANK, area)
+				return get(Metatile.BLANK, area)
 			}
 
 			return lowerFloorTileOf(area)
@@ -127,14 +148,14 @@ class Sprite(
 		fun fillTileOf(area: Area): Sprite {
 
 			if (area.header.platform == AreaHeader.Platform.CLOUD) {
-				return get(Tile.CLOUD, area)
+				return get(Metatile.CLOUD, area)
 			}
 
 			val tile = when (area.environment) {
-				Area.Environment.UNDERWATER -> get(Tile.SEAFLOOR, area)
-				Area.Environment.OVERWORLD -> get(Tile.GROUND, area)
-				Area.Environment.UNDERGROUND -> get(Tile.BRICK, area)
-				Area.Environment.CASTLE -> get(Tile.CASTLE_BRICK, area)
+				Area.Environment.UNDERWATER -> get(Metatile.SEAFLOOR, area)
+				Area.Environment.OVERWORLD -> get(Metatile.GROUND, area)
+				Area.Environment.UNDERGROUND -> get(Metatile.BRICK, area)
+				Area.Environment.CASTLE -> get(Metatile.CASTLE_BRICK, area)
 			}
 
 			return tile
@@ -143,10 +164,10 @@ class Sprite(
 		fun liftTileOf(area: Area): Sprite {
 
 			if (area.header.platform == AreaHeader.Platform.CLOUD) {
-				return get(Tile.CLOUD, area)
+				return get(Metatile.CLOUD, area)
 			}
 
-			return get(Tile.LIFT, area)
+			return get(Metatile.LIFT, area)
 		}
 	}
 }
