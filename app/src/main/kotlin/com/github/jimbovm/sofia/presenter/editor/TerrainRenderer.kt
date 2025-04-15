@@ -47,57 +47,32 @@ import com.github.jimbovm.sofia.presenter.editor.Skin
 public class TerrainRenderer {
 
 	companion object {
-	
-		public final val SPRITES = mapOf(
-			"overgroundTerrain" to (Pair(0.0, 64.0)),
-			"overgroundBrick" to (Pair(32.0, 64.0)),
-			"undergroundTerrain" to (Pair(0.0, 128.0)),
-			"undergroundBrick" to (Pair(32.0, 128.0)),
-			"castleBrick" to (Pair(0.0, 240.0)),
-			"underwaterTerrain" to (Pair(0.0, 32.0)),
-			"cloud" to (Pair(144.0, 64.0))
-		)
 
-		public final val FILL_METATILES: Map<Environment, Map<String, Pair<Double, Double>?>> = mapOf(
-			Environment.OVERWORLD to mapOf(
-				"ground" to SPRITES["overgroundTerrain"],
-				"fill" to SPRITES["overgroundTerrain"]),
-			Environment.UNDERGROUND to mapOf(
-				"ground" to SPRITES["undergroundTerrain"],
-				"fill" to SPRITES["undergroundBrick"]),
-			Environment.UNDERWATER to mapOf(
-				"ground" to SPRITES["underwaterTerrain"],
-				"fill" to SPRITES["underwaterTerrain"]),
-			Environment.CASTLE to mapOf(
-				"ground" to SPRITES["castleBrick"],
-				"fill" to SPRITES["castleBrick"])
-			)
-	}
+		/** Specifies which blocks to fill for each terrain fill scheme. */
+		private final enum class Fill(val blocks: Set<Int>) {
 
-	/** Specifies which blocks to fill for each terrain fill scheme. */
-	private final enum class Fill(val blocks: Set<Int>) {
+			FILL_NONE(emptySet()),
+			FILL_2BF_0BC(setOf(14, 13)),
+			FILL_2BF_1BC(setOf(2, 14, 13)),
+			FILL_2BF_3BC((2..4).toSet() + setOf(13, 14)),
+			FILL_2BF_4BC((2..5).toSet() + setOf(13, 14)),
+			FILL_2BF_8BC((2..9).toSet() + setOf(13, 14)),
+			FILL_5BF_1BC(setOf(2) + (10..14).toSet()),
+			FILL_5BF_3BC((2..4).toSet() + (10..14).toSet()),
+			FILL_5BF_4BC((2..5).toSet() + (10..14).toSet()),
+			FILL_6BF_1BC(setOf(2) + (9..14).toSet()),
+			FILL_0BF_1BC(setOf(2)),
+			FILL_6BF_4BC((2..5).toSet() + (9..14).toSet()),
+			FILL_9BF_1BC(setOf(2) + (7..14).toSet()),
+			FILL_2BF_3BG_5BL_2BG_1BC(setOf(2) + (6..10).toSet() + setOf(14, 13)),
+			FILL_2BF_3BG_4BL_3BG_1BC(setOf(2) + (6..10).toSet() + setOf(14, 13)),
+			FILL_ALL((2..14).toSet());
 
-		FILL_NONE(emptySet()),
-		FILL_2BF_0BC(setOf(14, 13)),
-		FILL_2BF_1BC(setOf(2, 14, 13)),
-		FILL_2BF_3BC((2..4).toSet() + setOf(13, 14)),
-		FILL_2BF_4BC((2..5).toSet() + setOf(13, 14)),
-		FILL_2BF_8BC((2..9).toSet() + setOf(13, 14)),
-		FILL_5BF_1BC(setOf(2) + (10..14).toSet()),
-		FILL_5BF_3BC((2..4).toSet() + (10..14).toSet()),
-		FILL_5BF_4BC((2..5).toSet() + (10..14).toSet()),
-		FILL_6BF_1BC(setOf(2) + (9..14).toSet()),
-		FILL_0BF_1BC(setOf(2)),
-		FILL_6BF_4BC((2..5).toSet() + (9..14).toSet()),
-		FILL_9BF_1BC(setOf(2) + (7..14).toSet()),
-		FILL_2BF_3BG_5BL_2BG_1BC(setOf(2) + (6..10).toSet() + setOf(14, 13)),
-		FILL_2BF_3BG_4BL_3BG_1BC(setOf(2) + (6..10).toSet() + setOf(14, 13)),
-		FILL_ALL((2..14).toSet());
+			companion object {
 
-		companion object {
-
-			public fun from(fill: AreaHeader.Fill): Fill {
-				return Fill.valueOf(fill.name.toString())
+				public fun from(fill: AreaHeader.Fill): Fill {
+					return Fill.valueOf(fill.name.toString())
+				}
 			}
 		}
 	}
@@ -110,6 +85,9 @@ public class TerrainRenderer {
 
 	/** The number of pages (16-block wide screens) to be rendered. */
 	private var pages: Int = 0
+
+	/** The skin to use for rendering terrain. */
+	private var skin: Skin = Skin.of(this.area)
 
 	/** Create a new renderer object. */
 	constructor(canvas: Canvas?, area: Area = Area()) {
@@ -127,54 +105,46 @@ public class TerrainRenderer {
 		return (rightmostActor / 16) + 1
 	}
 
-	/**
-	 * Draw a block sprite at the given coordinates.
-	 */
-	private fun drawBlock(spriteSheet: Image, spriteX: Double, spriteY: Double, column: Int, row: Int): Unit {
+	/** Draw a block sprite at the given coordinates. */
+	private fun drawBlock(tile: Sprite, column: Int, row: Int): Unit {
 
 		val cursorX = 16.0 * column
 		val cursorY = row * 16.0
 
 		this.canvas?.getGraphicsContext2D()?.drawImage(
-			spriteSheet,
-			spriteX,
-			spriteY,
-			16.0,
-			16.0,
+			this.skin.spriteSheet,
+			tile.x,
+			tile.y,
+			tile.width,
+			tile.height,
 			cursorX,
 			cursorY,
-			16.0,
-			16.0
+			tile.width,
+			tile.height
 		)
 	}
 
-	private fun drawColumn(spriteSheet: Image, fill: TerrainRenderer.Fill, column: Int): Unit {
+	private fun drawColumn(fill: Fill, column: Int): Unit {
 
-		// get set of blocks to draw per column for this fill type, then draw them
 		fill.blocks.forEach {
 
 			val row = it
 
-			val groundSprite = FILL_METATILES?.getValue(area.environment)?.getValue("ground") ?: Pair(0.0, 0.0)
-			val fillSprite = FILL_METATILES?.getValue(area.environment)?.getValue("fill") ?: Pair(0.0, 0.0)
-
-			val sprite: Pair<Double, Double>? = when (row) {
-				13, 14 -> groundSprite
-				else -> fillSprite
+			val sprite: Sprite = when (row) {
+				13 -> this.skin.upperFloorTile
+				14 -> this.skin.lowerFloorTile
+				else -> this.skin.fillTile
 			}
 
-			val spriteX = sprite?.first ?: 0.0
-			val spriteY = sprite?.second ?: 0.0
-
-			this.drawBlock(spriteSheet, spriteX, spriteY, column, row)
+			this.drawBlock(sprite, column, row)
 		}
 	}
 
-	public fun render(spriteSheet: Image): Unit {
+	public fun render(): Unit {
 
 		// draw first column with initial fill
-		var currentFill: TerrainRenderer.Fill = TerrainRenderer.Fill.from(this.area.header.fill)
-		drawColumn(spriteSheet, currentFill ?: TerrainRenderer.Fill.FILL_ALL, 0)
+		var currentFill: Fill = Fill.from(this.area.header.fill)
+		drawColumn(currentFill ?: Fill.FILL_ALL, 0)
 
 		// pop first actor
 		val actors: Deque<GeographyActor> = ArrayDeque<GeographyActor>(area.geography)
@@ -189,7 +159,7 @@ public class TerrainRenderer {
 				currentActor = actors.poll()
 			}
 
-			drawColumn(spriteSheet, currentFill, column)
+			drawColumn(currentFill, column)
 		}
 	}
 
@@ -206,7 +176,7 @@ public class TerrainRenderer {
 			ticks = 400
 		}
 		area.apply {
-			environment = Area.Environment.UNDERGROUND
+			environment = Area.Environment.UNDERWATER
 			geography = ArrayList<GeographyActor>().apply {
 				add(FillSceneryModifier.create(1, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.NONE))
 				add(FillSceneryModifier.create(5, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE))
@@ -222,7 +192,7 @@ public class TerrainRenderer {
 		this.area = area
 		this.pages = calculatePages(area)
 
-		val skin = Skin.of(area)
+		this.skin = Skin.of(this.area)
 
 		canvas?.apply {
 			width = 256.0 * pages
@@ -235,6 +205,7 @@ public class TerrainRenderer {
 		}
 
 		val spriteSheet = Image(ClassLoader.getSystemResourceAsStream("img/smb_sprite.png"))
-		this.render(spriteSheet)
+
+		this.render()
 	}
 }

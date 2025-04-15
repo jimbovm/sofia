@@ -39,36 +39,14 @@ import com.github.jimbovm.sofia.presenter.editor.Sprite
 final data class Skin(
 		val backgroundColor: Color,
 		val background: Sprite?,
-		val foregroundA: Sprite,
-		val foregroundB: Sprite,
 		val scenery: Sprite?,
+		val lowerFloorTile: Sprite,
+		val upperFloorTile: Sprite,
+		val fillTile: Sprite,
+		val liftTile: Sprite,
 		val spriteSheet: Image = Image(ClassLoader.getSystemResourceAsStream("img/smb_sprite.png")),
 		val backgroundScenerySheet: Image = Image(ClassLoader.getSystemResourceAsStream("img/smb_scenery.png"))
 	) {
-	
-	/**
-	 * Origin coordinates of the sprite sets for each environment (palette A).
-	 */
-	private final enum class ForegroundA(val data: Sprite) {
-		UNDERWATER(Sprite(0.0, 0.0, Skin.SPRITE_FOREGROUND_A_WIDTH, Skin.SPRITE_FOREGROUND_A_HEIGHT)),
-		OVERWORLD(Sprite(0.0, 64.0, Skin.SPRITE_FOREGROUND_A_WIDTH, Skin.SPRITE_FOREGROUND_A_HEIGHT)),
-		UNDERGROUND(Sprite(0.0, 128.0, Skin.SPRITE_FOREGROUND_A_WIDTH, Skin.SPRITE_FOREGROUND_A_HEIGHT)),
-		CASTLE(Sprite(0.0, 192.0, Skin.SPRITE_FOREGROUND_A_WIDTH, Skin.SPRITE_FOREGROUND_A_HEIGHT)),
-		MONOCHROME(Sprite(0.0, 192.0, Skin.SPRITE_FOREGROUND_A_WIDTH, Skin.SPRITE_FOREGROUND_A_HEIGHT))
-	}
-
-	/**
-	 * Origin coordinates of the sprite sets for each environment (palette B, including variants)
-	 **/
-	private final enum class ForegroundB(val data: Sprite) {
-		UNDERWATER(Sprite(208.0, 0.0, SPRITE_FOREGROUND_B_WIDTH, SPRITE_FOREGROUND_B_HEIGHT)),
-		OVERWORLD(Sprite(208.0, 64.0, SPRITE_FOREGROUND_B_WIDTH, SPRITE_FOREGROUND_B_HEIGHT)),
-		UNDERGROUND(Sprite(208.0, 128.0, SPRITE_FOREGROUND_B_WIDTH, SPRITE_FOREGROUND_B_HEIGHT)),
-		CASTLE(Sprite(208.0, 192.0, SPRITE_FOREGROUND_B_WIDTH, SPRITE_FOREGROUND_B_HEIGHT)),
-		MUSHROOM(Sprite(352.0, 64.0, SPRITE_FOREGROUND_B_WIDTH, SPRITE_FOREGROUND_B_HEIGHT)),
-		SNOW(Sprite(496.0, 64.0, SPRITE_FOREGROUND_B_WIDTH, SPRITE_FOREGROUND_B_HEIGHT)),
-		MONOCHROME(Sprite(208.0, 192.0, SPRITE_FOREGROUND_B_WIDTH, SPRITE_FOREGROUND_B_HEIGHT)),
-	}
 
 	/**
 	 * Default colour of the "sky", or blank background before any
@@ -135,20 +113,6 @@ final data class Skin(
 			val useSnowPalette = headerBackground.contains("SNOW")
 			val useMonochromePalette = headerBackground == "MONOCHROME"
 
-			val foregroundA = if (useMonochromePalette) {
-				Skin.ForegroundA.valueOf(headerBackground).data
-			} else {
-				Skin.ForegroundA.valueOf(environment).data
-			}
-			
-			val foregroundB = if (useMushroomPalette) {
-				ForegroundB.MUSHROOM.data
-			} else if (useSnowPalette) {
-				ForegroundB.SNOW.data
-			} else {
-				ForegroundB.valueOf(environment).data
-			}
-
 			val backgroundColor = if (night || useMonochromePalette) {
 				Color.BLACK
 			} else {
@@ -185,8 +149,8 @@ final data class Skin(
 				else -> 0.0
 			}
 
-			val scenery: Sprite? = when (area.header.scenery) {
-				AreaHeader.Scenery.NONE -> null
+			val scenery: Sprite? = when (area.header.platform) {
+				AreaHeader.Platform.CLOUD -> null
 				else ->	Sprite(
 					backgroundSceneryXOffset,
 					sceneryYOffset,
@@ -198,9 +162,11 @@ final data class Skin(
 			return Skin(
 				backgroundColor,
 				background,
-				foregroundA,
-				foregroundB,
-				scenery
+				scenery,
+				Sprite.lowerFloorTileOf(area),
+				Sprite.upperFloorTileOf(area),
+				Sprite.fillTileOf(area),
+				Sprite.liftTileOf(area),
 			)
 		}
 	}
