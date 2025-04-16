@@ -16,7 +16,7 @@
 			url="@/img/smb_sprite.png" />
 	</fx:define>
 	<items>
-		<MenuItem mnemonicParsing="false" text="%new_area" />
+		<MenuItem mnemonicParsing="false" text="%add_new_area" />
 		<SeparatorMenuItem />
 		<!-- Actors submenus -->
 		<fx:include fx:id="menu_insert_enemies" source="insert_menu_enemies.fxml" />

@@ -1,0 +1,56 @@
+/* SPDX-License-Identifier: MIT-0
+
+Ⓒ 2025 Jimbo Brierley.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
+
+package com.github.jimbovm.sofia.fxml;
+
+import java.util.ResourceBundle
+
+import javafx.event.ActionEvent
+import javafx.fxml.FXML
+import javafx.fxml.FXMLLoader
+import javafx.scene.control.Button
+import javafx.scene.image.Image 
+import javafx.scene.layout.HBox
+import javafx.scene.Scene
+import javafx.stage.Modality
+import javafx.stage.Popup
+import javafx.stage.Stage
+import javafx.stage.StageStyle
+
+class MainToolbarController {
+
+	@FXML val mainToolbarNew: Button? = null
+	@FXML val mainToolbarOpen: Button? = null
+	@FXML val mainToolbarSave: Button? = null
+	@FXML val mainToolbarExportBytecode: Button? = null
+	@FXML val mainToolbarCut: Button? = null
+	@FXML val mainToolbarCopy: Button? = null
+	@FXML val mainToolbarPaste: Button? = null
+	@FXML val mainToolbarUndo: Button? = null
+	@FXML val mainToolbarRedo: Button? = null
+	@FXML val mainToolbarAddArea: Button? = null
+	@FXML val mainToolbarMoveAreaDown: Button? = null
+	@FXML val mainToolbarMoveAreaUp: Button? = null
+	@FXML val mainToolbarDeleteArea: Button? = null
+	@FXML val mainToolbarPreferences: Button? = null	
+
+	public fun initialize() {
+
+	}
+}

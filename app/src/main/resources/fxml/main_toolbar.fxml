@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<ToolBar id="mainToolbar" fx:id="main_toolbar" xmlns="http://javafx.com/javafx/23.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.github.jimbovm.sofia.fxml.MainToolbarController">
+	<items>
+		<Button id="mainToolbarNew" fx:id="mainToolbarNew" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="New Game">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/document-new.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%new_game" />
+			</tooltip>
+		</Button>
+		<Button id="mainToolbarOpen" fx:id="mainToolbarOpen" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Open Game">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/document-open.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%open" />
+			</tooltip>
+		</Button>
+		<Button id="mainToolbarSave" fx:id="mainToolbarSave" contentDisplay="GRAPHIC_ONLY"
+			mnemonicParsing="false" text="%save">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/document-save.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%save" />
+			</tooltip>
+		</Button>
+		<Button id="mainToolbarExportBytecode" fx:id="mainToolbarExportBytecode"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="%export_bytecode">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/media-nes.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%export_bytecode" />
+			</tooltip>
+		</Button>
+		<Separator orientation="VERTICAL" />
+		<Button id="mainToolbarCut" fx:id="mainToolbarCut" contentDisplay="GRAPHIC_ONLY"
+			mnemonicParsing="false" text="%cut">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/edit-cut.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%cut" />
+			</tooltip>
+		</Button>
+		<Button id="mainToolbarCopy" fx:id="mainToolbarCopy" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="%copy">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/edit-copy.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%copy" />
+			</tooltip>
+		</Button>
+		<Button id="mainToolbarPaste" fx:id="mainToolbarPaste" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="%paste">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/edit-paste.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%paste" />
+			</tooltip>
+		</Button>
+		<Separator orientation="VERTICAL" />
+		<Button id="mainToolbarUndo" fx:id="mainToolbarUndo" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="%undo">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/edit-undo.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%undo" />
+			</tooltip>
+		</Button>
+		<Button id="mainToolbarRedo" fx:id="mainToolbarRedo" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="%redo">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/edit-redo.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%redo" />
+			</tooltip>
+		</Button>
+		<Separator orientation="VERTICAL" />
+		<Button id="mainToolbarAddArea" fx:id="mainToolbarAddArea" contentDisplay="GRAPHIC_ONLY"
+			mnemonicParsing="false" text="%add_new_area">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/list-add.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%add_new_area" />
+			</tooltip>
+		</Button>
+		<Button id="mainToolbarMoveAreaDown" fx:id="mainToolbarMoveAreaDown" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="%move_area_up">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/view-sort-descending.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%move_area_up" />
+			</tooltip>
+		</Button>
+		<Button id="mainToolbarMoveAreaUp" fx:id="mainToolbarMoveAreaUp" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="%move_area_down">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/view-sort-ascending.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%move_area_down" />
+			</tooltip>
+		</Button>
+		<Button id="mainToolbarDeleteArea" fx:id="mainToolbarDeleteArea" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="%delete_area">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/user-trash.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%delete_area" />
+			</tooltip>
+		</Button>
+		<Separator orientation="VERTICAL" />
+		<Button id="mainToolbarPreferences" fx:id="mainToolbarPreferences" alignment="CENTER"
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="%preferences">
+			<graphic>
+				<ImageView smooth="false">
+					<image>
+						<Image url="@/img/icons/emblem-system.png" />
+					</image>
+				</ImageView>
+			</graphic>
+			<tooltip>
+				<Tooltip text="%preferences" />
+			</tooltip>
+		</Button>
+	</items>
+</ToolBar>
