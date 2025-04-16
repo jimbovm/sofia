@@ -94,7 +94,7 @@
 					</image>
 					<viewport>
 						<Rectangle2D height="16.0"
-							minX="1267" minY="104.0" width="16.0" />
+							minX="1270.0" minY="104.0" width="16.0" />
 					</viewport>
 				</ImageView>
 			</graphic>

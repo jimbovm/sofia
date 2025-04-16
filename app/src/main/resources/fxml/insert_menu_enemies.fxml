@@ -192,7 +192,7 @@
 		<MenuItem text="%enemy_hammer_bro">
 			<graphic>
 				<ImageView fx:id="enemy_hammer_bro"
-					fitHeight="32.0"
+					fitHeight="34.0"
 					fitWidth="16.0"
 					layoutX="21.0"
 					layoutY="65.0"
@@ -205,8 +205,8 @@
 					</image>
 					<viewport>
 						<Rectangle2D
-							height="32.0"
-							minX="926.0"
+							height="34.0"
+							minX="928.0"
 							minY="86.0"
 							width="16.0" />
 					</viewport>
@@ -230,7 +230,7 @@
 					<viewport>
 						<Rectangle2D
 							height="16.0"
-							minX="971.0"
+							minX="975.0"
 							minY="80.0"
 							width="16.0" />
 					</viewport>
@@ -325,7 +325,7 @@
 					<viewport>
 						<Rectangle2D
 							height="32.0"
-							minX="1002.0"
+							minX="1006.0"
 							minY="88.0"
 							width="32.0" />
 					</viewport>
@@ -349,7 +349,7 @@
 					<viewport>
 						<Rectangle2D
 							height="24.0"
-							minX="1298.0"
+							minX="1302.0"
 							minY="96.0"
 							width="32.0" />
 					</viewport>
