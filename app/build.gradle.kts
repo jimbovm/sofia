@@ -9,6 +9,7 @@ plugins {
 	id("org.jetbrains.kotlin.jvm") version "2.1.20"
 	id("org.openjfx.javafxplugin") version "0.1.0"
 	id("com.palantir.git-version") version "3.2.0"
+	id("com.gradleup.shadow") version "9.0.0-beta12"
 }
 
 val gitVersion: groovy.lang.Closure<String> by extra
@@ -94,5 +95,9 @@ tasks.named("outputBuildInfo") {
 }
 
 tasks.named("run") {
+	dependsOn("outputBuildInfo")
+}
+
+tasks.named("build") {
 	dependsOn("outputBuildInfo")
 }
