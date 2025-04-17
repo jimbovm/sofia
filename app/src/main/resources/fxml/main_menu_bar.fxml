@@ -16,16 +16,7 @@
 			url="@/img/smb_sprite.png" />
 	</fx:define>
 	<menus>
-		<Menu mnemonicParsing="false" text="%main_menu_file">
-			<items>
-				<MenuItem mnemonicParsing="false" text="%main_menu_file_new" />
-				<MenuItem mnemonicParsing="false" text="%main_menu_file_open" />
-				<MenuItem mnemonicParsing="false" text="%main_menu_file_save" />
-				<MenuItem mnemonicParsing="false" text="%main_menu_file_save_as" />
-				<SeparatorMenuItem />
-				<MenuItem mnemonicParsing="false" text="%main_menu_file_export" />
-			</items>
-		</Menu>
+		<fx:include fx:id="menu_file" source="file_menu.fxml" />
 		<Menu mnemonicParsing="false" text="%main_menu_edit">
 			<items>
 				<MenuItem mnemonicParsing="false" text="%undo" />

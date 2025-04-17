@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<Menu mnemonicParsing="false" text="%main_menu_file">
+	<items>
+		<MenuItem mnemonicParsing="false" text="%main_menu_file_new">
+			<graphic>
+				<ImageView
+					pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<Image url="@/img/icons/document-new.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+		<MenuItem mnemonicParsing="false" text="%main_menu_file_open">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<Image url="@/img/icons/document-open.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+		<MenuItem mnemonicParsing="false" text="%main_menu_file_save">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<Image url="@/img/icons/document-save.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+		<MenuItem mnemonicParsing="false" text="%main_menu_file_save_as">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<Image url="@/img/icons/document-save-as.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+		<MenuItem mnemonicParsing="false" text="%main_menu_file_export">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<Image url="@/img/icons/media-nes.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+		<SeparatorMenuItem />
+		<MenuItem mnemonicParsing="false" text="%main_menu_file_close">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false">
+					<image>
+						<Image url="@/img/icons/window-close.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+	</items>
+</Menu>
