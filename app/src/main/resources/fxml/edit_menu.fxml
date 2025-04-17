@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<Menu xmlns="http://javafx.com/javafx/21"
+	xmlns:fx="http://javafx.com/fxml/1" id="menuEdit" fx:id="menuEdit"
+	mnemonicParsing="false" text="%main_menu_edit">
+	<items>
+		<MenuItem id="menuEditUndo" fx:id="menuEditUndo" mnemonicParsing="false" text="%undo">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false" fitHeight="16" fitWidth="16">
+					<image>
+						<Image url="@/img/icons/edit-undo.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+		<MenuItem id="menuEditRedo" fx:id="menuEditRedo" mnemonicParsing="false" text="%redo">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false" fitHeight="16" fitWidth="16">
+					<image>
+						<Image url="@/img/icons/edit-redo.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+		<SeparatorMenuItem />
+		<MenuItem id="menuEditCut" fx:id="menuEditCut" mnemonicParsing="false" text="%cut">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false" fitHeight="16" fitWidth="16">
+					<image>
+						<Image url="@/img/icons/edit-cut.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+		<MenuItem id="menuEditCopy" fx:id="menuEditCopy" mnemonicParsing="false" text="%copy">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false" fitHeight="16" fitWidth="16">
+					<image>
+						<Image url="@/img/icons/edit-copy.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+		<MenuItem id="menuEditPaste" fx:id="menuEditPaste" mnemonicParsing="false" text="%paste">
+			<graphic>
+				<ImageView pickOnBounds="true" preserveRatio="true"
+					smooth="false" fitHeight="16" fitWidth="16">
+					<image>
+						<Image url="@/img/icons/edit-paste.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</MenuItem>
+	</items>
+</Menu>

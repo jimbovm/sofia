@@ -6,53 +6,60 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<Menu mnemonicParsing="false" text="%main_menu_file">
+<Menu xmlns="http://javafx.com/javafx/21"
+	xmlns:fx="http://javafx.com/fxml/1" id="menuFile" fx:id="menuFile" mnemonicParsing="false"
+	text="%main_menu_file">
 	<items>
-		<MenuItem mnemonicParsing="false" text="%main_menu_file_new">
+		<MenuItem id="menuFileNew" fx:id="menuFileNew" mnemonicParsing="false"
+			text="%main_menu_file_new">
 			<graphic>
 				<ImageView
 					pickOnBounds="true" preserveRatio="true"
-					smooth="false">
+					smooth="false" fitHeight="16" fitWidth="16">
 					<image>
 						<Image url="@/img/icons/document-new.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</MenuItem>
-		<MenuItem mnemonicParsing="false" text="%main_menu_file_open">
+		<MenuItem id="menuFileOpen" fx:id="menuFileOpen" mnemonicParsing="false"
+			text="%main_menu_file_open">
 			<graphic>
 				<ImageView pickOnBounds="true" preserveRatio="true"
-					smooth="false">
+					smooth="false" fitHeight="16" fitWidth="16">
 					<image>
 						<Image url="@/img/icons/document-open.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</MenuItem>
-		<MenuItem mnemonicParsing="false" text="%main_menu_file_save">
+		<MenuItem id="menuFileSave" fx:id="menuFileSave" mnemonicParsing="false"
+			text="%main_menu_file_save">
 			<graphic>
 				<ImageView pickOnBounds="true" preserveRatio="true"
-					smooth="false">
+					smooth="false" fitHeight="16" fitWidth="16">
 					<image>
 						<Image url="@/img/icons/document-save.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</MenuItem>
-		<MenuItem mnemonicParsing="false" text="%main_menu_file_save_as">
+		<MenuItem id="menuFileSaveAs" fx:id="menuFileSaveAs" mnemonicParsing="false"
+			text="%main_menu_file_save_as">
 			<graphic>
 				<ImageView pickOnBounds="true" preserveRatio="true"
-					smooth="false">
+					smooth="false" fitHeight="16" fitWidth="16">
 					<image>
 						<Image url="@/img/icons/document-save-as.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</MenuItem>
-		<MenuItem mnemonicParsing="false" text="%main_menu_file_export">
+		<MenuItem id="menuFileExport" fx:id="menuFileExport" mnemonicParsing="false"
+			text="%main_menu_file_export">
 			<graphic>
 				<ImageView pickOnBounds="true" preserveRatio="true"
-					smooth="false">
+					smooth="false" fitHeight="16" fitWidth="16">
 					<image>
 						<Image url="@/img/icons/media-nes.png" />
 					</image>
@@ -60,10 +67,11 @@
 			</graphic>
 		</MenuItem>
 		<SeparatorMenuItem />
-		<MenuItem mnemonicParsing="false" text="%main_menu_file_close">
+		<MenuItem id="menuFileClose" fx:id="menuFileClose" mnemonicParsing="false"
+			text="%main_menu_file_close">
 			<graphic>
 				<ImageView pickOnBounds="true" preserveRatio="true"
-					smooth="false">
+					smooth="false" fitHeight="16" fitWidth="16">
 					<image>
 						<Image url="@/img/icons/window-close.png" />
 					</image>

@@ -16,18 +16,9 @@
 			url="@/img/smb_sprite.png" />
 	</fx:define>
 	<menus>
-		<fx:include fx:id="menu_file" source="file_menu.fxml" />
-		<Menu mnemonicParsing="false" text="%main_menu_edit">
-			<items>
-				<MenuItem mnemonicParsing="false" text="%undo" />
-				<MenuItem mnemonicParsing="false" text="%redo" />
-				<SeparatorMenuItem />
-				<MenuItem mnemonicParsing="false" text="%cut" />
-				<MenuItem mnemonicParsing="false" text="%copy" />
-				<MenuItem mnemonicParsing="false" text="%paste" />
-			</items>
-		</Menu>
-		<fx:include fx:id="menu_insert" source="insert_menu.fxml" />
+		<fx:include fx:id="menuFile" source="file_menu.fxml" />
+		<fx:include fx:id="menuEdit" source="edit_menu.fxml" />
+		<fx:include fx:id="menuInsert" source="insert_menu.fxml" />
 		<Menu mnemonicParsing="false" text="%main_menu_game">
 			<items>
 				<MenuItem mnemonicParsing="false" text="%main_menu_game_scenario" />
@@ -52,7 +43,7 @@
 			<items>
 				<MenuItem mnemonicParsing="false" text="%main_menu_help_about" onAction="#showAboutDialog">
 					<graphic>
-						<ImageView fx:id="icon_about"
+						<ImageView
 							pickOnBounds="true" preserveRatio="true"
 							smooth="false">
 							<image>
