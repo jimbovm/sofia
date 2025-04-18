@@ -29,6 +29,8 @@ import com.github.jimbovm.isobel.common.Area.Environment
 import com.github.jimbovm.isobel.common.AreaHeader
 import com.github.jimbovm.isobel.common.AreaHeader.Fill
 import com.github.jimbovm.isobel.common.AreaHeader.Scenery
+import com.github.jimbovm.isobel.common.AreaHeader.Background
+import com.github.jimbovm.isobel.common.AreaHeader.Platform
 
 import com.github.jimbovm.sofia.presenter.editor.Sprite
 
@@ -36,7 +38,7 @@ import com.github.jimbovm.sofia.presenter.editor.Sprite
  * A skin is a collection of assets for rendering an area based on that 
  * area's properties.
  */
-final data class Skin(
+class Skin(
 		val backgroundColor: Color,
 		val background: Sprite?,
 		val scenery: Sprite?,
@@ -45,8 +47,22 @@ final data class Skin(
 		val fillTile: Sprite,
 		val liftTile: Sprite,
 		val spriteSheet: Image = Image(ClassLoader.getSystemResourceAsStream("img/smb_sprite.png")),
-		val backgroundScenerySheet: Image = Image(ClassLoader.getSystemResourceAsStream("img/smb_scenery.png"))
+		val backgroundSheet: Image = Image(ClassLoader.getSystemResourceAsStream("img/smb_background.png")),
+		val scenerySheet: Image = Image(ClassLoader.getSystemResourceAsStream("img/smb_scenery.png"))
 	) {
+
+	public final enum class Palette0VariantOffset(val x: Double) {
+		DEFAULT(0.0),
+		MUSHROOM(144.0),
+		SNOW(288.0)
+	}
+
+	public final enum class Palette1Offset(val y: Double) {
+		UNDERWATER(0.0),
+		OVERWORLD(64.0),
+		UNDERGROUND(128.0),
+		CASTLE(192.0)
+	}
 
 	/**
 	 * Default colour of the "sky", or blank background before any
@@ -63,9 +79,9 @@ final data class Skin(
 	 * Offsets from the Y origin for the style in which to render the background.
 	 */
 	private final enum class BackgroundOffset(val y: Double) {
-		UNDERWATER(1200.0),
-		CASTLE_WALL(992.0),
-		OVER_WATER(752.0)
+		OVER_WATER(0.0),
+		UNDERWATER(Skin.SCREEN_HEIGHT as Double),
+		CASTLE_WALL(Skin.SCREEN_HEIGHT * 2.0),
 	}
 
 	/**
@@ -85,59 +101,60 @@ final data class Skin(
 	 * Offsets from the Y origin for the type of scenery to render.
 	 */
 	private final enum class SceneryOffset(val y: Double) {
-		CLOUDS(448.0),
 		HILLS(0.0),
-		FENCES(272.0),
+		FENCES(SCREEN_HEIGHT),
+		CLOUDS(SCREEN_HEIGHT * 2),
 	}
 
 	companion object {
 
-		private final val BLOCK_SIZE = 16
-		private final val SPRITE_SHEET_WIDTH = 1330.0
-		private final val SPRITE_SHEET_HEIGHT = 64.0
-		private final val SPRITE_FOREGROUND_A_WIDTH = 160.0
-		private final val SPRITE_FOREGROUND_A_HEIGHT = 64.0
-		private final val SPRITE_FOREGROUND_B_WIDTH = 144.0
-		private final val SPRITE_FOREGROUND_B_HEIGHT = 64.0
-		private final val SCENERY_WIDTH = 768.0
-		private final val SCENERY_HEIGHT = 272.0
+		public val SCREEN_WIDTH = 256.0
+		public val SCREEN_HEIGHT = 240.0
+		public val BLOCK_SIZE = 16
+		public val SPRITE_FOREGROUND_PALETTE_1_WIDTH = 160.0
+		public val SPRITE_FOREGROUND_PALETTE_1_HEIGHT = 64.0
+		public val SPRITE_FOREGROUND_PALETTE_0_WIDTH = 144.0
+		public val SPRITE_FOREGROUND_PALETTE_0_HEIGHT = 64.0
+		public val SCENERY_WIDTH = 768.0
+		
+		private val SPRITE_SHEET_WIDTH = 1330.0
+		private val SPRITE_SHEET_HEIGHT = 64.0
 
-		private final val BLUE_SKY = "#6c6aff"
+		private val BLUE_SKY = "#6c6aff"
 
 		fun of(area: Area): Skin {
 
-			val environment = area.environment.name.toString()
-			val headerBackground = area.header.background.name.toString()
-			val night = headerBackground.contains("NIGHT")
-			val useMushroomPalette = area.header.platform == AreaHeader.Platform.MUSHROOM
-			val useSnowPalette = headerBackground.contains("SNOW")
-			val useMonochromePalette = headerBackground == "MONOCHROME"
+			val isNight: Boolean = area.header.background in listOf(Background.NIGHT, Background.NIGHT_SNOW)
+			val useSnowPalette: Boolean = area.header.background in listOf(Background.DAY_SNOW, Background.NIGHT_SNOW)
+			val useMushroomPalette: Boolean = area.header.platform == Platform.MUSHROOM
+			val useMonochromePalette: Boolean = area.header.background == Background.MONOCHROME
 
-			val backgroundColor = if (night || useMonochromePalette) {
-				Color.BLACK
-			} else {
-				Skin.BackgroundColor.valueOf(environment).color
+			val backgroundColor = when {
+				isNight || useMonochromePalette -> Color.BLACK
+				else -> Skin.BackgroundColor.valueOf(area.environment.name.toString()).color
 			}
 
-			val backgroundSceneryXOffset = if (useMushroomPalette) {
-				Skin.BackgroundSceneryOffset.MUSHROOM.x
-			} else if (useSnowPalette) {
-				Skin.BackgroundSceneryOffset.SNOW.x
-			} else if (useMonochromePalette) {
-				Skin.BackgroundSceneryOffset.MONOCHROME.x
-			} else {
-				0.0
+			val backgroundSceneryXOffset = when {
+				useMushroomPalette -> Skin.BackgroundSceneryOffset.MUSHROOM.x
+				useSnowPalette -> Skin.BackgroundSceneryOffset.SNOW.x
+				useMonochromePalette -> Skin.BackgroundSceneryOffset.MONOCHROME.x
+				else -> SCENERY_WIDTH * area.environment.id
 			}
-			val backgroundYOffset = when (headerBackground) {
-				"UNDERWATER", "CASTLE_WALL", "OVER_WATER" -> Skin.BackgroundOffset.valueOf(headerBackground).y
+
+			val backgroundYOffset = when (area.header.background) {
+				Background.UNDERWATER,
+				Background.CASTLE_WALL,
+				Background.OVER_WATER -> Skin.BackgroundOffset.valueOf(area.header.background.toString()).y
 				else -> 0.0
 			}
 
-			val background: Sprite? = when (headerBackground) {
-				"UNDERWATER", "CASTLE_WALL", "OVER_WATER" -> Sprite(
+			val background: Sprite? = when (area.header.background) {
+				Background.UNDERWATER,
+				Background.CASTLE_WALL,
+				Background.OVER_WATER -> Sprite(
 					backgroundSceneryXOffset,
 					backgroundYOffset,
-					SCENERY_HEIGHT,
+					SCREEN_HEIGHT,
 					SCENERY_WIDTH)
 				else -> null
 			}
@@ -145,18 +162,18 @@ final data class Skin(
 			val sceneryYOffset: Double = when (area.header.scenery) {
 				AreaHeader.Scenery.CLOUDS -> Skin.SceneryOffset.CLOUDS.y
 				AreaHeader.Scenery.HILLS -> Skin.SceneryOffset.HILLS.y
-				AreaHeader.Scenery.FENCES -> Skin.SceneryOffset.HILLS.y
+				AreaHeader.Scenery.FENCES -> Skin.SceneryOffset.FENCES.y
 				else -> 0.0
 			}
 
 			val scenery: Sprite? = when (area.header.platform) {
 				AreaHeader.Platform.CLOUD -> null
 				else ->	Sprite(
-					backgroundSceneryXOffset,
-					sceneryYOffset,
-					SCENERY_HEIGHT,
-					SCENERY_WIDTH
-				)
+						backgroundSceneryXOffset,
+						sceneryYOffset,
+						SCREEN_HEIGHT,
+						SCENERY_WIDTH
+					)
 			}
 
 			return Skin(
