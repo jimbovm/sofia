@@ -101,3 +101,7 @@ tasks.named("run") {
 tasks.named("build") {
 	dependsOn("outputBuildInfo")
 }
+
+tasks.named("shadowJar") {
+	dependsOn("outputBuildInfo")
+}
