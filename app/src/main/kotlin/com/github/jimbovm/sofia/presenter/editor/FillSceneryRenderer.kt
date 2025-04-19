@@ -42,7 +42,7 @@ import com.github.jimbovm.sofia.presenter.editor.Skin
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-public class TerrainRenderer : Renderer {
+public class FillSceneryRenderer : Renderer {
 
 	companion object {
 
@@ -76,40 +76,33 @@ public class TerrainRenderer : Renderer {
 	}
 
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas, area: Area = Area()) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
 	private fun drawColumn(fill: Fill, column: Int): Unit {
 
 		fill.blocks.forEach {
-
 			val row = it
-
 			val sprite: Sprite = when (row) {
 				13 -> this.skin.upperFloorTile
 				14 -> this.skin.lowerFloorTile
 				else -> this.skin.fillTile
 			}
-
 			this.drawSprite(sprite, column, row)
 		}
 	}
 
 	public override fun render(): Unit {
 
-		canvas.width = 256.0 * this.pages
-		canvas.height = 240.0
-
 		// draw first column with initial fill
 		var currentFill: Fill = Fill.from(this.area.header.fill)
-		drawColumn(currentFill ?: Fill.FILL_ALL, 0)
 
 		// pop first actor
-		val actors: Deque<GeographyActor> = ArrayDeque<GeographyActor>(area.geography)
+		val actors: Deque<GeographyActor> = ArrayDeque<GeographyActor>(area.geography.filter({ it is FillSceneryModifier }))
 		var currentActor: GeographyActor? = actors.poll()
 
 		val finalColumn = this.pages * 16
 
-		for (column in (1..finalColumn)) {
+		for (column in (0..finalColumn)) {
 
 			if ((currentActor is FillSceneryModifier) && (currentActor?.x == column)) {
 				currentFill = Fill.from(currentActor.fill) ?: Fill.FILL_ALL

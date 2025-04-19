@@ -38,72 +38,158 @@ import com.github.jimbovm.sofia.presenter.editor.Sprite
  * A skin is a collection of assets for rendering an area based on that 
  * area's properties.
  */
-class Skin(
-		val backgroundColor: Color,
-		val background: Sprite?,
-		val scenery: Sprite?,
-		val lowerFloorTile: Sprite,
-		val upperFloorTile: Sprite,
-		val fillTile: Sprite,
-		val liftTile: Sprite,
-		val spriteSheet: Image = Image(ClassLoader.getSystemResourceAsStream("img/smb_sprite.png")),
-		val backgroundSheet: Image = Image(ClassLoader.getSystemResourceAsStream("img/smb_background.png")),
-		val scenerySheet: Image = Image(ClassLoader.getSystemResourceAsStream("img/smb_scenery.png"))
-	) {
+class Skin {
 
-	public final enum class Palette0VariantOffset(val x: Double) {
-		DEFAULT(0.0),
-		MUSHROOM(144.0),
-		SNOW(288.0)
+	constructor(area: Area) {
+		this.environment = area.environment
+		this.scenery = area.header.scenery
+		this.background = area.header.background
+		this.platform = area.header.platform
 	}
 
-	public final enum class Palette1Offset(val y: Double) {
-		UNDERWATER(0.0),
-		OVERWORLD(64.0),
-		UNDERGROUND(128.0),
-		CASTLE(192.0)
+	var environment: Environment = Environment.OVERWORLD
+	var scenery: Scenery = Scenery.HILLS
+	var background: Background = Background.NONE
+	var platform: Platform = Platform.TREE
+
+	/**
+	 * Return the correct scenery sheet given the scenery
+	 * and environment.
+	 *
+	 * @return An Image of scenery.
+	 */
+	var scenerySheet: Image? = null
+	get(): Image? {
+		val fileSource = when {
+			this.scenery == Scenery.NONE -> return null
+			this.platform == Platform.MUSHROOM -> "img/scenery/smb_MUSHROOM_${this.scenery.name}.png"
+			this.background in listOf(Background.DAY_SNOW,
+						 Background.NIGHT_SNOW) -> "img/scenery/smb_SNOW_${this.scenery.name}.png"
+			else -> "img/scenery/smb_${this.environment.name}_${this.scenery.name}.png"
+		}
+		
+		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
+	}
+
+	var backgroundSheet: Image? = null
+	get(): Image? {
+		val fileSource = when {
+			this.background == Background.NONE -> return null
+			this.environment in listOf(
+				Environment.CASTLE,
+				Environment.UNDERWATER) -> "img/scenery/smb_${this.environment.name}_${this.scenery.name}.png"
+			else -> "img/scenery/smb_OTHER_${this.background.name}.png"
+		}
+		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}
 
 	/**
-	 * Default colour of the "sky", or blank background before any
-	 * sprites are rendered.
+	 * Return the sprite sheet for rendering foreground objects given the 
+	 * environment and background settings.
+	 *
+	 * @return An Image of a sprite sheet of foreground objects.
 	 */
-	private final enum class BackgroundColor(val color: Color) {
-		UNDERWATER(Color.web(BLUE_SKY)),
-		OVERWORLD(Color.web(BLUE_SKY)),
-		UNDERGROUND(Color.BLACK),
-		CASTLE(Color.BLACK)
+	var spriteSheet: Image = Image("img/sheets/foreground/smb_sprites_OVERWORLD.png")
+	get(): Image {
+		// check for variant overworld palettes
+		val fileSource = if (this.environment == Environment.OVERWORLD) {
+			when {
+				this.platform == Platform.MUSHROOM -> "img/sheets/foreground/smb_sprites_MUSHROOM.png"
+				this.background == Background.DAY_SNOW -> "img/sheets/foreground/smb_sprites_SNOW.png"
+				this.background == Background.NIGHT_SNOW -> "img/sheets/foreground/smb_sprites_SNOW.png"
+				else -> "img/sheets/foreground/smb_sprites_OVERWORLD.png"
+			}
+		} else {
+			"img/sheets/foreground/smb_sprites_${this.environment.name.toString()}.png"
+		}
+
+		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}
 
 	/**
-	 * Offsets from the Y origin for the style in which to render the background.
+	 * Return the correct tile for rendering terrain fill higher than
+	 * floor level given the environment.
+	 *
+	 * @return A Sprite.
 	 */
-	private final enum class BackgroundOffset(val y: Double) {
-		OVER_WATER(0.0),
-		UNDERWATER(Skin.SCREEN_HEIGHT as Double),
-		CASTLE_WALL(Skin.SCREEN_HEIGHT * 2.0),
+	var fillTile: Sprite = Sprite.Metatile.BLANK.sprite
+	get(): Sprite { 
+		val tile = when (this.environment) {
+			Environment.UNDERWATER -> Sprite.Metatile.SEAFLOOR.sprite
+			Environment.OVERWORLD -> Sprite.Metatile.GROUND.sprite
+			Environment.UNDERGROUND -> Sprite.Metatile.BRICK.sprite
+			Environment.CASTLE -> Sprite.Metatile.CASTLE_BRICK.sprite
+		}
+		return tile
 	}
 
 	/**
-	 * Offsets from the X origin for background and scenery palette variants.
+	 * Return the correct tile for rendering the upper floor tile
+	 * (at Y=13) given the environment.
+	 *
+	 * @return A Sprite specifying a metatile.
 	 */
-	private final enum class BackgroundSceneryOffset(val x: Double) {
-		UNDERWATER(0.0),
-		OVERWORLD(SCENERY_WIDTH),
-		UNDERGROUND(SCENERY_WIDTH * 2),
-		CASTLE(SCENERY_WIDTH * 3),
-		MUSHROOM(SCENERY_WIDTH * 4),
-		SNOW(SCENERY_WIDTH * 5),
-		MONOCHROME(SCENERY_WIDTH * 3)
+	var upperFloorTile: Sprite = Sprite.Metatile.BLANK.sprite
+	get(): Sprite {  
+		val tile = if (this.platform == Platform.CLOUD) {
+			Sprite.Metatile.CLOUD.sprite
+		}
+		else {
+			this.lowerFloorTile
+		}
+		return tile
 	}
 
 	/**
-	 * Offsets from the Y origin for the type of scenery to render.
+	 * Return the correct tile for rendering the lower floor tile
+	 * (at Y=14) given the environment.
+	 *
+	 * @return A Sprite specifying a metatile.
 	 */
-	private final enum class SceneryOffset(val y: Double) {
-		HILLS(0.0),
-		FENCES(SCREEN_HEIGHT),
-		CLOUDS(SCREEN_HEIGHT * 2),
+	var lowerFloorTile: Sprite = Sprite.Metatile.BLANK.sprite
+	get(): Sprite {
+		val tile = if (this.platform == Platform.CLOUD) {
+			Sprite.Metatile.CLOUD.sprite
+		}
+		else when (this.environment) {
+			Environment.UNDERWATER -> Sprite.Metatile.SEAFLOOR.sprite
+			Environment.OVERWORLD -> Sprite.Metatile.GROUND.sprite
+			Environment.UNDERGROUND -> Sprite.Metatile.GROUND.sprite
+			Environment.CASTLE -> Sprite.Metatile.CASTLE_BRICK.sprite
+		}
+		return tile
+	}
+
+	/**
+	 * Return the correct tile for rendering the "column of bricks"
+	 * actor given the environment.
+	 *
+	 * @return A Sprite specifying a metatile.
+	 */
+	var brickTile: Sprite = Sprite.Metatile.BLANK.sprite
+	get(): Sprite {
+		val tile = when (this.environment) {
+			Environment.UNDERWATER -> Sprite.Metatile.CORAL.sprite
+			else -> Sprite.Metatile.BRICK.sprite
+		}
+		return tile
+	}
+
+	/**
+	 * Return the correct "sky" colour (base screen colour before scenery
+	 * or background is rendered on top) given the environment and 
+	 * background settings.
+	 *
+	 * @return A Color.
+	 */
+	var skyColor: Color = Color.BLACK
+	get(): Color { 
+		val color = when {
+			environment in listOf(Environment.UNDERGROUND, Environment.CASTLE) -> Color.BLACK
+			background in listOf(Background.NIGHT, Background.NIGHT_SNOW, Background.MONOCHROME) -> Color.BLACK
+			else -> Color.web(Skin.BLUE_SKY)
+		}
+		return color
 	}
 
 	companion object {
@@ -111,80 +197,11 @@ class Skin(
 		public val SCREEN_WIDTH = 256.0
 		public val SCREEN_HEIGHT = 240.0
 		public val BLOCK_SIZE = 16
-		public val SPRITE_FOREGROUND_PALETTE_1_WIDTH = 160.0
-		public val SPRITE_FOREGROUND_PALETTE_1_HEIGHT = 64.0
-		public val SPRITE_FOREGROUND_PALETTE_0_WIDTH = 144.0
-		public val SPRITE_FOREGROUND_PALETTE_0_HEIGHT = 64.0
 		public val SCENERY_WIDTH = 768.0
 		
 		private val SPRITE_SHEET_WIDTH = 1330.0
 		private val SPRITE_SHEET_HEIGHT = 64.0
 
 		private val BLUE_SKY = "#6c6aff"
-
-		fun of(area: Area): Skin {
-
-			val isNight: Boolean = area.header.background in listOf(Background.NIGHT, Background.NIGHT_SNOW)
-			val useSnowPalette: Boolean = area.header.background in listOf(Background.DAY_SNOW, Background.NIGHT_SNOW)
-			val useMushroomPalette: Boolean = area.header.platform == Platform.MUSHROOM
-			val useMonochromePalette: Boolean = area.header.background == Background.MONOCHROME
-
-			val backgroundColor = when {
-				isNight || useMonochromePalette -> Color.BLACK
-				else -> Skin.BackgroundColor.valueOf(area.environment.name.toString()).color
-			}
-
-			val backgroundSceneryXOffset = when {
-				useMushroomPalette -> Skin.BackgroundSceneryOffset.MUSHROOM.x
-				useSnowPalette -> Skin.BackgroundSceneryOffset.SNOW.x
-				useMonochromePalette -> Skin.BackgroundSceneryOffset.MONOCHROME.x
-				else -> SCENERY_WIDTH * area.environment.id
-			}
-
-			val backgroundYOffset = when (area.header.background) {
-				Background.UNDERWATER,
-				Background.CASTLE_WALL,
-				Background.OVER_WATER -> Skin.BackgroundOffset.valueOf(area.header.background.toString()).y
-				else -> 0.0
-			}
-
-			val background: Sprite? = when (area.header.background) {
-				Background.UNDERWATER,
-				Background.CASTLE_WALL,
-				Background.OVER_WATER -> Sprite(
-					backgroundSceneryXOffset,
-					backgroundYOffset,
-					SCREEN_HEIGHT,
-					SCENERY_WIDTH)
-				else -> null
-			}
-
-			val sceneryYOffset: Double = when (area.header.scenery) {
-				AreaHeader.Scenery.CLOUDS -> Skin.SceneryOffset.CLOUDS.y
-				AreaHeader.Scenery.HILLS -> Skin.SceneryOffset.HILLS.y
-				AreaHeader.Scenery.FENCES -> Skin.SceneryOffset.FENCES.y
-				else -> 0.0
-			}
-
-			val scenery: Sprite? = when (area.header.platform) {
-				AreaHeader.Platform.CLOUD -> null
-				else ->	Sprite(
-						backgroundSceneryXOffset,
-						sceneryYOffset,
-						SCREEN_HEIGHT,
-						SCENERY_WIDTH
-					)
-			}
-
-			return Skin(
-				backgroundColor,
-				background,
-				scenery,
-				Sprite.lowerFloorTileOf(area),
-				Sprite.upperFloorTileOf(area),
-				Sprite.fillTileOf(area),
-				Sprite.liftTileOf(area),
-			)
-		}
 	}
 }

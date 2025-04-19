@@ -13,7 +13,7 @@
 	text="%main_menu_insert">
 	<fx:define>
 		<Image fx:id="sprites"
-			url="@/img/smb_sprite.png" />
+			url="@/img/sheets/foreground/smb_sprites_OVERWORLD.png" />
 	</fx:define>
 	<items>
 		<MenuItem mnemonicParsing="false" text="%add_new_area" />
@@ -31,7 +31,7 @@
 					</image>
 					<viewport>
 						<Rectangle2D height="16.0"
-							minX="128.0" minY="96.0"
+							minX="128.0" minY="32.0"
 							width="16.0" />
 					</viewport>
 				</ImageView>
@@ -47,7 +47,7 @@
 					</image>
 					<viewport>
 						<Rectangle2D height="16.0"
-							minX="336.0" minY="64.0"
+							minX="336.0" minY="0.0"
 							width="16.0" />
 					</viewport>
 				</ImageView>
@@ -63,7 +63,7 @@
 					</image>
 					<viewport>
 						<Rectangle2D height="16.0"
-							minX="224.0" minY="80.0"
+							minX="224.0" minY="16.0"
 							width="16.0" />
 					</viewport>
 				</ImageView>
@@ -79,7 +79,7 @@
 					</image>
 					<viewport>
 						<Rectangle2D height="16.0"
-							minY="64.0" width="16.0" />
+							minY="0.0" width="16.0" />
 					</viewport>
 				</ImageView>
 			</graphic>
@@ -94,7 +94,7 @@
 					</image>
 					<viewport>
 						<Rectangle2D height="16.0"
-							minX="1270.0" minY="104.0" width="16.0" />
+							minX="1270.0" minY="40.0" width="16.0" />
 					</viewport>
 				</ImageView>
 			</graphic>

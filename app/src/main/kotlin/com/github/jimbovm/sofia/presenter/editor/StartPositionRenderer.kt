@@ -20,6 +20,8 @@ SOFTWARE. */
 package com.github.jimbovm.sofia.presenter.editor
 
 import javafx.scene.canvas.Canvas
+import javafx.scene.image.Image
+
 import com.github.jimbovm.isobel.common.Area
 import com.github.jimbovm.isobel.common.AreaHeader.StartPosition
 
@@ -32,16 +34,18 @@ import com.github.jimbovm.sofia.presenter.editor.Sprite.Metatile
  */
 public class StartPositionRenderer : Renderer {
 
+	private val brosSheet: Image = Image("img/foreground/smb_bros.png")
+
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas, area: Area = Area()) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area, skin: Skin = Skin(area)) : super(canvas, area)
 
 	public override fun render(): Unit {
 
 		when (this.area.header.startPosition) {
-			StartPosition.FALL -> this.drawSprite(Sprite.get(Metatile.MARIO_FALL, this.area), 2, 1)
-			StartPosition.BOTTOM -> this.drawSprite(Sprite.get(Metatile.MARIO_STAND, this.area), 2, 12)
-			StartPosition.MIDDLE -> this.drawSprite(Sprite.get(Metatile.MARIO_STAND, this.area), 2, 5)
-			else -> this.drawSprite(Sprite.get(Metatile.MARIO_FALL, this.area), 2, 2)
+			StartPosition.FALL -> this.drawSprite(Sprite.Metatile.MARIO_FALL.sprite, 2, 1)
+			StartPosition.BOTTOM -> this.drawSprite(Sprite.Metatile.MARIO_STAND.sprite, 2, 12)
+			StartPosition.MIDDLE -> this.drawSprite(Sprite.Metatile.MARIO_STAND.sprite, 2, 5)
+			else -> this.drawSprite(Sprite.Metatile.MARIO_FALL.sprite, 2, 2)
 		}
 	}
 }

@@ -39,13 +39,18 @@ import com.github.jimbovm.isobel.common.AreaHeader
 import com.github.jimbovm.isobel.actor.geography.GeographyActor
 import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
 
+import com.github.jimbovm.sofia.presenter.editor.FillSceneryRenderer
 import com.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
-import com.github.jimbovm.sofia.presenter.editor.TerrainRenderer
 
 /**
  * Main launcher for the Sofia GUI.
  */
 class Main() : Application() {
+
+	private val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
+	private val fxmlLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/main.fxml"), this.uiBundle)
+	private val mainPane: Pane = fxmlLoader.load()
+	private val scene = Scene(mainPane)
 
 	private fun setUpCanvas(container: Group): Unit {
 
@@ -58,42 +63,37 @@ class Main() : Application() {
 				background = AreaHeader.Background.NONE
 				fill = AreaHeader.Fill.FILL_ALL
 				platform = AreaHeader.Platform.TREE
-				scenery = AreaHeader.Scenery.NONE
-				startPosition = AreaHeader.StartPosition.FALL
+				scenery = AreaHeader.Scenery.FENCES
+				startPosition = AreaHeader.StartPosition.BOTTOM
 				ticks = 400
 			}
 			environment = Area.Environment.UNDERGROUND
-			geography = mutableListOf(
-				FillSceneryModifier.create(1, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.NONE),
-				FillSceneryModifier.create(5, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE),
-				FillSceneryModifier.create(11, AreaHeader.Fill.FILL_0BF_1BC, AreaHeader.Scenery.NONE),
-				FillSceneryModifier.create(13, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE),
-				FillSceneryModifier.create(15, AreaHeader.Fill.FILL_0BF_1BC, AreaHeader.Scenery.NONE),
-				FillSceneryModifier.create(17, AreaHeader.Fill.FILL_2BF_1BC, AreaHeader.Scenery.NONE),
-				FillSceneryModifier.create(18, AreaHeader.Fill.FILL_0BF_1BC, AreaHeader.Scenery.NONE),
-				FillSceneryModifier.create(21, AreaHeader.Fill.FILL_ALL, AreaHeader.Scenery.NONE))
 		}
 
-		val terrainRenderer = TerrainRenderer(canvas, area)
+		for (column in 0..128) {
+				area.geography.add(
+					FillSceneryModifier.create(
+						column,
+						AreaHeader.Fill.from(column % AreaHeader.Fill.entries.size),
+						AreaHeader.Scenery.NONE)
+				)
+		}
+
+		val terrainRenderer = FillSceneryRenderer(canvas, area)
 		terrainRenderer.render()
-		val startPositionRenderer = StartPositionRenderer(canvas, area)
-		startPositionRenderer.render()
 	}
 
 	override fun start(primaryStage: Stage?) {
 
-		val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
-		val fxmlLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/main.fxml"), uiBundle)
-
-		val mainPane: Pane = fxmlLoader.load()
-		val scene = Scene(mainPane)
 		val canvasContainer: Group = fxmlLoader.namespace.get("canvasContainer") as Group
 		setUpCanvas(canvasContainer)
 
-		primaryStage?.getIcons()?.add(Image("img/icon_128x128.png"))
-		primaryStage?.getIcons()?.add(Image("img/icon_64x64.png"))
-		primaryStage?.getIcons()?.add(Image("img/icon_32x32.png"))
-		primaryStage?.getIcons()?.add(Image("img/icon_16x16.png"))
+		primaryStage?.apply {
+			getIcons()?.add(Image("img/icon_128x128.png"))
+			getIcons()?.add(Image("img/icon_64x64.png"))
+			getIcons()?.add(Image("img/icon_32x32.png"))
+			getIcons()?.add(Image("img/icon_16x16.png"))
+		}
 
 		primaryStage?.title = "Sofia"
 		primaryStage?.scene = scene

@@ -32,7 +32,7 @@ class Sprite(
 		val width: Double,
 		val height: Double) {
 
-	public final enum class Metatile(val data: Sprite) {
+	public final enum class Metatile(val sprite: Sprite) {
 		AXE(Sprite(160.0, 48.0, 16.0, 16.0)),
 		BLANK(Sprite(160.0, 0.0, 16.0, 16.0)),
 		BLOCK(Sprite(0.0, 16.0, 16.0, 16.0)),
@@ -95,79 +95,5 @@ class Sprite(
 		RED_CHEEP(Sprite(975.0, 16.0, 16.0, 16.0)),
 		GREEN_CHEEP(Sprite(975.0, 39.0, 16.0, 16.0)),
 		BOWSER(Sprite(1006.0, 24.0, 32.0, 32.0));
-	}
-
-	companion object {
-	
-		fun get(tile: Metatile, area: Area): Sprite {
-
-			if (tile in listOf(Metatile.MARIO_STAND, Metatile.MARIO_FALL)) {
-				return tile.data
-			}
-			
-			val xOffset = if (area.header.platform == AreaHeader.Platform.MUSHROOM) {
-				352.0
-			} else when (area.header.background) {
-				AreaHeader.Background.DAY_SNOW, AreaHeader.Background.NIGHT_SNOW -> 496.0
-				else -> 0.0
-			}
-
-			val yOffset = 64.0 * area.environment.id
-
-			return Sprite(
-				tile.data.x + xOffset,
-				tile.data.y + yOffset,
-				tile.data.width,
-				tile.data.height)
-		}
-
-		fun lowerFloorTileOf(area: Area): Sprite {
-
-			if (area.header.platform == AreaHeader.Platform.CLOUD) {
-				return get(Metatile.BLANK, area)
-			}
-
-			val tile = when (area.environment) {
-				Area.Environment.UNDERWATER -> get(Metatile.SEAFLOOR, area)
-				Area.Environment.OVERWORLD -> get(Metatile.GROUND, area)
-				Area.Environment.UNDERGROUND -> get(Metatile.GROUND, area)
-				Area.Environment.CASTLE -> get(Metatile.CASTLE_BRICK, area)
-			}
-			return tile
-		}
-
-		fun upperFloorTileOf(area: Area): Sprite {
-
-			if (area.header.platform == AreaHeader.Platform.CLOUD) {
-				return get(Metatile.BLANK, area)
-			}
-
-			return lowerFloorTileOf(area)
-		}
-
-		fun fillTileOf(area: Area): Sprite {
-
-			if (area.header.platform == AreaHeader.Platform.CLOUD) {
-				return get(Metatile.CLOUD, area)
-			}
-
-			val tile = when (area.environment) {
-				Area.Environment.UNDERWATER -> get(Metatile.SEAFLOOR, area)
-				Area.Environment.OVERWORLD -> get(Metatile.GROUND, area)
-				Area.Environment.UNDERGROUND -> get(Metatile.BRICK, area)
-				Area.Environment.CASTLE -> get(Metatile.CASTLE_BRICK, area)
-			}
-
-			return tile
-		}
-
-		fun liftTileOf(area: Area): Sprite {
-
-			if (area.header.platform == AreaHeader.Platform.CLOUD) {
-				return get(Metatile.CLOUD, area)
-			}
-
-			return get(Metatile.LIFT, area)
-		}
 	}
 }

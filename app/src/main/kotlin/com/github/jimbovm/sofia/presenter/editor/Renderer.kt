@@ -21,6 +21,7 @@ package com.github.jimbovm.sofia.presenter.editor
 import kotlin.math.max
 
 import javafx.scene.canvas.Canvas
+import javafx.scene.image.Image
 
 import com.github.jimbovm.isobel.actor.Actor
 import com.github.jimbovm.isobel.common.Area
@@ -32,30 +33,31 @@ import com.github.jimbovm.sofia.presenter.editor.Sprite
  */
 abstract class Renderer {
 
-	internal var canvas: Canvas = Canvas()
 	internal var area: Area = Area()
-	internal var skin: Skin = Skin.of(area)
+	internal var canvas: Canvas = Canvas()
+	internal var skin: Skin = Skin(this.area)
 	internal var pages: Int get() = this.calculatePages(this.area)
 
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas, area: Area = Area()) {
+	constructor(canvas: Canvas, area: Area, skin: Skin = Skin(area)) {
 		
 		this.canvas = canvas
+		this.skin = skin
 		this.area = area
-		
 		this.pages = this.calculatePages(area)
 		
-		this.skin = Skin.of(area)
+		canvas.width = 256.0 * this.pages
+		canvas.height = 240.0
 	}
 
 	/** Draw a sprite at the given coordinates. */
-	fun drawSprite(tile: Sprite, column: Int, row: Int): Unit {
+	fun drawSprite(tile: Sprite, column: Int, row: Int, sheet: Image = this.skin.spriteSheet): Unit {
 
 		val cursorX = 16.0 * column
 		val cursorY = row * 16.0
 
 		this.canvas.getGraphicsContext2D().drawImage(
-			this.skin.spriteSheet,
+			sheet,
 			tile.x,
 			tile.y,
 			tile.width,

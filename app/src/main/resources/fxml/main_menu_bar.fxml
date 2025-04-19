@@ -13,7 +13,7 @@
 	BorderPane.alignment="CENTER" fx:controller="com.github.jimbovm.sofia.fxml.MainMenuController">
 	<fx:define>
 		<Image fx:id="sprites"
-			url="@/img/smb_sprite.png" />
+			url="@/img/sheets/foreground/smb_sprites_OVERWORLD.png" />
 	</fx:define>
 	<menus>
 		<fx:include fx:id="menuFile" source="file_menu.fxml" />

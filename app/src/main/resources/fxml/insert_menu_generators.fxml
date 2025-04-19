@@ -15,10 +15,10 @@
 	xmlns:fx="http://javafx.com/fxml/1">
 	<fx:define>
 		<Image fx:id="sprites"
-			url="@/img/smb_sprite.png" />
+			url="@/img/sheets/foreground/smb_sprites_OVERWORLD.png" />
 	</fx:define>
 	<graphic>
-		<ImageView fx:id="icon_menu_insert_generators"
+		<ImageView
 			pickOnBounds="true"
 			preserveRatio="true"
 			smooth="false">
@@ -29,7 +29,7 @@
 				<Rectangle2D
 					height="16.0"
 					minX="672.0"
-					minY="96.0"
+					minY="32.0"
 					width="16.0" />
 			</viewport>
 		</ImageView>
@@ -38,7 +38,7 @@
 		<MenuItem text="%generator_bullet_bill_cheep">
 			<graphic>
 				<VBox>
-					<ImageView fx:id="icon_menu_insert_generators"
+					<ImageView
 						pickOnBounds="true"
 						preserveRatio="true"
 						smooth="false">
@@ -49,7 +49,7 @@
 							<Rectangle2D
 								height="16.0"
 								minX="672.0"
-								minY="96.0"
+								minY="32.0"
 								width="16.0" />
 						</viewport>
 					</ImageView>
@@ -63,9 +63,9 @@
 						<viewport>
 							<Rectangle2D
 								height="16.0"
-								minX="971.0"
-								minY="103.0"
-								width="16.0" />
+								minX="991.0"
+								minY="39.0"
+								width="15.0" />
 						</viewport>
 					</ImageView>
 				</VBox>
@@ -83,8 +83,8 @@
 						<viewport>
 							<Rectangle2D
 								height="16.0"
-								minX="971.0"
-								minY="80.0"
+								minX="975.0"
+								minY="16.0"
 								width="16.0" />
 						</viewport>
 					</ImageView>
@@ -103,7 +103,7 @@
 							<Rectangle2D
 								height="8.0"
 								minX="816.0"
-								minY="136.0"
+								minY="8.0"
 								width="24.0" />
 						</viewport>
 					</ImageView>
