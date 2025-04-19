@@ -18,6 +18,8 @@ SOFTWARE. */
 
 package com.github.jimbovm.sofia.presenter.editor
 
+import kotlin.Int
+
 import java.util.ArrayDeque
 import java.util.ArrayList
 import java.util.Deque
@@ -78,9 +80,28 @@ public class FillSceneryRenderer : Renderer {
 	/** Create a new renderer object. */
 	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
-	private fun drawColumn(fill: Fill, column: Int): Unit {
+	private fun drawScenery(scenery: AreaHeader.Scenery, column: Int, xOffset: Double): Unit {
 
-		fill.blocks.forEach {
+		if (scenery == AreaHeader.Scenery.NONE) {
+			return
+		}
+
+		this.canvas.graphicsContext2D.drawImage(
+			this.skin.scenerySheet,
+			xOffset,
+			0.0,				// from Y origin (top)
+			Skin.BLOCK_SIZE.toDouble(), 	// 16px slice
+			Skin.SCREEN_HEIGHT.toDouble(),	// render entire slice in one pass
+			column * Skin.BLOCK_SIZE.toDouble(),
+			0.0,				// ditto for destination
+			Skin.BLOCK_SIZE.toDouble(),
+			Skin.SCREEN_HEIGHT.toDouble()
+		)
+	}
+
+	private fun drawFill(fill: AreaHeader.Fill, column: Int): Unit {
+		
+		Fill.from(fill).blocks.forEach {
 			val row = it
 			val sprite: Sprite = when (row) {
 				13 -> this.skin.upperFloorTile
@@ -93,23 +114,33 @@ public class FillSceneryRenderer : Renderer {
 
 	public override fun render(): Unit {
 
-		// draw first column with initial fill
-		var currentFill: Fill = Fill.from(this.area.header.fill)
+		var currentFill: AreaHeader.Fill = this.area.header.fill
+		var currentScenery: AreaHeader.Scenery = this.area.header.scenery
 
-		// pop first actor
 		val actors: Deque<GeographyActor> = ArrayDeque<GeographyActor>(area.geography.filter({ it is FillSceneryModifier }))
 		var currentActor: GeographyActor? = actors.poll()
+		var sceneryXOffset: Double = 0.0
 
-		val finalColumn = this.pages * 16
+		val finalColumn = (canvas.width / 16).toInt()
 
 		for (column in (0..finalColumn)) {
-
+			
 			if ((currentActor is FillSceneryModifier) && (currentActor?.x == column)) {
-				currentFill = Fill.from(currentActor.fill) ?: Fill.FILL_ALL
+				currentFill = currentActor.fill
+				
+				val newScenery = currentActor.scenery
+				
+				if (newScenery != currentScenery) {
+					sceneryXOffset = 0.0
+					this.skin.scenery = newScenery
+					currentScenery = newScenery
+				}
 				currentActor = actors.poll()
 			}
 
-			drawColumn(currentFill, column)
+			sceneryXOffset = (column * Skin.BLOCK_SIZE) % Skin.SCENERY_WIDTH
+			this.drawScenery(currentScenery, column, sceneryXOffset)
+			this.drawFill(currentFill, column)
 		}
 	}
 }

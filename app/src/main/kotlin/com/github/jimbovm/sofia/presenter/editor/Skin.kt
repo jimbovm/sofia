@@ -62,12 +62,11 @@ class Skin {
 	get(): Image? {
 		val fileSource = when {
 			this.scenery == Scenery.NONE -> return null
-			this.platform == Platform.MUSHROOM -> "img/scenery/smb_MUSHROOM_${this.scenery.name}.png"
+			this.platform == Platform.MUSHROOM -> "img/graphics/scenery/smb_MUSHROOM_${this.scenery.name.toString()}.png"
 			this.background in listOf(Background.DAY_SNOW,
-						 Background.NIGHT_SNOW) -> "img/scenery/smb_SNOW_${this.scenery.name}.png"
-			else -> "img/scenery/smb_${this.environment.name}_${this.scenery.name}.png"
+						 Background.NIGHT_SNOW) -> "img/graphics/scenery/smb_SNOW_${this.scenery.name.toString()}.png"
+			else -> "img/graphics/scenery/smb_${this.environment.name.toString()}_${this.scenery.name.toString()}.png"
 		}
-		
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}
 
@@ -77,8 +76,8 @@ class Skin {
 			this.background == Background.NONE -> return null
 			this.environment in listOf(
 				Environment.CASTLE,
-				Environment.UNDERWATER) -> "img/scenery/smb_${this.environment.name}_${this.scenery.name}.png"
-			else -> "img/scenery/smb_OTHER_${this.background.name}.png"
+				Environment.UNDERWATER) -> "img/graphics/scenery/smb_${this.environment.name.toString()}_${this.scenery.name.toString()}.png"
+			else -> "img/graphics/scenery/smb_OTHER_${this.background.name.toString()}.png"
 		}
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}
@@ -89,18 +88,18 @@ class Skin {
 	 *
 	 * @return An Image of a sprite sheet of foreground objects.
 	 */
-	var spriteSheet: Image = Image("img/sheets/foreground/smb_sprites_OVERWORLD.png")
+	var spriteSheet: Image = Image("img/graphics/foreground/smb_sprites_OVERWORLD.png")
 	get(): Image {
 		// check for variant overworld palettes
 		val fileSource = if (this.environment == Environment.OVERWORLD) {
 			when {
-				this.platform == Platform.MUSHROOM -> "img/sheets/foreground/smb_sprites_MUSHROOM.png"
-				this.background == Background.DAY_SNOW -> "img/sheets/foreground/smb_sprites_SNOW.png"
-				this.background == Background.NIGHT_SNOW -> "img/sheets/foreground/smb_sprites_SNOW.png"
-				else -> "img/sheets/foreground/smb_sprites_OVERWORLD.png"
+				this.platform == Platform.MUSHROOM -> "img/graphics/foreground/smb_sprites_MUSHROOM.png"
+				this.background == Background.DAY_SNOW -> "img/graphics/foreground/smb_sprites_SNOW.png"
+				this.background == Background.NIGHT_SNOW -> "img/graphics/foreground/smb_sprites_SNOW.png"
+				else -> "img/graphics/foreground/smb_sprites_OVERWORLD.png"
 			}
 		} else {
-			"img/sheets/foreground/smb_sprites_${this.environment.name.toString()}.png"
+			"img/graphics/foreground/smb_sprites_${this.environment.name.toString()}.png"
 		}
 
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))

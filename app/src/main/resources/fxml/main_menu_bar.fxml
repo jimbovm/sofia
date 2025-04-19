@@ -13,7 +13,7 @@
 	BorderPane.alignment="CENTER" fx:controller="com.github.jimbovm.sofia.fxml.MainMenuController">
 	<fx:define>
 		<Image fx:id="sprites"
-			url="@/img/sheets/foreground/smb_sprites_OVERWORLD.png" />
+			url="@/img/graphics/foreground/smb_sprites_OVERWORLD.png" />
 	</fx:define>
 	<menus>
 		<fx:include fx:id="menuFile" source="file_menu.fxml" />
@@ -32,7 +32,7 @@
 							</image>
 							<viewport>
 								<Rectangle2D height="16.0"
-									minX="1134.0" minY="104.0" width="16.0" />
+									minX="1134.0" minY="40.0" width="16.0" />
 							</viewport>
 						</ImageView>
 					</graphic>

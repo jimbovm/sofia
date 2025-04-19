@@ -61,22 +61,19 @@ class Main() : Application() {
 		val area = Area().apply {
 			header = AreaHeader().apply {
 				background = AreaHeader.Background.NONE
-				fill = AreaHeader.Fill.FILL_ALL
+				fill = AreaHeader.Fill.FILL_2BF_0BC
 				platform = AreaHeader.Platform.TREE
-				scenery = AreaHeader.Scenery.FENCES
+				scenery = AreaHeader.Scenery.CLOUDS
 				startPosition = AreaHeader.StartPosition.BOTTOM
 				ticks = 400
 			}
-			environment = Area.Environment.UNDERGROUND
-		}
-
-		for (column in 0..128) {
-				area.geography.add(
-					FillSceneryModifier.create(
-						column,
-						AreaHeader.Fill.from(column % AreaHeader.Fill.entries.size),
-						AreaHeader.Scenery.NONE)
-				)
+			environment = Area.Environment.OVERWORLD
+			geography = listOf(
+				FillSceneryModifier.create(5, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.CLOUDS),
+				FillSceneryModifier.create(35, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.HILLS),
+				FillSceneryModifier.create(59, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.FENCES),
+				FillSceneryModifier.create(80, AreaHeader.Fill.FILL_ALL, AreaHeader.Scenery.HILLS)
+			)
 		}
 
 		val terrainRenderer = FillSceneryRenderer(canvas, area)
