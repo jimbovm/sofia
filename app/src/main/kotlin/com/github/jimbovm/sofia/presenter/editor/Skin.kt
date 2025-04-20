@@ -76,8 +76,8 @@ class Skin {
 			this.background == Background.NONE -> return null
 			this.environment in listOf(
 				Environment.CASTLE,
-				Environment.UNDERWATER) -> "img/graphics/scenery/smb_${this.environment.name.toString()}_${this.scenery.name.toString()}.png"
-			else -> "img/graphics/scenery/smb_OTHER_${this.background.name.toString()}.png"
+				Environment.UNDERWATER) -> "img/graphics/background/smb_${this.environment.name.toString()}_${this.background.name.toString()}.png"
+			else -> "img/graphics/background/smb_OTHER_${this.background.name.toString()}.png"
 		}
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}
