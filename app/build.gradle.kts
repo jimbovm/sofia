@@ -34,6 +34,7 @@ java {
 }
 
 tasks.withType<Jar> {
+	archiveBaseName = rootProject.name
 	manifest {
 		attributes["Main-Class"] = "com.github.jimbovm.sofia.SofiaKt"
 	}
