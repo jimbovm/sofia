@@ -1,4 +1,3 @@
-import java.io.FileWriter
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
@@ -30,9 +29,7 @@ application {
 
 java {
 	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(21))
-		vendor = JvmVendorSpec.IBM
-		implementation = JvmImplementation.J9
+		languageVersion.set(JavaLanguageVersion.of(23))
 	}
 }
 
@@ -43,6 +40,7 @@ tasks.withType<Jar> {
 }
 
 javafx {
+	version = "23.+"
 	modules = mutableListOf("javafx.controls", "javafx.base", "javafx.graphics", "javafx.fxml")
 }
 
@@ -61,7 +59,7 @@ kotlin {
 }
 
 dependencies {
-	implementation("org.openjfx:javafx:24+")
+	implementation("org.openjfx:javafx:23.+")
 	implementation("com.github.jimbovm:isobel:0.+")
 	implementation("org.apache.logging.log4j:log4j-api:2.+")
 	implementation("org.apache.logging.log4j:log4j-core:2.+")
