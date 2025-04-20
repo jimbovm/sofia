@@ -17,21 +17,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.fxml;
+package com.github.jimbovm.sofia.fxml
 
-import java.util.ResourceBundle
-
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
 import javafx.scene.control.Button
-import javafx.scene.image.Image 
-import javafx.scene.layout.HBox
-import javafx.scene.Scene
-import javafx.stage.Modality
-import javafx.stage.Popup
-import javafx.stage.Stage
-import javafx.stage.StageStyle
 
 class MainToolbarController {
 
@@ -50,7 +39,7 @@ class MainToolbarController {
 	@FXML val mainToolbarDeleteArea: Button? = null
 	@FXML val mainToolbarPreferences: Button? = null	
 
-	public fun initialize() {
+	fun initialize() {
 
 	}
 }

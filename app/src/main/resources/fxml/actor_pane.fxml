@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.control.Tooltip?>
 
-<TabPane xmlns="http://javafx.com/javafx/21"
+<TabPane xmlns="http://javafx.com/javafx/17"
 	xmlns:fx="http://javafx.com/fxml/1" side="RIGHT" tabClosingPolicy="UNAVAILABLE"
 	BorderPane.alignment="CENTER">
 	<fx:define>

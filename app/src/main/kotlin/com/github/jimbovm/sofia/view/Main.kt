@@ -17,31 +17,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia;
-
-import java.util.ResourceBundle
+package com.github.jimbovm.sofia.view
 
 import javafx.application.Application
-import javafx.beans.property.ReadOnlyListWrapper
-import javafx.collections.ObservableList
+import javafx.fxml.FXMLLoader
 import javafx.scene.Group
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 import javafx.scene.layout.Pane
-import javafx.scene.paint.Color
 import javafx.stage.Stage
-import javafx.stage.StageStyle
-import javafx.fxml.FXMLLoader
+import java.util.*
 
+import com.github.jimbovm.isobel.actor.geography.BackgroundModifier
+import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
 import com.github.jimbovm.isobel.common.Area
 import com.github.jimbovm.isobel.common.AreaHeader
 import com.github.jimbovm.isobel.common.AreaHeader.Background
-import com.github.jimbovm.isobel.actor.geography.GeographyActor
-import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
-import com.github.jimbovm.isobel.actor.geography.BackgroundModifier
 import com.github.jimbovm.sofia.presenter.editor.BackgroundBackgroundFillSceneryRenderer
-import com.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
 
 /**
  * Main launcher for the Sofia GUI.
@@ -53,15 +46,15 @@ class Main() : Application() {
 	private val mainPane: Pane = fxmlLoader.load()
 	private val scene = Scene(mainPane)
 
-	private fun setUpCanvas(container: Group): Unit {
+	private fun setUpCanvas(container: Group) {
 
-		val canvas: Canvas = Canvas(256.0, 240.0)
+		val canvas = Canvas(256.0, 240.0)
 
 		container.getChildren().add(canvas)
 
 		val area = Area().apply {
 			header = AreaHeader().apply {
-				background = AreaHeader.Background.NONE
+				background = Background.NONE
 				fill = AreaHeader.Fill.FILL_2BF_0BC
 				platform = AreaHeader.Platform.MUSHROOM
 				scenery = AreaHeader.Scenery.CLOUDS

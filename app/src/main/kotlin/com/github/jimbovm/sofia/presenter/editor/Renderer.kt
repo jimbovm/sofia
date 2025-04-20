@@ -25,8 +25,6 @@ import javafx.scene.image.Image
 
 import com.github.jimbovm.isobel.actor.Actor
 import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.sofia.presenter.editor.Skin
-import com.github.jimbovm.sofia.presenter.editor.Sprite
 
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.

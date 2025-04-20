@@ -17,17 +17,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.presenter.editor;
+package com.github.jimbovm.sofia.presenter.editor
 
-import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 import javafx.scene.paint.Color
-import javafx.scene.paint.Paint
 
 import com.github.jimbovm.isobel.common.Area
 import com.github.jimbovm.isobel.common.Area.Environment
-import com.github.jimbovm.isobel.common.AreaHeader
-import com.github.jimbovm.isobel.common.AreaHeader.Fill
 import com.github.jimbovm.isobel.common.AreaHeader.Scenery
 import com.github.jimbovm.isobel.common.AreaHeader.Background
 import com.github.jimbovm.isobel.common.AreaHeader.Platform
@@ -62,10 +58,10 @@ class Skin {
 	get(): Image? {
 		val fileSource = when {
 			this.scenery == Scenery.NONE -> return null
-			this.platform == Platform.MUSHROOM -> "img/graphics/scenery/smb_MUSHROOM_${this.scenery.name.toString()}.png"
+			this.platform == Platform.MUSHROOM -> "img/graphics/scenery/smb_MUSHROOM_${this.scenery.name}.png"
 			this.background in listOf(Background.DAY_SNOW,
-						 Background.NIGHT_SNOW) -> "img/graphics/scenery/smb_SNOW_${this.scenery.name.toString()}.png"
-			else -> "img/graphics/scenery/smb_${this.environment.name.toString()}_${this.scenery.name.toString()}.png"
+						 Background.NIGHT_SNOW) -> "img/graphics/scenery/smb_SNOW_${this.scenery.name}.png"
+			else -> "img/graphics/scenery/smb_${this.environment.name}_${this.scenery.name}.png"
 		}
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}
@@ -76,8 +72,8 @@ class Skin {
 			this.background == Background.NONE -> return null
 			this.environment in listOf(
 				Environment.CASTLE,
-				Environment.UNDERWATER) -> "img/graphics/background/smb_${this.environment.name.toString()}_${this.background.name.toString()}.png"
-			else -> "img/graphics/background/smb_OTHER_${this.background.name.toString()}.png"
+				Environment.UNDERWATER) -> "img/graphics/background/smb_${this.environment.name}_${this.background.name}.png"
+			else -> "img/graphics/background/smb_OTHER_${this.background.name}.png"
 		}
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}
@@ -99,7 +95,7 @@ class Skin {
 				else -> "img/graphics/foreground/smb_sprites_OVERWORLD.png"
 			}
 		} else {
-			"img/graphics/foreground/smb_sprites_${this.environment.name.toString()}.png"
+			"img/graphics/foreground/smb_sprites_${this.environment.name}.png"
 		}
 
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
@@ -193,13 +189,10 @@ class Skin {
 
 	companion object {
 
-		public val SCREEN_WIDTH = 256.0
-		public val SCREEN_HEIGHT = 240.0
-		public val BLOCK_SIZE = 16
-		public val SCENERY_WIDTH = 768.0
-		
-		private val SPRITE_SHEET_WIDTH = 1330.0
-		private val SPRITE_SHEET_HEIGHT = 64.0
+		val SCREEN_WIDTH = 256.0
+		val SCREEN_HEIGHT = 240.0
+		val BLOCK_SIZE = 16
+		val SCENERY_WIDTH = 768.0
 
 		private val BLUE_SKY = "#6c6aff"
 	}

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.Tooltip?>
 
-<ToolBar xmlns="http://javafx.com/javafx/21"
+<ToolBar xmlns="http://javafx.com/javafx/17"
 	xmlns:fx="http://javafx.com/fxml/1" prefHeight="40.0"
 	prefWidth="200.0">
 	<items>

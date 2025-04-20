@@ -6,7 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<Menu xmlns="http://javafx.com/javafx/21"
+<Menu xmlns="http://javafx.com/javafx/17"
 	xmlns:fx="http://javafx.com/fxml/1" id="menuFile" fx:id="menuFile" mnemonicParsing="false"
 	text="%main_menu_file">
 	<items>

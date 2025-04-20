@@ -19,9 +19,6 @@ SOFTWARE. */
 
 package com.github.jimbovm.sofia.presenter.editor
 
-import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.common.AreaHeader
-
 /**
  * Encapsulates coordinates for referring to sections of sprite sheets in a
  * semantic manner.
@@ -32,7 +29,7 @@ class Sprite(
 		val width: Double,
 		val height: Double) {
 
-	public final enum class Metatile(val sprite: Sprite) {
+	enum class Metatile(val sprite: Sprite) {
 		AXE(Sprite(160.0, 48.0, 16.0, 16.0)),
 		BLANK(Sprite(160.0, 0.0, 16.0, 16.0)),
 		BLOCK(Sprite(0.0, 16.0, 16.0, 16.0)),

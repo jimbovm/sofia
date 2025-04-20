@@ -17,15 +17,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia;
+package com.github.jimbovm.sofia
 
-import java.io.File
-import java.io.FileInputStream
 import java.io.IOException
-import java.util.Properties
-import javafx.application.Application
+import java.util.*
 
-import com.github.jimbovm.sofia.Main
+import com.github.jimbovm.sofia.view.Main
 
 /**
  * Entry point for the Sofia GUI.

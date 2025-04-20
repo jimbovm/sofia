@@ -18,39 +18,25 @@ SOFTWARE. */
 
 package com.github.jimbovm.sofia.presenter.editor
 
-import kotlin.Int
-
-import java.util.ArrayDeque
-import java.util.ArrayList
-import java.util.Deque
-
 import javafx.scene.canvas.Canvas
-import javafx.scene.image.Image
-import javafx.scene.paint.Color
+import java.util.*
 
-import com.github.jimbovm.isobel.actor.Actor
 import com.github.jimbovm.isobel.actor.geography.BackgroundModifier
 import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
 import com.github.jimbovm.isobel.actor.geography.GeographyActor
-import com.github.jimbovm.isobel.actor.population.PopulationActor
 import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.common.Area.Environment
 import com.github.jimbovm.isobel.common.AreaHeader
 import com.github.jimbovm.isobel.common.AreaHeader.Background
-import com.github.jimbovm.isobel.common.AreaHeader.Fill
-import com.github.jimbovm.isobel.common.AreaHeader.Scenery
-
-import com.github.jimbovm.sofia.presenter.editor.Skin
 
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-public class BackgroundBackgroundFillSceneryRenderer : Renderer {
+class BackgroundBackgroundFillSceneryRenderer : Renderer {
 
 	companion object {
 
 		/** Specifies which blocks to fill for each terrain fill scheme. */
-		private final enum class Fill(val blocks: Set<Int>) {
+		private enum class Fill(val blocks: Set<Int>) {
 
 			FILL_NONE(emptySet()),
 			FILL_2BF_0BC(setOf(14, 13)),
@@ -71,8 +57,8 @@ public class BackgroundBackgroundFillSceneryRenderer : Renderer {
 
 			companion object {
 
-				public fun from(fill: AreaHeader.Fill): Fill {
-					return Fill.valueOf(fill.name.toString())
+				fun from(fill: AreaHeader.Fill): Fill {
+					return Fill.valueOf(fill.name)
 				}
 			}
 		}
@@ -92,11 +78,11 @@ public class BackgroundBackgroundFillSceneryRenderer : Renderer {
 			xOffset,
 			0.0,				// from Y origin (top)
 			Skin.BLOCK_SIZE.toDouble(), 	// 16px slice
-			Skin.SCREEN_HEIGHT.toDouble(),	// render entire slice in one pass
+			Skin.SCREEN_HEIGHT,	// render entire slice in one pass
 			column * Skin.BLOCK_SIZE.toDouble(),
 			0.0,				// ditto for destination
 			Skin.BLOCK_SIZE.toDouble(),
-			Skin.SCREEN_HEIGHT.toDouble()
+			Skin.SCREEN_HEIGHT
 		)
 	}
 
@@ -123,7 +109,7 @@ public class BackgroundBackgroundFillSceneryRenderer : Renderer {
 
 	private fun drawBackground(background: Background, column: Int): Unit {
 
-		if ((background != null) && background in listOf(
+		if (background in listOf(
 			Background.OVER_WATER, Background.CASTLE_WALL, Background.UNDERWATER)) {
 
 			this.canvas.graphicsContext2D.drawImage(
@@ -131,27 +117,27 @@ public class BackgroundBackgroundFillSceneryRenderer : Renderer {
 				0.0,
 				0.0,				
 				Skin.BLOCK_SIZE.toDouble(), 	
-				Skin.SCREEN_HEIGHT.toDouble(),	
+				Skin.SCREEN_HEIGHT,
 				column * Skin.BLOCK_SIZE.toDouble(),
 				0.0,				
 				Skin.BLOCK_SIZE.toDouble(),
-				Skin.SCREEN_HEIGHT.toDouble()
+				Skin.SCREEN_HEIGHT
 			)
 		}
 	}
 
-	public override fun render(): Unit {
+	override fun render(): Unit {
 
 		this.drawSky()
 
 		var currentFill: AreaHeader.Fill = this.area.header.fill
 		var currentScenery: AreaHeader.Scenery = this.area.header.scenery
-		var currentBackground: AreaHeader.Background = this.area.header.background
+		var currentBackground: Background = this.area.header.background
 
 		val actors: Deque<GeographyActor> = ArrayDeque<GeographyActor>(
 			area.geography.filter({ it is FillSceneryModifier || it is BackgroundModifier }))
 		var currentActor: GeographyActor? = actors.poll()
-		var sceneryXOffset: Double = 0.0
+		var sceneryXOffset = 0.0
 
 		val finalColumn = (canvas.width / 16).toInt()
 

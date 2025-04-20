@@ -17,7 +17,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.fxml;
+package com.github.jimbovm.sofia.fxml
 
 import java.util.ResourceBundle
 
@@ -26,14 +26,12 @@ import javafx.event.ActionEvent
 import javafx.scene.Scene
 import javafx.scene.image.Image 
 import javafx.scene.layout.HBox
-import javafx.stage.Popup
 import javafx.stage.Modality
 import javafx.stage.Stage
-import javafx.stage.StageStyle
 
 class MainMenuController {
 
-	public fun initialize() {
+	fun initialize() {
 
 	}
 
@@ -42,7 +40,7 @@ class MainMenuController {
 	 *
 	 * param[event] A click event received from the associated menu item.
 	 */
-	public fun showAboutDialog(event: ActionEvent): Unit {
+	fun showAboutDialog(event: ActionEvent) {
 
 		val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
 		val fxmlLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/about.fxml"), uiBundle)

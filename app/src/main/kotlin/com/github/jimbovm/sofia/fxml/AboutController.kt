@@ -19,8 +19,6 @@ SOFTWARE. */
 
 package com.github.jimbovm.sofia.fxml
 
-import java.io.File
-import java.io.FileInputStream
 import java.io.IOException
 import java.util.Properties
 
@@ -47,13 +45,13 @@ class AboutController {
 	/**
 	 * Execute configuration for the About Sofia pane.
 	 */
-	public fun initialize() {
+	fun initialize() {
 
 		val properties: Properties = Properties()
 
 		try {
 			properties.load(ClassLoader.getSystemResourceAsStream("build_info.properties"))
-			aboutSofiaVersion?.text = "${properties.getProperty("sofiaVersion")}"
+			aboutSofiaVersion?.text = properties.getProperty("sofiaVersion")
 
 			val gradleVersion: String = properties.getProperty("gradleVersion")
 			val buildJvmVersion: String = properties.getProperty("jvmVersion")
@@ -72,7 +70,7 @@ class AboutController {
 	 *
 	 * param[event] An ActionEvent originating from the About dialog's close button.
 	 */
-	public fun close(event: ActionEvent) {
+	fun close(event: ActionEvent) {
 
 		val parentWindow: Stage = aboutCloseButton?.scene?.window as Stage
 		parentWindow.close()

@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.control.Tooltip?>
 
-<Tab xmlns="http://javafx.com/javafx/21"
+<Tab xmlns="http://javafx.com/javafx/17"
 	xmlns:fx="http://javafx.com/fxml/1" text="%tab_enemies">
 	<fx:define>
 		<Image fx:id="sprites"
-			url="@/img/smb_sprite.png" />
+			url="@/img/graphics/foreground/smb_sprites_OVERWORLD.png" />
 	</fx:define>
 	<content>
 		<TilePane prefColumns="3" prefRows="3"
