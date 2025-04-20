@@ -36,10 +36,11 @@ import javafx.fxml.FXMLLoader
 
 import com.github.jimbovm.isobel.common.Area
 import com.github.jimbovm.isobel.common.AreaHeader
+import com.github.jimbovm.isobel.common.AreaHeader.Background
 import com.github.jimbovm.isobel.actor.geography.GeographyActor
 import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
-
-import com.github.jimbovm.sofia.presenter.editor.FillSceneryRenderer
+import com.github.jimbovm.isobel.actor.geography.BackgroundModifier
+import com.github.jimbovm.sofia.presenter.editor.BackgroundBackgroundFillSceneryRenderer
 import com.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
 
 /**
@@ -62,22 +63,29 @@ class Main() : Application() {
 			header = AreaHeader().apply {
 				background = AreaHeader.Background.NONE
 				fill = AreaHeader.Fill.FILL_2BF_0BC
-				platform = AreaHeader.Platform.TREE
+				platform = AreaHeader.Platform.MUSHROOM
 				scenery = AreaHeader.Scenery.CLOUDS
 				startPosition = AreaHeader.StartPosition.BOTTOM
 				ticks = 400
 			}
 			environment = Area.Environment.OVERWORLD
 			geography = listOf(
-				FillSceneryModifier.create(5, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.CLOUDS),
+				FillSceneryModifier.create(12, AreaHeader.Fill.FILL_NONE, AreaHeader.Scenery.CLOUDS),
+				BackgroundModifier.create(12, Background.OVER_WATER),
+				FillSceneryModifier.create(14, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.CLOUDS),
+				BackgroundModifier.create(14, Background.NONE),
+				BackgroundModifier.create(17, Background.CASTLE_WALL),
+				BackgroundModifier.create(23, Background.NONE),
 				FillSceneryModifier.create(35, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.HILLS),
 				FillSceneryModifier.create(59, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.FENCES),
+				BackgroundModifier.create(61, Background.CASTLE_WALL),
+				BackgroundModifier.create(63, Background.NONE),
 				FillSceneryModifier.create(80, AreaHeader.Fill.FILL_ALL, AreaHeader.Scenery.HILLS)
 			)
 		}
 
-		val terrainRenderer = FillSceneryRenderer(canvas, area)
-		terrainRenderer.render()
+		val renderer = BackgroundBackgroundFillSceneryRenderer(canvas, area)
+		renderer.render()
 	}
 
 	override fun start(primaryStage: Stage?) {
