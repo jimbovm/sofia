@@ -31,8 +31,7 @@ SOFTWARE. -->
 <?import javafx.scene.text.Text?>
 
 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-	minWidth="-Infinity" prefHeight="523.0" prefWidth="762.0"
-	xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+	minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="com.github.jimbovm.sofia.fxml.AboutController">
 	<children>
 		<ImageView pickOnBounds="true" preserveRatio="true" smooth="false">
@@ -40,14 +39,13 @@ SOFTWARE. -->
 				<Image url="@/img/icon_256x256.png" />
 			</image>
 		</ImageView>
-		<VBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308"
-			maxWidth="1.7976931348623157E308">
+		<VBox alignment="CENTER_RIGHT">
 			<children>
 				<Text id="about_title" fontSmoothingType="LCD" strokeType="OUTSIDE"
 					strokeWidth="0.0" style="-fx-font-weight: bold;"
 					text="Sofia" textOrigin="CENTER">
 					<font>
-						<Font size="76.0" />
+						<Font size="64.0" />
 					</font>
 				</Text>
 				<Text fx:id="aboutSofiaVersion" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
