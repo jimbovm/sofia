@@ -34,18 +34,20 @@ import com.github.jimbovm.sofia.presenter.editor.Sprite.Metatile
  */
 public class StartPositionRenderer : Renderer {
 
-	private val brosSheet: Image = Image("img/foreground/smb_bros.png")
-
+	private val brosSheet: Image = Image("img/graphics/foreground/smb_bros.png")
+	private val marioStand = Sprite(0.0, 0.0, 15.0, 16.0)
+	private val marioFall = Sprite(16.0, 0.0, 15.0, 16.0)
+	
 	/** Create a new renderer object. */
 	constructor(canvas: Canvas, area: Area, skin: Skin = Skin(area)) : super(canvas, area)
 
 	public override fun render(): Unit {
 
 		when (this.area.header.startPosition) {
-			StartPosition.FALL -> this.drawSprite(Sprite.Metatile.MARIO_FALL.sprite, 2, 1)
-			StartPosition.BOTTOM -> this.drawSprite(Sprite.Metatile.MARIO_STAND.sprite, 2, 12)
-			StartPosition.MIDDLE -> this.drawSprite(Sprite.Metatile.MARIO_STAND.sprite, 2, 5)
-			else -> this.drawSprite(Sprite.Metatile.MARIO_FALL.sprite, 2, 2)
+			StartPosition.FALL -> this.drawSprite(marioFall, 2, 1, brosSheet)
+			StartPosition.BOTTOM -> this.drawSprite(marioStand, 2, 12, brosSheet)
+			StartPosition.MIDDLE -> this.drawSprite(marioStand, 2, 5, brosSheet)
+			else -> this.drawSprite(marioFall, 2, 2, brosSheet)
 		}
 	}
 }

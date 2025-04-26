@@ -35,6 +35,7 @@ import com.github.jimbovm.isobel.common.Area
 import com.github.jimbovm.isobel.common.AreaHeader
 import com.github.jimbovm.isobel.common.AreaHeader.Background
 import com.github.jimbovm.sofia.presenter.editor.BackgroundFillSceneryRenderer
+import com.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
 
 /**
  * Main launcher for the Sofia GUI.
@@ -77,8 +78,10 @@ class Main() : Application() {
 			)
 		}
 
-		val renderer = BackgroundFillSceneryRenderer(canvas, area)
-		renderer.render()
+		val backgroundFillSceneryRenderer = BackgroundFillSceneryRenderer(canvas, area)
+		val startPositionRenderer = StartPositionRenderer(canvas, area)
+		backgroundFillSceneryRenderer.render()
+		startPositionRenderer.render()
 	}
 
 	override fun start(primaryStage: Stage?) {

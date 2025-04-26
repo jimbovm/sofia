@@ -75,8 +75,6 @@ class Sprite(
 		UPRIGHT_PIPE_BODY_RIGHT(Sprite(336.0, 16.0, 16.0, 16.0)),
 		UPRIGHT_PIPE_BODY(Sprite(320.0, 16.0, 32.0, 16.0)),
 		UPRIGHT_PIPE_MOUTH(Sprite(320.0, 0.0, 32.0, 16.0)),
-		MARIO_STAND(Sprite(480.0, 0.0, 16.0, 16.0)),
-		MARIO_FALL(Sprite(496.0, 0.0, 16.0, 16.0)),
 		GOOMBA(Sprite(640.0, 0.0, 16.0, 16.0)),
 		BUZZY_BEETLE(Sprite(640.0, 16.0, 16.0, 16.0)),
 		BLOOBER(Sprite(640.0, 32.0, 16.0, 24.0)),
