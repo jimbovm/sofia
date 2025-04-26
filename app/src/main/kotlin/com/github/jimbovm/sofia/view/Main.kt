@@ -34,7 +34,7 @@ import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
 import com.github.jimbovm.isobel.common.Area
 import com.github.jimbovm.isobel.common.AreaHeader
 import com.github.jimbovm.isobel.common.AreaHeader.Background
-import com.github.jimbovm.sofia.presenter.editor.BackgroundBackgroundFillSceneryRenderer
+import com.github.jimbovm.sofia.presenter.editor.BackgroundFillSceneryRenderer
 
 /**
  * Main launcher for the Sofia GUI.
@@ -77,7 +77,7 @@ class Main() : Application() {
 			)
 		}
 
-		val renderer = BackgroundBackgroundFillSceneryRenderer(canvas, area)
+		val renderer = BackgroundFillSceneryRenderer(canvas, area)
 		renderer.render()
 	}
 

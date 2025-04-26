@@ -31,7 +31,7 @@ import com.github.jimbovm.isobel.common.AreaHeader.Background
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-class BackgroundBackgroundFillSceneryRenderer : Renderer {
+class BackgroundFillSceneryRenderer : Renderer {
 
 	companion object {
 
