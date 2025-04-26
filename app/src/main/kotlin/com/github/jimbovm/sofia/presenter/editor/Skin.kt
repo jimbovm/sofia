@@ -70,10 +70,7 @@ class Skin {
 	get(): Image? {
 		val fileSource = when {
 			this.background == Background.NONE -> return null
-			this.environment in listOf(
-				Environment.CASTLE,
-				Environment.UNDERWATER) -> "img/graphics/background/smb_${this.environment.name}_${this.background.name}.png"
-			else -> "img/graphics/background/smb_OTHER_${this.background.name}.png"
+			else -> "img/graphics/background/smb_${this.environment.name}_${this.background.name}.png"
 		}
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}

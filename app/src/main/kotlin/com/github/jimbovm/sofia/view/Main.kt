@@ -50,18 +50,18 @@ class Main() : Application() {
 
 		val canvas = Canvas(256.0, 240.0)
 
-		container.getChildren().add(canvas)
+		container.children.add(canvas)
 
 		val area = Area().apply {
 			header = AreaHeader().apply {
 				background = Background.NONE
 				fill = AreaHeader.Fill.FILL_2BF_0BC
-				platform = AreaHeader.Platform.MUSHROOM
+				platform = AreaHeader.Platform.TREE
 				scenery = AreaHeader.Scenery.CLOUDS
 				startPosition = AreaHeader.StartPosition.BOTTOM
 				ticks = 400
 			}
-			environment = Area.Environment.OVERWORLD
+			environment = Area.Environment.UNDERGROUND
 			geography = listOf(
 				FillSceneryModifier.create(12, AreaHeader.Fill.FILL_NONE, AreaHeader.Scenery.CLOUDS),
 				BackgroundModifier.create(12, Background.OVER_WATER),
@@ -83,14 +83,14 @@ class Main() : Application() {
 
 	override fun start(primaryStage: Stage?) {
 
-		val canvasContainer: Group = fxmlLoader.namespace.get("canvasContainer") as Group
+		val canvasContainer: Group = fxmlLoader.namespace["canvasContainer"] as Group
 		setUpCanvas(canvasContainer)
 
 		primaryStage?.apply {
-			getIcons()?.add(Image("img/icon_128x128.png"))
-			getIcons()?.add(Image("img/icon_64x64.png"))
-			getIcons()?.add(Image("img/icon_32x32.png"))
-			getIcons()?.add(Image("img/icon_16x16.png"))
+			icons?.add(Image("img/icon_128x128.png"))
+			icons?.add(Image("img/icon_64x64.png"))
+			icons?.add(Image("img/icon_32x32.png"))
+			icons?.add(Image("img/icon_16x16.png"))
 		}
 
 		primaryStage?.title = "Sofia"
@@ -100,6 +100,6 @@ class Main() : Application() {
 
 	companion object {
 		
-		fun run(args: Array<String>): Unit = Application.launch(Main::class.java, *args)
+		fun run(args: Array<String>): Unit = launch(Main::class.java, *args)
 	}
 }
