@@ -36,6 +36,7 @@ import com.github.jimbovm.isobel.common.AreaHeader
 import com.github.jimbovm.isobel.common.AreaHeader.Background
 import com.github.jimbovm.sofia.presenter.editor.BackgroundFillSceneryRenderer
 import com.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
+import com.github.jimbovm.sofia.presenter.editor.TextRenderer
 
 /**
  * Main launcher for the Sofia GUI.
@@ -55,14 +56,14 @@ class Main() : Application() {
 
 		val area = Area().apply {
 			header = AreaHeader().apply {
-				background = Background.NONE
+				background = Background.UNDERWATER
 				fill = AreaHeader.Fill.FILL_2BF_0BC
 				platform = AreaHeader.Platform.TREE
 				scenery = AreaHeader.Scenery.CLOUDS
 				startPosition = AreaHeader.StartPosition.BOTTOM
 				ticks = 400
 			}
-			environment = Area.Environment.UNDERGROUND
+			environment = Area.Environment.UNDERWATER
 			geography = listOf(
 				FillSceneryModifier.create(12, AreaHeader.Fill.FILL_NONE, AreaHeader.Scenery.CLOUDS),
 				BackgroundModifier.create(12, Background.OVER_WATER),
@@ -80,8 +81,15 @@ class Main() : Application() {
 
 		val backgroundFillSceneryRenderer = BackgroundFillSceneryRenderer(canvas, area)
 		val startPositionRenderer = StartPositionRenderer(canvas, area)
+		val textRenderer = TextRenderer(canvas, area)
 		backgroundFillSceneryRenderer.render()
 		startPositionRenderer.render()
+		textRenderer.apply {
+			xOrigin = 216.0
+			yOrigin = 16.0
+			text = "TIME\n ${area.header.ticks}"
+			render()
+		}
 	}
 
 	override fun start(primaryStage: Stage?) {

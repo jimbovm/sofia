@@ -76,5 +76,5 @@ abstract class Renderer {
 		return (rightmostActor / 16) + 1
 	}
 
-	abstract public fun render(): Unit
+	abstract fun render(): Unit
 }
