@@ -30,11 +30,13 @@ import javafx.stage.Stage
 import java.util.*
 
 import com.github.jimbovm.isobel.actor.geography.BackgroundModifier
+import com.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
 import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
 import com.github.jimbovm.isobel.common.Area
 import com.github.jimbovm.isobel.common.AreaHeader
 import com.github.jimbovm.isobel.common.AreaHeader.Background
 import com.github.jimbovm.sofia.presenter.editor.BackgroundFillSceneryRenderer
+import com.github.jimbovm.sofia.presenter.editor.ExtensiblePlatformRenderer
 import com.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
 import com.github.jimbovm.sofia.presenter.editor.TextRenderer
 
@@ -56,25 +58,29 @@ class Main() : Application() {
 
 		val area = Area().apply {
 			header = AreaHeader().apply {
-				background = Background.UNDERWATER
+				background = Background.NIGHT
 				fill = AreaHeader.Fill.FILL_2BF_0BC
 				platform = AreaHeader.Platform.TREE
 				scenery = AreaHeader.Scenery.CLOUDS
 				startPosition = AreaHeader.StartPosition.BOTTOM
 				ticks = 400
 			}
-			environment = Area.Environment.UNDERWATER
+			environment = Area.Environment.OVERWORLD
 			geography = listOf(
 				FillSceneryModifier.create(12, AreaHeader.Fill.FILL_NONE, AreaHeader.Scenery.CLOUDS),
 				BackgroundModifier.create(12, Background.OVER_WATER),
 				FillSceneryModifier.create(14, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.CLOUDS),
 				BackgroundModifier.create(14, Background.NONE),
-				BackgroundModifier.create(17, Background.CASTLE_WALL),
+				BackgroundModifier.create(17, Background.OVER_WATER),
 				BackgroundModifier.create(23, Background.NONE),
+				ExtensiblePlatform.create(25, 9, 3),
+				ExtensiblePlatform.create(26, 7, 5),
+				ExtensiblePlatform.create(32, 12, 0),
 				FillSceneryModifier.create(35, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.HILLS),
 				FillSceneryModifier.create(59, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.FENCES),
-				BackgroundModifier.create(61, Background.CASTLE_WALL),
+				BackgroundModifier.create(61, Background.OVER_WATER),
 				BackgroundModifier.create(63, Background.NONE),
+				ExtensiblePlatform.create(64, 9, 3),
 				FillSceneryModifier.create(80, AreaHeader.Fill.FILL_ALL, AreaHeader.Scenery.HILLS)
 			)
 		}
@@ -82,8 +88,10 @@ class Main() : Application() {
 		val backgroundFillSceneryRenderer = BackgroundFillSceneryRenderer(canvas, area)
 		val startPositionRenderer = StartPositionRenderer(canvas, area)
 		val textRenderer = TextRenderer(canvas, area)
+		val extensiblePlatformRenderer = ExtensiblePlatformRenderer(canvas, area)
 		backgroundFillSceneryRenderer.render()
 		startPositionRenderer.render()
+		extensiblePlatformRenderer.render()
 		textRenderer.apply {
 			xOrigin = 216.0
 			yOrigin = 16.0
