@@ -28,8 +28,6 @@ import com.github.jimbovm.isobel.common.AreaHeader.Scenery
 import com.github.jimbovm.isobel.common.AreaHeader.Background
 import com.github.jimbovm.isobel.common.AreaHeader.Platform
 
-import com.github.jimbovm.sofia.presenter.editor.Sprite
-
 /**
  * A skin is a collection of assets for rendering an area based on that 
  * area's properties.
@@ -40,12 +38,30 @@ class Skin {
 		this.environment = area.environment
 		this.scenery = area.header.scenery
 		this.background = area.header.background
+		this.defaultBackground = area.header.background
 		this.platform = area.header.platform
 	}
 
 	var environment: Environment = Environment.OVERWORLD
+
 	var scenery: Scenery = Scenery.HILLS
+	set(scenery) {
+		field = scenery
+		this.scenerySheet = pickScenerySheet()
+	}
+
 	var background: Background = Background.NONE
+	set(background) {
+		field = if (background in listOf(Background.CASTLE_WALL, Background.UNDERWATER, Background.OVER_WATER)) {
+			background
+		} else {
+			defaultBackground
+		}
+	}
+
+	var defaultBackground: Background = this.background
+	private set
+
 	var platform: Platform = Platform.TREE
 
 	/**
@@ -55,22 +71,34 @@ class Skin {
 	 * @return An Image of scenery.
 	 */
 	var scenerySheet: Image? = null
+	private set
+	get(): Image? {
+		return pickScenerySheet()
+	}
+
+	var backgroundSheet: Image? = null
+	private set
 	get(): Image? {
 		val fileSource = when {
-			this.scenery == Scenery.NONE -> return null
-			this.platform == Platform.MUSHROOM -> "img/graphics/scenery/smb_MUSHROOM_${this.scenery.name}.png"
-			this.background in listOf(Background.DAY_SNOW,
-						 Background.NIGHT_SNOW) -> "img/graphics/scenery/smb_SNOW_${this.scenery.name}.png"
-			else -> "img/graphics/scenery/smb_${this.environment.name}_${this.scenery.name}.png"
+			this.background in listOf(
+				Background.NONE,
+				Background.NIGHT,
+				Background.MONOCHROME,
+				Background.DAY_SNOW,
+				Background.NIGHT_SNOW) -> return null
+			else -> "img/graphics/background/smb_${this.environment.name}_${this.background.name}.png"
 		}
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}
 
-	var backgroundSheet: Image? = null
-	get(): Image? {
+	private fun pickScenerySheet(): Image? {
 		val fileSource = when {
-			this.background == Background.NONE -> return null
-			else -> "img/graphics/background/smb_${this.environment.name}_${this.background.name}.png"
+			this.scenery == Scenery.NONE -> return null
+			this.defaultBackground == Background.DAY_SNOW -> "img/graphics/scenery/smb_SNOW_${this.scenery.name}.png"
+			this.defaultBackground == Background.NIGHT_SNOW -> "img/graphics/scenery/smb_SNOW_${this.scenery.name}.png"
+			(this.environment == Environment.OVERWORLD) && (this.platform == Platform.MUSHROOM) ->
+				"img/graphics/scenery/smb_MUSHROOM_${this.scenery.name}.png"
+			else -> "img/graphics/scenery/smb_${this.environment.name}_${this.scenery.name}.png"
 		}
 		return Image(ClassLoader.getSystemResourceAsStream(fileSource))
 	}
@@ -82,13 +110,14 @@ class Skin {
 	 * @return An Image of a sprite sheet of foreground objects.
 	 */
 	var spriteSheet: Image = Image("img/graphics/foreground/smb_sprites_OVERWORLD.png")
+	private set
 	get(): Image {
 		// check for variant overworld palettes
 		val fileSource = if (this.environment == Environment.OVERWORLD) {
 			when {
 				this.platform == Platform.MUSHROOM -> "img/graphics/foreground/smb_sprites_MUSHROOM.png"
-				this.background == Background.DAY_SNOW -> "img/graphics/foreground/smb_sprites_SNOW.png"
-				this.background == Background.NIGHT_SNOW -> "img/graphics/foreground/smb_sprites_SNOW.png"
+				this.defaultBackground == Background.DAY_SNOW -> "img/graphics/foreground/smb_sprites_SNOW.png"
+				this.defaultBackground == Background.NIGHT_SNOW -> "img/graphics/foreground/smb_sprites_SNOW.png"
 				else -> "img/graphics/foreground/smb_sprites_OVERWORLD.png"
 			}
 		} else {
@@ -105,7 +134,8 @@ class Skin {
 	 * @return A Sprite.
 	 */
 	var fillTile: Sprite = Sprite.Metatile.BLANK.sprite
-	get(): Sprite { 
+	private set
+	get(): Sprite {
 		val tile = when (this.environment) {
 			Environment.UNDERWATER -> Sprite.Metatile.SEAFLOOR.sprite
 			Environment.OVERWORLD -> Sprite.Metatile.GROUND.sprite
@@ -122,7 +152,8 @@ class Skin {
 	 * @return A Sprite specifying a metatile.
 	 */
 	var upperFloorTile: Sprite = Sprite.Metatile.BLANK.sprite
-	get(): Sprite {  
+	private set
+	get(): Sprite {
 		val tile = if (this.platform == Platform.CLOUD) {
 			Sprite.Metatile.CLOUD.sprite
 		}
@@ -139,9 +170,10 @@ class Skin {
 	 * @return A Sprite specifying a metatile.
 	 */
 	var lowerFloorTile: Sprite = Sprite.Metatile.BLANK.sprite
+	private set
 	get(): Sprite {
 		val tile = if (this.platform == Platform.CLOUD) {
-			Sprite.Metatile.CLOUD.sprite
+			Sprite.Metatile.BLANK.sprite
 		}
 		else when (this.environment) {
 			Environment.UNDERWATER -> Sprite.Metatile.SEAFLOOR.sprite
@@ -159,6 +191,7 @@ class Skin {
 	 * @return A Sprite specifying a metatile.
 	 */
 	var brickTile: Sprite = Sprite.Metatile.BLANK.sprite
+	private set
 	get(): Sprite {
 		val tile = when (this.environment) {
 			Environment.UNDERWATER -> Sprite.Metatile.CORAL.sprite
@@ -175,10 +208,11 @@ class Skin {
 	 * @return A Color.
 	 */
 	var skyColor: Color = Color.BLACK
-	get(): Color { 
+	private set
+	get(): Color {
 		val color = when {
 			environment in listOf(Environment.UNDERGROUND, Environment.CASTLE) -> Color.BLACK
-			background in listOf(Background.NIGHT, Background.NIGHT_SNOW, Background.MONOCHROME) -> Color.BLACK
+			defaultBackground in listOf(Background.NIGHT, Background.NIGHT_SNOW, Background.MONOCHROME) -> Color.BLACK
 			else -> Color.web(Skin.BLUE_SKY)
 		}
 		return color
