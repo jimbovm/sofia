@@ -58,7 +58,7 @@ class Main() : Application() {
 
 		val area = Area().apply {
 			header = AreaHeader().apply {
-				background = Background.NIGHT
+				background = Background.NIGHT_SNOW
 				fill = AreaHeader.Fill.FILL_2BF_0BC
 				platform = AreaHeader.Platform.TREE
 				scenery = AreaHeader.Scenery.CLOUDS
@@ -73,15 +73,14 @@ class Main() : Application() {
 				BackgroundModifier.create(14, Background.NONE),
 				BackgroundModifier.create(17, Background.OVER_WATER),
 				BackgroundModifier.create(23, Background.NONE),
-				ExtensiblePlatform.create(25, 9, 3),
-				ExtensiblePlatform.create(26, 7, 5),
-				ExtensiblePlatform.create(32, 12, 0),
+				ExtensiblePlatform.create(25, 9, 4),
+				ExtensiblePlatform.create(32, 12, 1),
 				FillSceneryModifier.create(35, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.HILLS),
 				FillSceneryModifier.create(59, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.FENCES),
 				BackgroundModifier.create(61, Background.OVER_WATER),
 				BackgroundModifier.create(63, Background.NONE),
 				ExtensiblePlatform.create(64, 9, 3),
-				FillSceneryModifier.create(80, AreaHeader.Fill.FILL_ALL, AreaHeader.Scenery.HILLS)
+				FillSceneryModifier.create(81, AreaHeader.Fill.FILL_2BF_0BC, AreaHeader.Scenery.FENCES)
 			)
 		}
 

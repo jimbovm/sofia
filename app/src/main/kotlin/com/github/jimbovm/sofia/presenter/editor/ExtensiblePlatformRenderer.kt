@@ -12,7 +12,7 @@ import com.github.jimbovm.isobel.actor.geography.GeographyActor
 import javafx.scene.canvas.Canvas
 
 import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.common.AreaHeader
+import com.github.jimbovm.isobel.common.AreaHeader.Platform
 
 import com.github.jimbovm.sofia.presenter.editor.Renderer
 import com.github.jimbovm.sofia.presenter.editor.Sprite
@@ -33,6 +33,56 @@ class ExtensiblePlatformRenderer : Renderer {
 		}
 	}
 
+	private fun drawShroom(x: Int, y: Int, extent: Int) {
+
+		val stipeOriginX = x + ((extent + 1) / 2)
+		val stipeOriginY = y + 1
+		if (extent > 1) {
+			for (row in stipeOriginY..15) {
+				when (row) {
+					stipeOriginY -> drawSprite(
+						Sprite.Metatile.STIPE_RING.sprite, stipeOriginX, row)
+					else -> drawSprite(
+						Sprite.Metatile.STIPE.sprite,stipeOriginX, row)
+				}
+			}
+		}
+		drawCap(x, y, extent,
+			Sprite.Metatile.MUSHROOM_LEFT.sprite,
+			Sprite.Metatile.MUSHROOM_MIDDLE.sprite,
+			Sprite.Metatile.MUSHROOM_RIGHT.sprite)
+	}
+
+	private fun drawTree(x: Int, y: Int, extent: Int) {
+
+		val trunkOriginX = x + 1
+		val trunkOriginY = y + 1
+		val trunkWidth = extent - 2
+		if (extent > 1) {
+			for (x in trunkOriginX..(trunkOriginX + trunkWidth)) {
+				for (y in trunkOriginY..15) {
+					drawSprite(Sprite.Metatile.TREE_TRUNK.sprite, x, y)
+				}
+			}
+		}
+		drawCap(x, y, extent,
+			Sprite.Metatile.TREE_LEFT.sprite,
+			Sprite.Metatile.TREE_MIDDLE.sprite,
+			Sprite.Metatile.TREE_RIGHT.sprite
+		)
+	}
+
+	private fun drawCap(x: Int, y: Int, extent: Int, left: Sprite, middle: Sprite, right: Sprite) {
+
+		for (column in x..(x + extent)) {
+			when (column) {
+				x -> drawSprite(left, column, y)
+				(x + extent) -> drawSprite(right, column, y)
+				else -> drawSprite(middle, column, y)
+			}
+		}
+	}
+
 	override fun render() {
 		val actors: Deque<GeographyActor> = ArrayDeque<GeographyActor>(
 			area.geography.filter({ it is ExtensiblePlatform }))
@@ -42,14 +92,24 @@ class ExtensiblePlatformRenderer : Renderer {
 		val finalColumn = (canvas.width / 16).toInt()
 
 		for (column in (0..finalColumn)) {
-
 			while (currentActor?.x == column) {
-
-				this.drawCannon(
-					currentActor.x,
-					(currentActor as YPlaceable).y,
-					(currentActor as Extensible).extent
-				)
+				when (this.area.header.platform) {
+					Platform.MUSHROOM -> this.drawShroom(
+						currentActor.x,
+						(currentActor as YPlaceable).y,
+						(currentActor as Extensible).extent
+					)
+					Platform.CANNON -> this.drawCannon(
+						currentActor.x,
+						(currentActor as YPlaceable).y,
+						(currentActor as Extensible).extent
+						)
+					Platform.TREE, Platform.CLOUD -> this.drawTree(
+						currentActor.x,
+						(currentActor as YPlaceable).y,
+						(currentActor as Extensible).extent
+					)
+				}
 				currentActor = actors.poll()
 			}
 		}
