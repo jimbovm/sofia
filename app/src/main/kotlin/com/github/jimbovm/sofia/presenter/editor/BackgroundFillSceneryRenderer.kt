@@ -115,11 +115,11 @@ class BackgroundFillSceneryRenderer : Renderer {
 			this.canvas.graphicsContext2D.drawImage(
 				this.skin.backgroundSheet,
 				0.0,
-				0.0,				
-				Skin.BLOCK_SIZE.toDouble(), 	
+				0.0,
+				Skin.BLOCK_SIZE.toDouble(),
 				Skin.SCREEN_HEIGHT,
 				column * Skin.BLOCK_SIZE.toDouble(),
-				0.0,				
+				0.0,
 				Skin.BLOCK_SIZE.toDouble(),
 				Skin.SCREEN_HEIGHT
 			)
@@ -147,14 +147,7 @@ class BackgroundFillSceneryRenderer : Renderer {
 				when (currentActor) {
 					is FillSceneryModifier -> {
 						currentFill = currentActor.fill
-						
-						val newScenery = currentActor.scenery
-						
-						if (newScenery != currentScenery) {
-							sceneryXOffset = 0.0
-							this.skin.scenery = newScenery
-							currentScenery = newScenery
-						}
+						this.skin.scenery = currentActor.scenery
 					}
 					is BackgroundModifier -> {
 						currentBackground = currentActor.background
