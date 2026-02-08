@@ -91,6 +91,7 @@ class Sprite(
 		STARMAN(Sprite(1242.0, 17.0, 16.0, 16.0)),
 		STIPE_RING(Sprite(64.0, 32.0, 16.0, 16.0)),
 		STIPE(Sprite(64.0, 48.0, 16.0, 16.0)),
+		TEE_PIPE_MOUTH(Sprite(288.0, 32.0, 48.0, 32.0)),
 		TREE_LEFT(Sprite(208.0, 0.0, 16.0, 16.0)),
 		TREE_MIDDLE(Sprite(224.0, 0.0, 16.0, 16.0)),
 		TREE_RIGHT(Sprite(240.0, 0.0, 16.0, 16.0)),
