@@ -5,10 +5,10 @@ group = "com.github.jimbovm"
 
 plugins {
 	application
-	id("org.jetbrains.kotlin.jvm") version "2.1.20"
+	id("org.jetbrains.kotlin.jvm") version "2.3.10"
 	id("org.openjfx.javafxplugin") version "0.1.0"
-	id("com.palantir.git-version") version "3.2.0"
-	id("com.gradleup.shadow") version "9.0.0-beta12"
+	id("com.palantir.git-version") version "4.3.0"
+	id("com.gradleup.shadow") version "9.3.0"
 }
 
 val gitVersion: groovy.lang.Closure<String> by extra
@@ -29,7 +29,7 @@ application {
 
 java {
 	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(23))
+		languageVersion.set(JavaLanguageVersion.of(21))
 	}
 }
 
@@ -41,7 +41,7 @@ tasks.withType<Jar> {
 }
 
 javafx {
-	version = "23.+"
+	version = "21.+"
 	modules = mutableListOf("javafx.controls", "javafx.base", "javafx.graphics", "javafx.fxml")
 }
 
@@ -60,7 +60,7 @@ kotlin {
 }
 
 dependencies {
-	implementation("org.openjfx:javafx:23.+")
+	implementation("org.openjfx:javafx:21.+")
 	implementation("com.github.jimbovm:isobel:0.+")
 	implementation("org.apache.logging.log4j:log4j-api:2.+")
 	implementation("org.apache.logging.log4j:log4j-core:2.+")
