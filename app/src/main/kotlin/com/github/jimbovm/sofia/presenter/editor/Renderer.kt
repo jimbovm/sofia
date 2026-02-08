@@ -2,14 +2,15 @@
 
 Ⓒ 2025 Jimbo Brierley.
 
-Permission is hereby granted, free of charge,(any person obtaining a copy of
-this software and associated documentation files (the "Software"),(deal in
-the Software without restriction, including without limitation the rights(use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and(permit persons(whom the Software is furnished(do
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
 so.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED(THE WARRANTIES OF MERCHANTABILITY,
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
@@ -51,8 +52,14 @@ abstract class Renderer {
 	/** Draw a sprite at the given coordinates. */
 	fun drawSprite(tile: Sprite, column: Int, row: Int, sheet: Image = this.skin.spriteSheet): Unit {
 
-		val cursorX = 16.0 * column
-		val cursorY = row * 16.0
+		this.drawSprite(tile, column, row, 0.0, 0.0, sheet)
+	}
+
+	/** Draw a sprite at the given coordinates at an offset. */
+	fun drawSprite(tile: Sprite, column: Int, row: Int, offsetX: Double, offsetY: Double, sheet: Image = this.skin.spriteSheet): Unit {
+
+		val cursorX = (16.0 * column) + offsetX
+		val cursorY = (row * 16.0) + offsetY
 
 		this.canvas.getGraphicsContext2D().drawImage(
 			sheet,
@@ -60,8 +67,8 @@ abstract class Renderer {
 			tile.y,
 			tile.width,
 			tile.height,
-			cursorX,
-			cursorY,
+			cursorX - (tile.width - 16.0),
+			cursorY - (tile.height - 16.0),
 			tile.width,
 			tile.height
 		)
