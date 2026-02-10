@@ -44,7 +44,10 @@ class SingletonObjectRenderer : Renderer {
 					}
 
 					this.drawSprite(objectMetatile, geographyActor.x, geographyActor.y)
-					this.drawSprite(contentsMetatile, geographyActor.x, geographyActor.y)
+
+					if (objectName != "QUESTION_BLOCK_COIN") {
+						this.drawSprite(contentsMetatile, geographyActor.x, geographyActor.y)
+					}
 				}
 			}
 		}

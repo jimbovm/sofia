@@ -76,8 +76,8 @@ class Main() : Application() {
 			}
 			environment = Area.Environment.OVERWORLD
 			geography = listOf(
-				SingletonObject.create(1, 1, SingletonObject.Type.BRICK_VINE),
-				SingletonObject.create(1, 2, SingletonObject.Type.QUESTION_BLOCK_COIN),
+				SingletonObject.create(1, 1, SingletonObject.Type.QUESTION_BLOCK_COIN),
+				SingletonObject.create(1, 2, SingletonObject.Type.QUESTION_BLOCK_POWERUP),
 				SingletonObject.create(1, 3, SingletonObject.Type.BRICK_MULTI_COIN),
 				SingletonObject.create(1, 4, SingletonObject.Type.BRICK_POWERUP),
 				SingletonObject.create(1, 5, SingletonObject.Type.BRICK_STARMAN),
