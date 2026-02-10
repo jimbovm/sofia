@@ -9,15 +9,15 @@ import com.github.jimbovm.isobel.actor.geography.SingletonObject
 import com.github.jimbovm.sofia.presenter.editor.Sprite
 
 class SingletonObjectRenderer : Renderer {
-	
+
 	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
-	public override fun render(): Unit {
+	override fun render(): Unit {
 
 		for (geographyActor in this.area.geography) {
 			when (geographyActor) {
 				is SingletonObject -> {
-					
+
 					val objectName = geographyActor.type.toString()
 					val objectNamePrefix = objectName.substring(0, objectName.lastIndexOf("_"))
 					val objectNameSuffix = objectName.substring(objectName.lastIndexOf("_") + 1)
@@ -42,7 +42,7 @@ class SingletonObjectRenderer : Renderer {
 						"VINE" -> Sprite.Metatile.VINE.sprite
 						else -> Sprite.Metatile.BLANK.sprite
 					}
-					
+
 					this.drawSprite(objectMetatile, geographyActor.x, geographyActor.y)
 					this.drawSprite(contentsMetatile, geographyActor.x, geographyActor.y)
 				}

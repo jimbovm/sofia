@@ -32,16 +32,16 @@ import com.github.jimbovm.sofia.presenter.editor.Sprite.Metatile
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-public class StartPositionRenderer : Renderer {
+class StartPositionRenderer : Renderer {
 
 	private val brosSheet: Image = Image("img/graphics/foreground/smb_bros.png")
 	private val marioStand = Sprite(0.0, 0.0, 15.0, 16.0)
 	private val marioFall = Sprite(16.0, 0.0, 15.0, 16.0)
-	
+
 	/** Create a new renderer object. */
 	constructor(canvas: Canvas, area: Area, skin: Skin = Skin(area)) : super(canvas, area)
 
-	public override fun render(): Unit {
+	override fun render(): Unit {
 
 		when (this.area.header.startPosition) {
 			StartPosition.FALL -> this.drawSprite(marioFall, 2, 1, brosSheet)
