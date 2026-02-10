@@ -10,10 +10,10 @@ import com.github.jimbovm.isobel.actor.population.Character
 import com.github.jimbovm.sofia.presenter.editor.Sprite
 
 class CharacterRenderer : Renderer {
-	
+
 	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
-	public override fun render(): Unit {
+	override fun render(): Unit {
 
 		for (populationActor in this.area.population) {
 			when (populationActor) {
@@ -38,14 +38,17 @@ class CharacterRenderer : Renderer {
 						Character.Type.TOAD_PEACH -> {
 							this.renderSingleton(characterActor)
 						}
+
 						else -> {
 							if (characterActor.type.toString().contains("SQUAD", false)) {
 								this.renderSquad(characterActor);
-							}
-							else if (characterActor.type.toString().contains("FIRE_BAR", false)) {
+							} else if (characterActor.type.toString()
+									.contains("FIRE_BAR", false)
+							) {
 								this.renderFireBar(characterActor)
-							}
-							else if (characterActor.type.toString().contains("LIFT", false)) {
+							} else if (characterActor.type.toString()
+									.contains("LIFT", false)
+							) {
 								this.renderLift(characterActor)
 							}
 						}
@@ -66,7 +69,8 @@ class CharacterRenderer : Renderer {
 
 		val type = squad.type.toString()
 
-		val metatile = if (type.startsWith("GOOMBA")) Sprite.Metatile.GOOMBA.sprite else Sprite.Metatile.GREEN_TROOPA.sprite
+		val metatile =
+			if (type.startsWith("GOOMBA")) Sprite.Metatile.GOOMBA.sprite else Sprite.Metatile.GREEN_TROOPA.sprite
 		val members = if (type.contains("3", false)) 3 else 2
 		val y = if (type.contains("Y10", false)) 10 else 6
 
@@ -82,12 +86,12 @@ class CharacterRenderer : Renderer {
 	private fun renderLift(lift: Character): Unit {
 
 		val liftName = lift.toString()
-		val liftType = liftName.toString().substring(5 + liftName.lastIndexOf("LIFT_"))
+		val liftType = liftName.substring(5 + liftName.lastIndexOf("LIFT_"))
 		val isShort = liftName.startsWith("SHORT")
 
 		val extent = if (isShort) 1 else 2
 
-		for (x in (lift.x)..(lift.x+extent)) {
+		for (x in (lift.x)..(lift.x + extent)) {
 
 			this.drawSprite(Sprite.Metatile.LIFT.sprite, x, lift.y)
 			this.drawSprite(Sprite.Metatile.LIFT.sprite, x, lift.y, 8.0, 0.0)

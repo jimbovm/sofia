@@ -29,6 +29,7 @@ import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import java.util.*
 
+import com.github.jimbovm.isobel.common.Game
 import com.github.jimbovm.isobel.actor.geography.BackgroundModifier
 import com.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
 import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
@@ -56,7 +57,9 @@ class Main() : Application() {
 	private val mainPane: Pane = fxmlLoader.load()
 	private val scene = Scene(mainPane)
 
-	private fun setUpCanvas(container: Group) {
+	private var game = Game()
+
+	fun setUpCanvas(container: Group) {
 
 		val canvas = Canvas(256.0, 240.0)
 
@@ -113,8 +116,8 @@ class Main() : Application() {
 				Character.create(36, 8, Character.Type.LIFT_UP_AND_DOWN, false),
 				Character.create(48, 0, Character.Type.TROOPA_SQUAD_2_Y6, false),
 				Character.create(48, 0, Character.Type.TROOPA_SQUAD_3_Y10, false),
-				
-			)
+
+				)
 		}
 
 		val backgroundFillSceneryRenderer = BackgroundFillSceneryRenderer(canvas, area)
@@ -156,7 +159,7 @@ class Main() : Application() {
 	}
 
 	companion object {
-		
+
 		fun run(args: Array<String>): Unit = launch(Main::class.java, *args)
 	}
 }
