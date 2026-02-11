@@ -10,7 +10,7 @@
 
 <ToolBar xmlns="http://javafx.com/javafx/17"
 	xmlns:fx="http://javafx.com/fxml/1" prefHeight="40.0"
-	prefWidth="200.0">
+	prefWidth="200.0" fx:id="editorToolbar">
 	<items>
 		<Label
 			text="%editor_toolbar_environment">

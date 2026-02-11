@@ -46,6 +46,8 @@ import com.github.jimbovm.sofia.presenter.editor.FixedStaticRenderer
 import com.github.jimbovm.sofia.presenter.editor.SingletonObjectRenderer
 import com.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
 import com.github.jimbovm.sofia.presenter.editor.TextRenderer
+import javafx.scene.control.Accordion
+import javafx.scene.control.TitledPane
 
 /**
  * Main launcher for the Sofia GUI.
@@ -59,13 +61,11 @@ class Main() : Application() {
 
 	private var game = Game()
 
-	fun setUpCanvas(container: Group) {
+	fun setUpCanvas(area: Area, editor: TitledPane) {
 
 		val canvas = Canvas(256.0, 240.0)
 
-		container.children.add(canvas)
-
-		val area = Area().apply {
+		/* val area = Area().apply {
 			header = AreaHeader().apply {
 				background = Background.NONE
 				fill = AreaHeader.Fill.FILL_2BF_0BC
@@ -118,7 +118,7 @@ class Main() : Application() {
 				Character.create(48, 0, Character.Type.TROOPA_SQUAD_3_Y10, false),
 
 				)
-		}
+		}*/
 
 		val backgroundFillSceneryRenderer = BackgroundFillSceneryRenderer(canvas, area)
 		val startPositionRenderer = StartPositionRenderer(canvas, area)
@@ -139,12 +139,14 @@ class Main() : Application() {
 			text = "TIME\n ${area.header.ticks}"
 			render()
 		}
+
+		val canvasContainer: Group = editor.lookup("#canvasContainer") as Group
+		canvasContainer.id = "canvasContainer_" + area.id
+
+		canvasContainer.children.add(canvas)
 	}
 
 	override fun start(primaryStage: Stage?) {
-
-		val canvasContainer: Group = fxmlLoader.namespace["canvasContainer"] as Group
-		setUpCanvas(canvasContainer)
 
 		primaryStage?.apply {
 			icons?.add(Image("img/icon_128x128.png"))
@@ -156,6 +158,32 @@ class Main() : Application() {
 		primaryStage?.title = "Sofia"
 		primaryStage?.scene = scene
 		primaryStage?.show()
+
+		displayAreas(scene)
+	}
+
+	fun displayAreas(scene: Scene) {
+
+		// val canvasContainer: Group = fxmlLoader.namespace["canvasContainer"] as Group
+		// setUpCanvas(canvasContainer)
+
+		this.game.atlas.areas.add(Area())
+		this.game.atlas.areas.add(Area())
+
+		this.game.atlas.areas[0].familiarName = "Area 1"
+		this.game.atlas.areas[1].familiarName = "Area 2"
+
+		this.game.atlas.areas.forEach {
+			val editor: TitledPane = FXMLLoader(
+				ClassLoader.getSystemResource("fxml/editor.fxml"),
+				this.uiBundle
+			).load() as TitledPane
+
+			editor.text = it.familiarName
+
+			val areaList: Accordion = scene.lookup("#areaList") as Accordion
+			areaList.panes.add(editor)
+		}
 	}
 
 	companion object {

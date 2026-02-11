@@ -16,34 +16,13 @@
 	</right>
 	<top>
 		<VBox id="menus" fx:id="menus">
-		<fx:include source="main_menu_bar.fxml" />
-		<fx:include source="main_toolbar.fxml" />
-	</VBox>
+			<fx:include source="main_menu_bar.fxml" />
+			<fx:include source="main_toolbar.fxml" />
+		</VBox>
 	</top>
 	<center>
 		<Accordion fx:id="areaList" BorderPane.alignment="CENTER">
-			<panes>
-				<TitledPane animated="false" text="untitled 1">
-					<content>
-						<SplitPane dividerPositions="0.5"
-							orientation="VERTICAL">
-							<items>
-								<fx:include source="editor_toolbar.fxml" />
-								<ScrollPane pannable="true"
-									vbarPolicy="ALWAYS">
-									<content>
-										<Group fx:id="canvasContainer" />
-									</content>
-									<cursor>
-										<Cursor
-											fx:constant="CROSSHAIR" />
-									</cursor>
-								</ScrollPane>
-							</items>
-						</SplitPane>
-					</content>
-				</TitledPane>
-			</panes>
+			<panes/>
 		</Accordion>
 	</center>
 	<bottom>

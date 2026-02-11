@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--<?xml-model
+href="file:///home/james/Code/isobel/src/main/resources/isobel.xsd" type="application/xml"
+schematypens="http://www.w3.org/2001/XMLSchema"?>-->
+<is:game
+	xmlns:is="https://github.com/jimbovm/isobel"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	id="empty">
+	<is:atlas>
+		<is:area id='empty'>
+			<is:header>
+				<is:autowalk>false</is:autowalk>
+				<is:background>NIGHT</is:background>
+				<is:fill>FILL_2BF_0BC</is:fill>
+				<is:platform>TREE</is:platform>
+				<is:scenery>HILLS</is:scenery>
+				<is:startPosition>BOTTOM</is:startPosition>
+				<is:ticks>400</is:ticks>
+			</is:header>
+			<is:environment>OVERWORLD</is:environment>
+			<is:geography>
+			</is:geography>
+			<is:population>
+			</is:population>
+		</is:area>
+	</is:atlas>
+	<is:scenario>
+		<is:world hidden1UpCost="0">
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+		</is:world>
+		<is:world hidden1UpCost="0">
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+		</is:world>
+		<is:world hidden1UpCost="0">
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+		</is:world>
+		<is:world hidden1UpCost="0">
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+		</is:world>
+		<is:world hidden1UpCost="0">
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+		</is:world>
+		<is:world hidden1UpCost="0">
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+		</is:world>
+		<is:world hidden1UpCost="0">
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+		</is:world>
+		<is:world hidden1UpCost="0">
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+			<is:level startArea="empty" checkpoint="0" />
+		</is:world>
+	</is:scenario>
+</is:game>
