@@ -36,18 +36,23 @@ import javafx.stage.Stage
 class AboutController {
 
 	/** Version text box in the About Sofia dialog. */
-	@FXML var aboutSofiaVersion: Text? = null
+	@FXML
+	var aboutSofiaVersion: Text? = null
+
 	/** Build info text box for the About Sofia dialog. */
-	@FXML var aboutBuildInfo: Text? = null
+	@FXML
+	var aboutBuildInfo: Text? = null
+
 	/** Close button for dialog. */
-	@FXML var aboutCloseButton: Button? = null
+	@FXML
+	var aboutCloseButton: Button? = null
 
 	/**
 	 * Execute configuration for the About Sofia pane.
 	 */
 	fun initialize() {
 
-		val properties: Properties = Properties()
+		val properties = Properties()
 
 		try {
 			properties.load(ClassLoader.getSystemResourceAsStream("build_info.properties"))
@@ -57,9 +62,7 @@ class AboutController {
 			val buildJvmVersion: String = properties.getProperty("jvmVersion")
 			val buildDateTime: String = properties.getProperty("buildDateTime")
 			aboutBuildInfo?.text = "$gradleVersion, JVM $buildJvmVersion $buildDateTime UTC"
-		}
-
-		catch (e: IOException) {
+		} catch (e: IOException) {
 
 			e.printStackTrace()
 		}

@@ -26,27 +26,21 @@ import com.github.jimbovm.isobel.actor.geography.FixedStatic
 import com.github.jimbovm.isobel.common.Area
 
 class FixedStaticRenderer : Renderer {
-	
+
 	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
-	public override fun render(): Unit {
+	fun render(fixedStatic: FixedStatic): Unit {
 
 		val axeY = 8
 		val chainY = 9
 
-		for (geographyActor in area.geography) {
-			when (geographyActor) {
-				is FixedStatic -> {
-					when (geographyActor.type) {
-						FixedStatic.Type.AXE -> drawSprite(Sprite.Metatile.AXE.sprite, geographyActor.x, axeY)
-						FixedStatic.Type.CHAIN -> drawSprite(Sprite.Metatile.CHAIN.sprite, geographyActor.x, chainY)
-						FixedStatic.Type.FLAGPOLE -> this.renderFlagpole(geographyActor)
-						FixedStatic.Type.BOWSER_BRIDGE -> this.renderBowserBridge(geographyActor)
-						FixedStatic.Type.TEE_PIPE -> this.renderTeePipe(geographyActor)
-						else -> return
-					}
-				}
-			}
+		when (fixedStatic.type) {
+			FixedStatic.Type.AXE -> drawSprite(Sprite.Metatile.AXE.sprite, fixedStatic.x, axeY)
+			FixedStatic.Type.CHAIN -> drawSprite(Sprite.Metatile.CHAIN.sprite, fixedStatic.x, chainY)
+			FixedStatic.Type.FLAGPOLE -> this.renderFlagpole(fixedStatic)
+			FixedStatic.Type.BOWSER_BRIDGE -> this.renderBowserBridge(fixedStatic)
+			FixedStatic.Type.TEE_PIPE -> this.renderTeePipe(fixedStatic)
+			else -> return
 		}
 	}
 
@@ -56,8 +50,16 @@ class FixedStaticRenderer : Renderer {
 
 		for (yCursor in 12 downTo 2) {
 			if (yCursor == 12) this.drawSprite(Sprite.Metatile.BLOCK.sprite, flagpole.x, yCursor)
-			else if (yCursor >= 3) this.drawSprite(Sprite.Metatile.FLAGPOLE_STAFF.sprite, flagpole.x, yCursor)
-			else if (yCursor == 2) this.drawSprite(Sprite.Metatile.FLAGPOLE_FINIAL.sprite, flagpole.x, yCursor)
+			else if (yCursor >= 3) this.drawSprite(
+				Sprite.Metatile.FLAGPOLE_STAFF.sprite,
+				flagpole.x,
+				yCursor
+			)
+			else if (yCursor == 2) this.drawSprite(
+				Sprite.Metatile.FLAGPOLE_FINIAL.sprite,
+				flagpole.x,
+				yCursor
+			)
 		}
 		drawSprite(Sprite.Metatile.FLAGPOLE_FLAG.sprite, flagpole.x, flagY, -8.0, 1.0)
 	}
@@ -66,7 +68,7 @@ class FixedStaticRenderer : Renderer {
 
 		val y = 10
 
-		for (x in bowserBridge.x..<bowserBridge.x+13) {
+		for (x in bowserBridge.x..<bowserBridge.x + 13) {
 			this.drawSprite(Sprite.Metatile.BOWSER_BRIDGE.sprite, x, y)
 		}
 	}
@@ -77,7 +79,7 @@ class FixedStaticRenderer : Renderer {
 		val teePipeTop = 9
 
 		for (y in teePipeBase downTo (teePipeTop + 1)) {
-			this.drawSprite(Sprite.Metatile.UPRIGHT_PIPE_BODY_RIGHT.sprite, teePipe.x+4, y)
+			this.drawSprite(Sprite.Metatile.UPRIGHT_PIPE_BODY_RIGHT.sprite, teePipe.x + 4, y)
 		}
 		this.drawSprite(Sprite.Metatile.UPRIGHT_PIPE_BODY_LEFT.sprite, teePipe.x + 3, teePipeTop + 1)
 		this.drawSprite(Sprite.Metatile.UPRIGHT_PIPE_MOUTH.sprite, teePipe.x + 4, teePipeTop)

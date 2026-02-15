@@ -13,56 +13,48 @@ class CharacterRenderer : Renderer {
 
 	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
-	override fun render(): Unit {
+	fun render(character: Character): Unit {
+		when (character.type) {
+			Character.Type.BLOOBER,
+			Character.Type.BOWSER,
+			Character.Type.BUZZY_BEETLE,
+			Character.Type.GOOMBA,
+			Character.Type.GREEN_CHEEP,
+			Character.Type.GREEN_PARATROOPA_HOP,
+			Character.Type.GREEN_PARATROOPA_HOVER,
+			Character.Type.GREEN_TROOPA,
+			Character.Type.HAMMER_BRO,
+			Character.Type.LAKITU,
+			Character.Type.PODOBOO,
+			Character.Type.RED_CHEEP,
+			Character.Type.RED_PARATROOPA,
+			Character.Type.RED_TROOPA,
+			Character.Type.SPINY,
+			Character.Type.TOAD_PEACH -> {
+				this.renderSingleton(character)
+			}
 
-		for (populationActor in this.area.population) {
-			when (populationActor) {
-				is Character -> {
-					val characterActor = populationActor
-					when (characterActor.type) {
-						Character.Type.BLOOBER,
-						Character.Type.BOWSER,
-						Character.Type.BUZZY_BEETLE,
-						Character.Type.GOOMBA,
-						Character.Type.GREEN_CHEEP,
-						Character.Type.GREEN_PARATROOPA_HOP,
-						Character.Type.GREEN_PARATROOPA_HOVER,
-						Character.Type.GREEN_TROOPA,
-						Character.Type.HAMMER_BRO,
-						Character.Type.LAKITU,
-						Character.Type.PODOBOO,
-						Character.Type.RED_CHEEP,
-						Character.Type.RED_PARATROOPA,
-						Character.Type.RED_TROOPA,
-						Character.Type.SPINY,
-						Character.Type.TOAD_PEACH -> {
-							this.renderSingleton(characterActor)
-						}
-
-						else -> {
-							if (characterActor.type.toString().contains("SQUAD", false)) {
-								this.renderSquad(characterActor);
-							} else if (characterActor.type.toString()
-									.contains("FIRE_BAR", false)
-							) {
-								this.renderFireBar(characterActor)
-							} else if (characterActor.type.toString()
-									.contains("LIFT", false)
-							) {
-								this.renderLift(characterActor)
-							}
-						}
-					}
+			else -> {
+				if (character.type.toString().contains("SQUAD", false)) {
+					this.renderSquad(character);
+				} else if (character.type.toString()
+						.contains("FIRE_BAR", false)
+				) {
+					this.renderFireBar(character)
+				} else if (character.type.toString()
+						.contains("LIFT", false)
+				) {
+					this.renderLift(character)
 				}
 			}
 		}
 	}
 
-	private fun renderSingleton(characterActor: Character): Unit {
+	private fun renderSingleton(character: Character): Unit {
 
-		val characterName = characterActor.type.toString()
+		val characterName = character.type.toString()
 		val characterMetatile = Sprite.Metatile.valueOf(characterName)
-		this.drawSprite(characterMetatile.sprite, characterActor.x, characterActor.y)
+		this.drawSprite(characterMetatile.sprite, character.x, character.y, 0.0, 1.0)
 	}
 
 	private fun renderSquad(squad: Character): Unit {
@@ -75,7 +67,7 @@ class CharacterRenderer : Renderer {
 		val y = if (type.contains("Y10", false)) 10 else 6
 
 		for (member in 0..<members) {
-			drawSprite(metatile, squad.x, y, member * 23.0, 0.0)
+			drawSprite(metatile, squad.x, y, member * 23.0, 1.0)
 		}
 	}
 

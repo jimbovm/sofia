@@ -24,10 +24,11 @@ package com.github.jimbovm.sofia.presenter.editor
  * semantic manner.
  */
 class Sprite(
-		val x: Double,
-		val y: Double,
-		val width: Double,
-		val height: Double) {
+	val x: Double,
+	val y: Double,
+	val width: Double,
+	val height: Double
+) {
 
 	enum class Metatile(val sprite: Sprite) {
 		AXE(Sprite(160.0, 48.0, 16.0, 16.0)),
@@ -56,7 +57,9 @@ class Sprite(
 		FLAGPOLE_STAFF(Sprite(336.0, 48.0, 16.0, 16.0)),
 		GOOMBA(Sprite(640.0, 0.0, 16.0, 16.0)),
 		GREEN_CHEEP(Sprite(975.0, 39.0, 16.0, 16.0)),
-		GREEN_PARATROOPA(Sprite(720.0, 32.0, 16.0, 24.0)),
+		GREEN_PARATROOPA_FIXED(Sprite(720.0, 32.0, 16.0, 24.0)),
+		GREEN_PARATROOPA_HOP(Sprite(720.0, 32.0, 16.0, 24.0)),
+		GREEN_PARATROOPA_HOVER(Sprite(743.0, 46.0, 16.0, 24.0)),
 		GREEN_TROOPA(Sprite(688.0, 32.0, 16.0, 24.0)),
 		GROUND(Sprite(0.0, 0.0, 16.0, 16.0)),
 		HAMMER_BRO(Sprite(927.0, 22.0, 16.0, 34.0)),

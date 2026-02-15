@@ -30,7 +30,7 @@ import com.github.jimbovm.isobel.common.Area
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-abstract class Renderer {
+open class Renderer {
 
 	internal var area: Area = Area()
 	internal var canvas: Canvas = Canvas()
@@ -39,12 +39,12 @@ abstract class Renderer {
 
 	/** Create a new renderer object. */
 	constructor(canvas: Canvas, area: Area, skin: Skin = Skin(area)) {
-		
+
 		this.canvas = canvas
 		this.skin = skin
 		this.area = area
 		this.pages = this.calculatePages(area)
-		
+
 		canvas.width = 256.0 * this.pages
 		canvas.height = 240.0
 	}
@@ -56,7 +56,14 @@ abstract class Renderer {
 	}
 
 	/** Draw a sprite at the given coordinates at an offset. */
-	fun drawSprite(tile: Sprite, column: Int, row: Int, offsetX: Double, offsetY: Double, sheet: Image = this.skin.spriteSheet): Unit {
+	fun drawSprite(
+		tile: Sprite,
+		column: Int,
+		row: Int,
+		offsetX: Double,
+		offsetY: Double,
+		sheet: Image = this.skin.spriteSheet
+	): Unit {
 
 		val cursorX = (16.0 * column) + offsetX
 		val cursorY = (row * 16.0) + offsetY
@@ -76,12 +83,10 @@ abstract class Renderer {
 
 	fun calculatePages(area: Area): Int {
 
-		val rightmostGeographyActorX: Int = area.geography.fold(0, {acc: Int, a: Actor -> max(a.x, acc)})
-		val rightmostPopulationActorX: Int = area.population.fold(0, {acc: Int, a: Actor -> max(a.x, acc)})
+		val rightmostGeographyActorX: Int = area.geography.fold(0) { acc: Int, a: Actor -> max(a.x, acc) }
+		val rightmostPopulationActorX: Int = area.population.fold(0) { acc: Int, a: Actor -> max(a.x, acc) }
 		val rightmostActor = intArrayOf(rightmostGeographyActorX, rightmostPopulationActorX).max()
 
 		return (rightmostActor / 16) + 1
 	}
-
-	abstract fun render(): Unit
 }

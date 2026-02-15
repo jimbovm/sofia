@@ -21,18 +21,37 @@ package com.github.jimbovm.sofia.fxml
 
 import java.util.ResourceBundle
 
+import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.event.ActionEvent
 import javafx.scene.Scene
+import javafx.scene.control.Menu
+import javafx.scene.control.MenuItem
 import javafx.scene.image.Image
 import javafx.scene.layout.HBox
+import javafx.stage.FileChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
 
 class MainMenuController {
 
-	fun initialize() {
+	@FXML
+	var menuFileNew: MenuItem? = null
 
+	@FXML
+	var menuFileOpen: MenuItem? = null
+
+	private val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
+	private val aboutLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/about.fxml"), uiBundle)
+
+	fun initialize() {}
+
+	@FXML
+	fun showOpenDialog(event: ActionEvent) {
+
+		val fileChooser = FileChooser()
+		val selectedFile = fileChooser.showOpenDialog(this.menuFileOpen?.parentPopup?.scene?.window as Stage)
+		println(selectedFile.toString())
 	}
 
 	/**
@@ -42,10 +61,7 @@ class MainMenuController {
 	 */
 	fun showAboutDialog(event: ActionEvent) {
 
-		val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
-		val fxmlLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/about.fxml"), uiBundle)
-
-		val aboutPane: HBox = fxmlLoader.load()
+		val aboutPane: HBox = aboutLoader.load()
 
 		val aboutStage = Stage().apply {
 			title = uiBundle?.getString("about_title")

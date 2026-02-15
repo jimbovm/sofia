@@ -42,7 +42,7 @@ tasks.withType<Jar> {
 
 javafx {
 	version = "21.+"
-	modules = mutableListOf("javafx.controls", "javafx.base", "javafx.graphics", "javafx.fxml")
+	modules = mutableListOf("javafx.controls", "javafx.base", "javafx.graphics", "javafx.fxml", "javafx.web")
 }
 
 kotlin {

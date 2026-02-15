@@ -41,16 +41,21 @@ class ExtensiblePlatformRenderer : Renderer {
 			for (row in stipeOriginY..15) {
 				when (row) {
 					stipeOriginY -> drawSprite(
-						Sprite.Metatile.STIPE_RING.sprite, stipeOriginX, row)
+						Sprite.Metatile.STIPE_RING.sprite, stipeOriginX, row
+					)
+
 					else -> drawSprite(
-						Sprite.Metatile.STIPE.sprite,stipeOriginX, row)
+						Sprite.Metatile.STIPE.sprite, stipeOriginX, row
+					)
 				}
 			}
 		}
-		drawCap(x, y, extent,
+		drawCap(
+			x, y, extent,
 			Sprite.Metatile.MUSHROOM_LEFT.sprite,
 			Sprite.Metatile.MUSHROOM_MIDDLE.sprite,
-			Sprite.Metatile.MUSHROOM_RIGHT.sprite)
+			Sprite.Metatile.MUSHROOM_RIGHT.sprite
+		)
 	}
 
 	private fun drawTree(x: Int, y: Int, extent: Int) {
@@ -65,7 +70,8 @@ class ExtensiblePlatformRenderer : Renderer {
 				}
 			}
 		}
-		drawCap(x, y, extent,
+		drawCap(
+			x, y, extent,
 			Sprite.Metatile.TREE_LEFT.sprite,
 			Sprite.Metatile.TREE_MIDDLE.sprite,
 			Sprite.Metatile.TREE_RIGHT.sprite
@@ -83,35 +89,25 @@ class ExtensiblePlatformRenderer : Renderer {
 		}
 	}
 
-	override fun render() {
-		val actors: Deque<GeographyActor> = ArrayDeque<GeographyActor>(
-			area.geography.filter({ it is ExtensiblePlatform }))
+	fun render(extensiblePlatform: ExtensiblePlatform) {
+		when (this.area.header.platform) {
+			Platform.MUSHROOM -> this.drawShroom(
+				extensiblePlatform.x,
+				(extensiblePlatform as YPlaceable).y,
+				(extensiblePlatform as Extensible).extent
+			)
 
-		var currentActor = actors.poll()
+			Platform.CANNON -> this.drawCannon(
+				extensiblePlatform.x,
+				(extensiblePlatform as YPlaceable).y,
+				(extensiblePlatform as Extensible).extent
+			)
 
-		val finalColumn = (canvas.width / 16).toInt()
-
-		for (column in (0..finalColumn)) {
-			while (currentActor?.x == column) {
-				when (this.area.header.platform) {
-					Platform.MUSHROOM -> this.drawShroom(
-						currentActor.x,
-						(currentActor as YPlaceable).y,
-						(currentActor as Extensible).extent
-					)
-					Platform.CANNON -> this.drawCannon(
-						currentActor.x,
-						(currentActor as YPlaceable).y,
-						(currentActor as Extensible).extent
-						)
-					Platform.TREE, Platform.CLOUD -> this.drawTree(
-						currentActor.x,
-						(currentActor as YPlaceable).y,
-						(currentActor as Extensible).extent
-					)
-				}
-				currentActor = actors.poll()
-			}
+			Platform.TREE, Platform.CLOUD -> this.drawTree(
+				extensiblePlatform.x,
+				(extensiblePlatform as YPlaceable).y,
+				(extensiblePlatform as Extensible).extent
+			)
 		}
 	}
 }

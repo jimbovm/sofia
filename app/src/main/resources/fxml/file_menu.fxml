@@ -8,7 +8,7 @@
 
 <Menu xmlns="http://javafx.com/javafx/17"
 	xmlns:fx="http://javafx.com/fxml/1" id="menuFile" fx:id="menuFile" mnemonicParsing="false"
-	text="%main_menu_file">
+	text="%main_menu_file" fx:controller="com.github.jimbovm.sofia.fxml.MainMenuController">
 	<items>
 		<MenuItem id="menuFileNew" fx:id="menuFileNew" mnemonicParsing="false"
 			text="%main_menu_file_new">

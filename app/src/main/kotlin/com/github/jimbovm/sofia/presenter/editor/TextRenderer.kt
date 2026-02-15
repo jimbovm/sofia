@@ -100,11 +100,11 @@ class TextRenderer : Renderer {
 		return Glyph.QUESTION
 	}
 
-	override fun render() {
-		
+	fun render() {
+
 		var dx = xOrigin
 		var dy = yOrigin
-		
+
 		for (char in this.text) {
 			when (char) {
 				'\n' -> {
@@ -112,14 +112,15 @@ class TextRenderer : Renderer {
 					dy += GLYPH_HEIGHT
 					continue
 				}
+
 				' ' -> {
 					dx += GLYPH_WIDTH
 					continue
 				}
 			}
-			
+
 			val glyph = this.getGlyph(char)
-			
+
 			this.canvas.graphicsContext2D.drawImage(
 				GLYPH_SHEET,
 				glyph.sprite.x,

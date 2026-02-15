@@ -76,32 +76,31 @@ class BackgroundFillSceneryRenderer : Renderer {
 		this.canvas.graphicsContext2D.drawImage(
 			this.skin.scenerySheet,
 			xOffset,
-			0.0,				// from Y origin (top)
-			Skin.BLOCK_SIZE.toDouble(), 	// 16px slice
-			Skin.SCREEN_HEIGHT,	// render entire slice in one pass
+			0.0,                                // from Y origin (top)
+			Skin.BLOCK_SIZE.toDouble(),        // 16px slice
+			Skin.SCREEN_HEIGHT,        // render entire slice in one pass
 			column * Skin.BLOCK_SIZE.toDouble(),
-			0.0,				// ditto for destination
+			0.0,                                // ditto for destination
 			Skin.BLOCK_SIZE.toDouble(),
 			Skin.SCREEN_HEIGHT
 		)
 	}
 
 	private fun drawFill(fill: AreaHeader.Fill, column: Int): Unit {
-		
+
 		Fill.from(fill).blocks.forEach {
-			val row = it
-			val sprite: Sprite = when (row) {
+			val sprite: Sprite = when (it) {
 				13 -> this.skin.upperFloorTile
 				14 -> this.skin.lowerFloorTile
 				else -> this.skin.fillTile
 			}
-			this.drawSprite(sprite, column, row)
+			this.drawSprite(sprite, column, it)
 		}
 	}
 
 	private fun drawSky(): Unit {
 
-		with (this.canvas.graphicsContext2D) {
+		with(this.canvas.graphicsContext2D) {
 			fill = skin.skyColor
 			fillRect(0.0, 0.0, this.canvas.width, this.canvas.height)
 		}
@@ -110,7 +109,9 @@ class BackgroundFillSceneryRenderer : Renderer {
 	private fun drawBackground(background: Background, column: Int): Unit {
 
 		if (background in listOf(
-			Background.OVER_WATER, Background.CASTLE_WALL, Background.UNDERWATER)) {
+				Background.OVER_WATER, Background.CASTLE_WALL, Background.UNDERWATER
+			)
+		) {
 
 			this.canvas.graphicsContext2D.drawImage(
 				this.skin.backgroundSheet,
@@ -126,7 +127,7 @@ class BackgroundFillSceneryRenderer : Renderer {
 		}
 	}
 
-	override fun render(): Unit {
+	fun render(): Unit {
 
 		this.drawSky()
 
@@ -135,25 +136,27 @@ class BackgroundFillSceneryRenderer : Renderer {
 		var currentBackground: Background = this.area.header.background
 
 		val actors: Deque<GeographyActor> = ArrayDeque<GeographyActor>(
-			area.geography.filter({ it is FillSceneryModifier || it is BackgroundModifier }))
+			area.geography.filter { it is FillSceneryModifier || it is BackgroundModifier })
 		var currentActor: GeographyActor? = actors.poll()
 		var sceneryXOffset = 0.0
 
 		val finalColumn = (canvas.width / 16).toInt()
 
 		for (column in (0..finalColumn)) {
-			
+
 			while ((currentActor?.x == column)) {
 				when (currentActor) {
 					is FillSceneryModifier -> {
 						currentFill = currentActor.fill
 						this.skin.scenery = currentActor.scenery
 					}
+
 					is BackgroundModifier -> {
 						currentBackground = currentActor.background
 						this.skin.background = currentBackground
 					}
-					else -> break 
+
+					else -> break
 				}
 				currentActor = actors.poll()
 			}

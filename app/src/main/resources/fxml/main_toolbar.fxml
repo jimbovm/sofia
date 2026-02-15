@@ -25,7 +25,7 @@
 			</tooltip>
 		</Button>
 		<Button id="mainToolbarOpen" fx:id="mainToolbarOpen" alignment="CENTER"
-			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Open Game">
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Open Game" onAction="#showOpenDialog">
 			<graphic>
 				<ImageView smooth="false">
 					<image>

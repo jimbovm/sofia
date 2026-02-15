@@ -23,31 +23,31 @@ import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 
 import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.common.AreaHeader.StartPosition
+import com.github.jimbovm.isobel.actor.geography.Staircase
 
 import com.github.jimbovm.sofia.presenter.editor.Skin
 import com.github.jimbovm.sofia.presenter.editor.Sprite
 import com.github.jimbovm.sofia.presenter.editor.Sprite.Metatile
+import sun.awt.X11.XRenderDirectFormat
 
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-class StartPositionRenderer : Renderer {
-
-	private val brosSheet: Image = Image("img/graphics/foreground/smb_bros.png")
-	private val marioStand = Sprite(0.0, 0.0, 15.0, 16.0)
-	private val marioFall = Sprite(16.0, 0.0, 15.0, 16.0)
+class StaircaseRenderer : Renderer {
 
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas, area: Area, skin: Skin = Skin(area)) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
-	fun render(): Unit {
+	fun render(staircase: Staircase): Unit {
 
-		when (this.area.header.startPosition) {
-			StartPosition.FALL -> this.drawSprite(marioFall, 2, 1, brosSheet)
-			StartPosition.BOTTOM -> this.drawSprite(marioStand, 2, 12, brosSheet)
-			StartPosition.MIDDLE -> this.drawSprite(marioStand, 2, 5, brosSheet)
-			else -> this.drawSprite(marioFall, 2, 2, brosSheet)
+		for ((height, xCursor) in (0..staircase.extent).withIndex()) {
+			drawStep(staircase.x + xCursor, minOf(7, height))
+		}
+	}
+
+	private fun drawStep(x: Int, height: Int) {
+		for (yCursor in 12 downTo (12 - height)) {
+			this.drawSprite(Sprite.Metatile.BLOCK.sprite, x, yCursor)
 		}
 	}
 }

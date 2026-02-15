@@ -21,25 +21,63 @@ package com.github.jimbovm.sofia.fxml
 
 import javafx.fxml.FXML
 import javafx.scene.control.Button
+import javafx.event.ActionEvent
+import javafx.stage.FileChooser
+import javafx.stage.Stage
 
 class MainToolbarController {
 
-	@FXML val mainToolbarNew: Button? = null
-	@FXML val mainToolbarOpen: Button? = null
-	@FXML val mainToolbarSave: Button? = null
-	@FXML val mainToolbarExportBytecode: Button? = null
-	@FXML val mainToolbarCut: Button? = null
-	@FXML val mainToolbarCopy: Button? = null
-	@FXML val mainToolbarPaste: Button? = null
-	@FXML val mainToolbarUndo: Button? = null
-	@FXML val mainToolbarRedo: Button? = null
-	@FXML val mainToolbarAddArea: Button? = null
-	@FXML val mainToolbarMoveAreaDown: Button? = null
-	@FXML val mainToolbarMoveAreaUp: Button? = null
-	@FXML val mainToolbarDeleteArea: Button? = null
-	@FXML val mainToolbarPreferences: Button? = null	
+	@FXML
+	val mainToolbarNew: Button? = null
+
+	@FXML
+	var mainToolbarOpen: Button? = null
+
+	@FXML
+	val mainToolbarSave: Button? = null
+
+	@FXML
+	val mainToolbarExportBytecode: Button? = null
+
+	@FXML
+	val mainToolbarCut: Button? = null
+
+	@FXML
+	val mainToolbarCopy: Button? = null
+
+	@FXML
+	val mainToolbarPaste: Button? = null
+
+	@FXML
+	val mainToolbarUndo: Button? = null
+
+	@FXML
+	val mainToolbarRedo: Button? = null
+
+	@FXML
+	val mainToolbarAddArea: Button? = null
+
+	@FXML
+	val mainToolbarMoveAreaDown: Button? = null
+
+	@FXML
+	val mainToolbarMoveAreaUp: Button? = null
+
+	@FXML
+	val mainToolbarDeleteArea: Button? = null
+
+	@FXML
+	val mainToolbarPreferences: Button? = null
 
 	fun initialize() {
+	}
 
+	@FXML
+	fun showOpenDialog(event: ActionEvent) {
+
+		val fileChooser = FileChooser()
+		val selectedFile =
+			fileChooser.showOpenDialog(this.mainToolbarOpen?.scene?.window as Stage)
+		println(selectedFile.toString())
 	}
 }
