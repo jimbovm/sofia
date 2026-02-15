@@ -21,6 +21,7 @@ package com.github.jimbovm.sofia.fxml
 
 import javafx.fxml.FXML
 import javafx.scene.Group
+import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TitledPane
 import javafx.scene.control.ToolBar
 
@@ -36,6 +37,9 @@ class EditorController {
 
 	@FXML
 	val editorToolbar: ToolBar? = null
+
+	@FXML
+	val environmentChoiceBox: ChoiceBox<Area.Environment>? = null
 
 	private var area: Area? = null
 

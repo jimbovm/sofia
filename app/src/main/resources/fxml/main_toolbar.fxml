@@ -9,10 +9,10 @@
 
 <ToolBar id="mainToolbar" fx:id="main_toolbar" xmlns="http://javafx.com/javafx/17"
 	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="com.github.jimbovm.sofia.fxml.MainToolbarController">
+	fx:controller="com.github.jimbovm.sofia.fxml.MainMenuController">
 	<items>
 		<Button id="mainToolbarNew" fx:id="mainToolbarNew" alignment="CENTER"
-			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="New Game">
+			contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="New Game" onAction="#createNewGame">
 			<graphic>
 				<ImageView smooth="false">
 					<image>
@@ -38,7 +38,7 @@
 			</tooltip>
 		</Button>
 		<Button id="mainToolbarSave" fx:id="mainToolbarSave" contentDisplay="GRAPHIC_ONLY"
-			mnemonicParsing="false" text="%save">
+			mnemonicParsing="false" text="%save" onAction="#showSaveDialog">
 			<graphic>
 				<ImageView smooth="false">
 					<image>

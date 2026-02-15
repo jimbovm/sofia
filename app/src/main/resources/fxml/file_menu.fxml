@@ -11,7 +11,7 @@
 	text="%main_menu_file" fx:controller="com.github.jimbovm.sofia.fxml.MainMenuController">
 	<items>
 		<MenuItem id="menuFileNew" fx:id="menuFileNew" mnemonicParsing="false"
-			text="%main_menu_file_new">
+			text="%main_menu_file_new" onAction="#createNewGame">
 			<graphic>
 				<ImageView
 					pickOnBounds="true" preserveRatio="true"
@@ -23,7 +23,7 @@
 			</graphic>
 		</MenuItem>
 		<MenuItem id="menuFileOpen" fx:id="menuFileOpen" mnemonicParsing="false"
-			text="%main_menu_file_open">
+			text="%main_menu_file_open" onAction="#showOpenDialog">
 			<graphic>
 				<ImageView pickOnBounds="true" preserveRatio="true"
 					smooth="false" fitHeight="16" fitWidth="16">
@@ -34,7 +34,7 @@
 			</graphic>
 		</MenuItem>
 		<MenuItem id="menuFileSave" fx:id="menuFileSave" mnemonicParsing="false"
-			text="%main_menu_file_save">
+			text="%main_menu_file_save" onAction="#showSaveDialog">
 			<graphic>
 				<ImageView pickOnBounds="true" preserveRatio="true"
 					smooth="false" fitHeight="16" fitWidth="16">

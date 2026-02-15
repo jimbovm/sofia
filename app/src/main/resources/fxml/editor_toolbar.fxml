@@ -10,7 +10,7 @@
 
 <ToolBar xmlns="http://javafx.com/javafx/17"
 	xmlns:fx="http://javafx.com/fxml/1" prefHeight="40.0"
-	prefWidth="200.0" fx:id="editorToolbar">
+	prefWidth="200.0" fx:id="editorToolbar" fx:controller="com.github.jimbovm.sofia.EditorController">
 	<items>
 		<Label
 			text="%editor_toolbar_environment">
@@ -19,7 +19,7 @@
 					right="4.0" />
 			</padding>
 		</Label>
-		<ChoiceBox>
+		<ChoiceBox fx:id="environmentChoiceBox">
 			<tooltip>
 				<Tooltip text="%editor_toolbar_environment_tooltip" />
 			</tooltip>

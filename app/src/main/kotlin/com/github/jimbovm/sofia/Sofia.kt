@@ -31,6 +31,8 @@ import com.github.jimbovm.sofia.view.Main
  */
 fun main(args: Array<String>) {
 
+	// Locale.setDefault(Locale.ENGLISH)
+
 	var buildInfo: Properties? = Properties()
 
 	try {
