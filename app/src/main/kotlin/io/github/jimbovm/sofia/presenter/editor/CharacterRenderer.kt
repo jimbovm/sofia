@@ -1,13 +1,13 @@
-package com.github.jimbovm.sofia.presenter.editor
+package io.github.jimbovm.sofia.presenter.editor
 
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 
-import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.actor.population.PopulationActor
-import com.github.jimbovm.isobel.actor.population.Character
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.actor.population.PopulationActor
+import io.github.jimbovm.isobel.actor.population.Character
 
-import com.github.jimbovm.sofia.presenter.editor.Sprite
+import io.github.jimbovm.sofia.presenter.editor.Sprite
 
 class CharacterRenderer : Renderer {
 

@@ -1,15 +1,15 @@
-package com.github.jimbovm.sofia.presenter.editor;
+package io.github.jimbovm.sofia.presenter.editor;
 
 import javafx.scene.canvas.Canvas
 
-import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.actor.geography.BackgroundModifier
-import com.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
-import com.github.jimbovm.isobel.actor.geography.FixedStatic
-import com.github.jimbovm.isobel.actor.geography.GeographyActor
-import com.github.jimbovm.isobel.actor.geography.Staircase
-import com.github.jimbovm.isobel.actor.geography.SingletonObject
-import com.github.jimbovm.isobel.actor.population.Character
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.actor.geography.BackgroundModifier
+import io.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
+import io.github.jimbovm.isobel.actor.geography.FixedStatic
+import io.github.jimbovm.isobel.actor.geography.GeographyActor
+import io.github.jimbovm.isobel.actor.geography.Staircase
+import io.github.jimbovm.isobel.actor.geography.SingletonObject
+import io.github.jimbovm.isobel.actor.population.Character
 
 class AreaRenderer {
 

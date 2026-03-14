@@ -36,7 +36,9 @@
 					pickOnBounds="true"
 					preserveRatio="true"
 					smooth="false">
-					<fx:reference source="sprites" />
+					<image>
+						<fx:reference source="sprites" />
+					</image>
 					<viewport>
 						<Rectangle2D
 							height="16.0"

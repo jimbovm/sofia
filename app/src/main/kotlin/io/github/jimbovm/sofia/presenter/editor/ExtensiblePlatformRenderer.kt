@@ -1,21 +1,21 @@
-package com.github.jimbovm.sofia.presenter.editor
+package io.github.jimbovm.sofia.presenter.editor
 
-import com.github.jimbovm.isobel.actor.Extensible
-import com.github.jimbovm.isobel.actor.YPlaceable
+import io.github.jimbovm.isobel.actor.Extensible
+import io.github.jimbovm.isobel.actor.YPlaceable
 import java.util.ArrayDeque
 import java.util.Deque
 
-import com.github.jimbovm.isobel.actor.geography.BackgroundModifier
-import com.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
-import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
-import com.github.jimbovm.isobel.actor.geography.GeographyActor
+import io.github.jimbovm.isobel.actor.geography.BackgroundModifier
+import io.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
+import io.github.jimbovm.isobel.actor.geography.FillSceneryModifier
+import io.github.jimbovm.isobel.actor.geography.GeographyActor
 import javafx.scene.canvas.Canvas
 
-import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.common.AreaHeader.Platform
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.common.AreaHeader.Platform
 
-import com.github.jimbovm.sofia.presenter.editor.Renderer
-import com.github.jimbovm.sofia.presenter.editor.Sprite
+import io.github.jimbovm.sofia.presenter.editor.Renderer
+import io.github.jimbovm.sofia.presenter.editor.Sprite
 
 class ExtensiblePlatformRenderer : Renderer {
 

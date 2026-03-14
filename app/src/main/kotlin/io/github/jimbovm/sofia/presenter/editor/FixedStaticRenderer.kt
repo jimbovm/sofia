@@ -17,13 +17,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.presenter.editor
+package io.github.jimbovm.sofia.presenter.editor
 
 import javafx.scene.canvas.Canvas
 import java.util.*
 
-import com.github.jimbovm.isobel.actor.geography.FixedStatic
-import com.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.actor.geography.FixedStatic
+import io.github.jimbovm.isobel.common.Area
 
 class FixedStaticRenderer : Renderer {
 

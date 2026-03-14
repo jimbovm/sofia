@@ -16,17 +16,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.presenter.editor
+package io.github.jimbovm.sofia.presenter.editor
 
 import javafx.scene.canvas.Canvas
 import java.util.*
 
-import com.github.jimbovm.isobel.actor.geography.BackgroundModifier
-import com.github.jimbovm.isobel.actor.geography.FillSceneryModifier
-import com.github.jimbovm.isobel.actor.geography.GeographyActor
-import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.common.AreaHeader
-import com.github.jimbovm.isobel.common.AreaHeader.Background
+import io.github.jimbovm.isobel.actor.geography.BackgroundModifier
+import io.github.jimbovm.isobel.actor.geography.FillSceneryModifier
+import io.github.jimbovm.isobel.actor.geography.GeographyActor
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.common.AreaHeader
+import io.github.jimbovm.isobel.common.AreaHeader.Background
 
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.

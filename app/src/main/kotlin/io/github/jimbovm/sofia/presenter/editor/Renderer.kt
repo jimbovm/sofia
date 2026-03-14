@@ -17,15 +17,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.presenter.editor
+package io.github.jimbovm.sofia.presenter.editor
 
 import kotlin.math.max
 
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 
-import com.github.jimbovm.isobel.actor.Actor
-import com.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.actor.Actor
+import io.github.jimbovm.isobel.common.Area
 
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.

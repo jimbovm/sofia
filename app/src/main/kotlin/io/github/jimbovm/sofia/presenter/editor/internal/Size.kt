@@ -1,8 +1,10 @@
-import com.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
-import com.github.jimbovm.isobel.actor.geography.SingletonObject
-import com.github.jimbovm.isobel.actor.geography.Castle
-import com.github.jimbovm.isobel.actor.population.Character
-import com.github.jimbovm.isobel.common.AreaHeader.Platform
+package io.github.jimbovm.sofia.presenter.editor.internal;
+
+import io.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
+import io.github.jimbovm.isobel.actor.geography.SingletonObject
+import io.github.jimbovm.isobel.actor.geography.Castle
+import io.github.jimbovm.isobel.actor.population.Character
+import io.github.jimbovm.isobel.common.AreaHeader.Platform
 
 /**
  * The bounding box of an actor, i.e. how many blocks the object it

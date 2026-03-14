@@ -1,7 +1,7 @@
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
-group = "com.github.jimbovm"
+group = "io.github.jimbovm"
 
 plugins {
 	application
@@ -24,7 +24,7 @@ allprojects {
 }
 
 application {
-	mainClass = "com.github.jimbovm.sofia.SofiaKt"
+	mainClass = "io.github.jimbovm.sofia.SofiaKt"
 }
 
 java {
@@ -36,7 +36,7 @@ java {
 tasks.withType<Jar> {
 	archiveBaseName = rootProject.name
 	manifest {
-		attributes["Main-Class"] = "com.github.jimbovm.sofia.SofiaKt"
+		attributes["Main-Class"] = "io.github.jimbovm.sofia.SofiaKt"
 	}
 }
 
@@ -61,7 +61,7 @@ kotlin {
 
 dependencies {
 	implementation("org.openjfx:javafx:21.+")
-	implementation("com.github.jimbovm:isobel:0.+")
+	implementation("io.github.jimbovm:isobel:0.+")
 	implementation("org.apache.logging.log4j:log4j-api:2.+")
 	implementation("org.apache.logging.log4j:log4j-core:2.+")
 }

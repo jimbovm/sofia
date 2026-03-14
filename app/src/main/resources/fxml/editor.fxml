@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TitledPane?>
 
 <TitledPane animated="false" fx:id="editor" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.jimbovm.sofia.fxml.EditorController">
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.jimbovm.sofia.fxml.EditorController">
 	<content>
 		<SplitPane dividerPositions="0.5"
 			orientation="VERTICAL" fx:id="editorSplitPane">

@@ -17,16 +17,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.presenter.editor
+package io.github.jimbovm.sofia.presenter.editor
 
 import javafx.scene.image.Image
 import javafx.scene.paint.Color
 
-import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.common.Area.Environment
-import com.github.jimbovm.isobel.common.AreaHeader.Scenery
-import com.github.jimbovm.isobel.common.AreaHeader.Background
-import com.github.jimbovm.isobel.common.AreaHeader.Platform
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.common.Area.Environment
+import io.github.jimbovm.isobel.common.AreaHeader.Scenery
+import io.github.jimbovm.isobel.common.AreaHeader.Background
+import io.github.jimbovm.isobel.common.AreaHeader.Platform
 
 /**
  * A skin is a collection of assets for rendering an area based on that 

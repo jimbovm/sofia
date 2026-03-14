@@ -17,7 +17,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.fxml
+package io.github.jimbovm.sofia.fxml
 
 import java.util.ResourceBundle
 
@@ -89,7 +89,6 @@ class MainMenuController {
 	val mainToolbarPreferences: Button? = null
 
 	private val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
-	private val aboutLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/about.fxml"), uiBundle)
 
 	internal val extensionDescription = uiBundle?.getString("extension_description")
 	internal val fileExtensions =
@@ -133,6 +132,7 @@ class MainMenuController {
 	 */
 	fun showAboutDialog(event: ActionEvent) {
 
+		val aboutLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/about.fxml"), uiBundle)
 		val aboutPane: HBox = aboutLoader.load()
 
 		val aboutStage = Stage().apply {

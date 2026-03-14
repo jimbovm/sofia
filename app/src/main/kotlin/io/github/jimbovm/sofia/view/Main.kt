@@ -17,7 +17,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.view
+package io.github.jimbovm.sofia.view
 
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
@@ -30,24 +30,24 @@ import javafx.scene.control.ToolBar
 import javafx.stage.Stage
 import java.util.*
 
-import com.github.jimbovm.isobel.common.Game
-import com.github.jimbovm.isobel.common.Area
-import com.github.jimbovm.isobel.common.AreaHeader
-import com.github.jimbovm.isobel.actor.population.Character
-import com.github.jimbovm.sofia.presenter.editor.BackgroundFillSceneryRenderer
-import com.github.jimbovm.sofia.presenter.editor.CharacterRenderer
-import com.github.jimbovm.sofia.fxml.EditorController
-import com.github.jimbovm.sofia.presenter.editor.ExtensiblePlatformRenderer
-import com.github.jimbovm.sofia.presenter.editor.FixedStaticRenderer
-import com.github.jimbovm.sofia.presenter.editor.SingletonObjectRenderer
-import com.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
-import com.github.jimbovm.sofia.presenter.editor.TextRenderer
+import io.github.jimbovm.isobel.common.Game
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.common.AreaHeader
+import io.github.jimbovm.isobel.actor.population.Character
+import io.github.jimbovm.sofia.presenter.editor.BackgroundFillSceneryRenderer
+import io.github.jimbovm.sofia.presenter.editor.CharacterRenderer
+import io.github.jimbovm.sofia.fxml.EditorController
+import io.github.jimbovm.sofia.presenter.editor.ExtensiblePlatformRenderer
+import io.github.jimbovm.sofia.presenter.editor.FixedStaticRenderer
+import io.github.jimbovm.sofia.presenter.editor.SingletonObjectRenderer
+import io.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
+import io.github.jimbovm.sofia.presenter.editor.TextRenderer
 import javafx.scene.control.Accordion
 import javafx.scene.control.TitledPane
 
-import com.github.jimbovm.isobel.common.AreaHeader.Background
-import com.github.jimbovm.sofia.presenter.editor.AreaRenderer
-import com.github.jimbovm.sofia.presenter.editor.StaircaseRenderer
+import io.github.jimbovm.isobel.common.AreaHeader.Background
+import io.github.jimbovm.sofia.presenter.editor.AreaRenderer
+import io.github.jimbovm.sofia.presenter.editor.StaircaseRenderer
 
 /**
  * Main launcher for the Sofia GUI.
@@ -60,6 +60,7 @@ class Main() : Application() {
 	private val mainToolbarLoader =
 		FXMLLoader(ClassLoader.getSystemResource("fxml/main_toolbar.fxml"), this.uiBundle)
 	private val fileMenuLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/file_menu.fxml"), this.uiBundle)
+	private val actorPaneLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/actor_pane.fxml"), this.uiBundle)
 	private val mainPane: Pane = mainLoader.load()
 	private val scene = Scene(mainPane)
 

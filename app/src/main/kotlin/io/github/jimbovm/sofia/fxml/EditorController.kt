@@ -17,7 +17,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package com.github.jimbovm.sofia.fxml
+package io.github.jimbovm.sofia.fxml
 
 import javafx.fxml.FXML
 import javafx.scene.Group
@@ -25,7 +25,7 @@ import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TitledPane
 import javafx.scene.control.ToolBar
 
-import com.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.common.Area
 
 class EditorController {
 
