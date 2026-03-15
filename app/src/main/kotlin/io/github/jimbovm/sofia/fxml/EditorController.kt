@@ -26,8 +26,14 @@ import javafx.scene.control.TitledPane
 import javafx.scene.control.ToolBar
 
 import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.common.AreaHeader
 
-class EditorController {
+import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
+import io.github.jimbovm.sofia.viewmodel.AreaViewModel
+import javafx.collections.FXCollections
+import javafx.scene.control.CheckBox
+
+class EditorController(private val areaViewModel: AreaViewModel, private val areaHeaderViewModel: AreaHeaderViewModel) {
 
 	@FXML
 	val editor: TitledPane? = null
@@ -39,11 +45,52 @@ class EditorController {
 	val editorToolbar: ToolBar? = null
 
 	@FXML
-	val environmentChoiceBox: ChoiceBox<Area.Environment>? = null
+	lateinit var autowalkCheckBox: CheckBox
+
+	@FXML
+	lateinit var environmentChoiceBox: ChoiceBox<Area.Environment>
+
+	@FXML
+	lateinit var fillChoiceBox: ChoiceBox<AreaHeader.Fill>
+
+	@FXML
+	lateinit var platformChoiceBox: ChoiceBox<AreaHeader.Platform>
+
+	@FXML
+	lateinit var sceneryChoiceBox: ChoiceBox<AreaHeader.Scenery>
+
+	@FXML
+	lateinit var startPositionChoiceBox: ChoiceBox<AreaHeader.StartPosition>
+
+	@FXML
+	lateinit var timeChoiceBox: ChoiceBox<Int>
 
 	private var area: Area? = null
 
+	@FXML
 	fun initialize() {
 		editor?.text = area?.familiarName
+
+		environmentChoiceBox.items = FXCollections.observableArrayList(Area.Environment.values().toList())
+		sceneryChoiceBox.items = FXCollections.observableArrayList(AreaHeader.Scenery.values().toList())
+		platformChoiceBox.items = FXCollections.observableArrayList(AreaHeader.Platform.values().toList())
+		fillChoiceBox.items = FXCollections.observableArrayList(AreaHeader.Fill.values().toList())
+		startPositionChoiceBox.items =
+			FXCollections.observableArrayList(
+				listOf(
+					AreaHeader.StartPosition.BOTTOM,
+					AreaHeader.StartPosition.MIDDLE,
+					AreaHeader.StartPosition.FALL
+				)
+			)
+		timeChoiceBox.items = FXCollections.observableArrayList(0, 200, 300, 400)
+
+		autowalkCheckBox.selectedProperty()?.bindBidirectional(areaHeaderViewModel.autowalk)
+		environmentChoiceBox.valueProperty()?.bindBidirectional(areaViewModel.environment)
+		fillChoiceBox.valueProperty()?.bindBidirectional(areaHeaderViewModel.fill)
+		platformChoiceBox.valueProperty()?.bindBidirectional(areaHeaderViewModel.platform)
+		sceneryChoiceBox.valueProperty()?.bindBidirectional(areaHeaderViewModel.scenery)
+		startPositionChoiceBox.valueProperty()?.bindBidirectional(areaHeaderViewModel.startPosition)
+		timeChoiceBox.valueProperty()?.bindBidirectional(areaHeaderViewModel.ticks)
 	}
 }

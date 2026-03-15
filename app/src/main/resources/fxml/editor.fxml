@@ -6,14 +6,98 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
 
 <TitledPane animated="false" fx:id="editor" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.jimbovm.sofia.fxml.EditorController">
+	xmlns:fx="http://javafx.com/fxml/1">
 	<content>
 		<SplitPane dividerPositions="0.5"
 			orientation="VERTICAL" fx:id="editorSplitPane">
 			<items>
-				<fx:include source="editor_toolbar.fxml" />
+				<ToolBar xmlns="http://javafx.com/javafx/17"
+					xmlns:fx="http://javafx.com/fxml/1" prefHeight="40.0"
+					prefWidth="200.0" fx:id="editorToolbar">
+					<items>
+						<Label
+							text="%editor_toolbar_environment">
+							<padding>
+								<Insets
+									right="4.0" />
+							</padding>
+						</Label>
+						<ChoiceBox fx:id="environmentChoiceBox">
+							<tooltip>
+								<Tooltip text="%editor_toolbar_environment_tooltip" />
+							</tooltip>
+						</ChoiceBox>
+						<Label
+							text="%editor_toolbar_scenery">
+						</Label>
+						<ChoiceBox fx:id="sceneryChoiceBox">
+							<tooltip>
+								<Tooltip text="%editor_toolbar_scenery_tooltip" />
+							</tooltip>
+						</ChoiceBox>
+						<Label
+							text="%editor_toolbar_platform">
+						</Label>
+						<ChoiceBox fx:id="platformChoiceBox"
+							layoutX="376.0"
+							layoutY="12.0">
+							<tooltip>
+								<Tooltip text="%editor_toolbar_platform_tooltip" />
+							</tooltip>
+						</ChoiceBox>
+						<Separator
+							orientation="VERTICAL" />
+						<Label
+							text="%editor_toolbar_start_position">
+						</Label>
+						<ChoiceBox fx:id="startPositionChoiceBox">
+							<tooltip>
+								<Tooltip text="%editor_toolbar_start_position_tooltip" />
+							</tooltip>
+						</ChoiceBox>
+						<CheckBox fx:id="autowalkCheckBox"
+							mnemonicParsing="false"
+							text="%editor_toolbar_autowalk">
+							<tooltip>
+								<Tooltip text="%editor_toolbar_autowalk_tooltip" />
+							</tooltip>
+						</CheckBox>
+						<Separator
+							orientation="VERTICAL" />
+						<Label
+							layoutX="299.0"
+							layoutY="16.0"
+							text="%editor_toolbar_time">
+						</Label>
+						<ChoiceBox fx:id="timeChoiceBox"
+							layoutX="376.0"
+							layoutY="12.0">
+							<tooltip>
+								<Tooltip text="%editor_toolbar_time_tooltip" />
+							</tooltip>
+						</ChoiceBox>
+						<Separator
+							orientation="VERTICAL" /><Label
+							layoutX="151.0"
+							layoutY="16.0"
+							text="%editor_toolbar_fill">
+						</Label>
+						<ChoiceBox fx:id="fillChoiceBox">
+							<tooltip>
+								<Tooltip text="%editor_toolbar_fill_tooltip" />
+							</tooltip>
+						</ChoiceBox>
+					</items>
+				</ToolBar>
 				<ScrollPane pannable="true"
 					vbarPolicy="ALWAYS" fx:id="editorScrollPane">
 					<content>

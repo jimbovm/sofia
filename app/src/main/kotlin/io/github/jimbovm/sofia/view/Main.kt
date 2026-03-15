@@ -34,20 +34,13 @@ import io.github.jimbovm.isobel.common.Game
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader
 import io.github.jimbovm.isobel.actor.population.Character
-import io.github.jimbovm.sofia.presenter.editor.BackgroundFillSceneryRenderer
-import io.github.jimbovm.sofia.presenter.editor.CharacterRenderer
 import io.github.jimbovm.sofia.fxml.EditorController
-import io.github.jimbovm.sofia.presenter.editor.ExtensiblePlatformRenderer
-import io.github.jimbovm.sofia.presenter.editor.FixedStaticRenderer
-import io.github.jimbovm.sofia.presenter.editor.SingletonObjectRenderer
-import io.github.jimbovm.sofia.presenter.editor.StartPositionRenderer
-import io.github.jimbovm.sofia.presenter.editor.TextRenderer
 import javafx.scene.control.Accordion
 import javafx.scene.control.TitledPane
 
-import io.github.jimbovm.isobel.common.AreaHeader.Background
 import io.github.jimbovm.sofia.presenter.editor.AreaRenderer
-import io.github.jimbovm.sofia.presenter.editor.StaircaseRenderer
+import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
+import io.github.jimbovm.sofia.viewmodel.AreaViewModel
 
 /**
  * Main launcher for the Sofia GUI.
@@ -71,9 +64,11 @@ class Main() : Application() {
 	 */
 	private var game = Game()
 
-	fun setUpCanvas(area: Area) {
+	fun setUpCanvas(area: Area, areaViewModel: AreaViewModel, areaHeaderViewModel: AreaHeaderViewModel) {
 
 		val editorLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/editor.fxml"), this.uiBundle)
+		editorLoader.setController(EditorController(areaViewModel, areaHeaderViewModel))
+
 		val editor: TitledPane = editorLoader.load()
 
 		editor.text = area.familiarName
@@ -140,7 +135,7 @@ class Main() : Application() {
 		}
 
 		this.game.atlas.areas.forEach {
-			setUpCanvas(it)
+			setUpCanvas(it, AreaViewModel(it), AreaHeaderViewModel(it.header))
 		}
 	}
 
