@@ -37,16 +37,16 @@ import javafx.scene.control.CheckBox
 class EditorController(private val areaViewModel: AreaViewModel, private val areaHeaderViewModel: AreaHeaderViewModel) {
 
 	@FXML
-	val editor: TitledPane? = null
+	lateinit var editor: TitledPane
 
 	@FXML
 	lateinit var canvas: Canvas
 
 	@FXML
-	val canvasContainer: Group? = null
+	lateinit var canvasContainer: Group
 
 	@FXML
-	val editorToolbar: ToolBar? = null
+	lateinit var editorToolbar: ToolBar
 
 	@FXML
 	lateinit var autowalkCheckBox: CheckBox
@@ -73,7 +73,7 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 
 	@FXML
 	fun initialize() {
-		editor?.text = area?.familiarName
+		editor.text = area?.familiarName
 
 		environmentChoiceBox.items = FXCollections.observableArrayList(Area.Environment.values().toList())
 		sceneryChoiceBox.items = FXCollections.observableArrayList(AreaHeader.Scenery.values().toList())
