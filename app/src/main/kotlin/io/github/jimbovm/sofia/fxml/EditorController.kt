@@ -21,6 +21,7 @@ package io.github.jimbovm.sofia.fxml
 
 import javafx.fxml.FXML
 import javafx.scene.Group
+import javafx.scene.canvas.Canvas
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TitledPane
 import javafx.scene.control.ToolBar
@@ -37,6 +38,9 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 
 	@FXML
 	val editor: TitledPane? = null
+
+	@FXML
+	lateinit var canvas: Canvas
 
 	@FXML
 	val canvasContainer: Group? = null

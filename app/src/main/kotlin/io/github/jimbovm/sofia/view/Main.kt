@@ -73,14 +73,13 @@ class Main() : Application() {
 
 		editor.text = area.familiarName
 
-		val canvas = Canvas(256.0, 240.0)
-
 		val editorController: EditorController =
 			editorLoader.getController<EditorController>() as EditorController
 		val canvasContainer: Group = editorLoader.namespace["canvasContainer"] as Group
 		canvasContainer.id = "canvasContainer_" + area.id
 
-		canvasContainer.children?.add(canvas)
+		val canvas = canvasContainer.children.first() as Canvas
+		canvas.id = "canvas_" + area.id
 
 		val areaRenderer = AreaRenderer(area, canvas)
 		areaRenderer.update()

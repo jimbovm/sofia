@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
@@ -101,7 +102,9 @@
 				<ScrollPane pannable="true"
 					vbarPolicy="ALWAYS" fx:id="editorScrollPane">
 					<content>
-						<Group fx:id="canvasContainer" />
+						<Group fx:id="canvasContainer">
+							<Canvas fx:id="canvas" />
+						</Group>
 					</content>
 					<cursor>
 						<Cursor
