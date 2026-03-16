@@ -61,6 +61,8 @@ kotlin {
 
 dependencies {
 	implementation("org.openjfx:javafx:21.+")
+	implementation("org.glassfish.jaxb:jaxb-runtime:[3.0,)")
+	implementation("jakarta.xml.bind:jakarta.xml.bind-api:[3.0,)")
 	implementation("io.github.jimbovm:isobel:0.+")
 	implementation("org.apache.logging.log4j:log4j-api:2.+")
 	implementation("org.apache.logging.log4j:log4j-core:2.+")
