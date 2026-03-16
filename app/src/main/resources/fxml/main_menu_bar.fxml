@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <MenuBar xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-	BorderPane.alignment="CENTER" fx:controller="io.github.jimbovm.sofia.fxml.MainMenuController">
+	BorderPane.alignment="CENTER" fx:controller="io.github.jimbovm.sofia.controller.MainMenuController">
 	<fx:define>
 		<Image fx:id="sprites"
 			url="@/img/graphics/foreground/smb_sprites_OVERWORLD.png" />
