@@ -17,7 +17,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package io.github.jimbovm.sofia.fxml
+package io.github.jimbovm.sofia.controller
 
 import javafx.fxml.FXML
 import javafx.scene.Group
@@ -69,11 +69,9 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 	@FXML
 	lateinit var timeChoiceBox: ChoiceBox<Int>
 
-	private var area: Area? = null
-
 	@FXML
 	fun initialize() {
-		editor.text = area?.familiarName
+		editor.text = areaViewModel.familiarName.get()
 
 		environmentChoiceBox.items = FXCollections.observableArrayList(Area.Environment.values().toList())
 		sceneryChoiceBox.items = FXCollections.observableArrayList(AreaHeader.Scenery.values().toList())

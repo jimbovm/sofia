@@ -17,7 +17,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-package io.github.jimbovm.sofia.fxml
+package io.github.jimbovm.sofia.controller
 
 import java.util.ResourceBundle
 
@@ -35,10 +35,14 @@ import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.Window
 
+import io.github.jimbovm.sofia.io.GameIO
+import io.github.jimbovm.sofia.viewmodel.GameViewModel
+
 /**
  * Controller for both the main menu and main toolbar.
  */
 class MainMenuController {
+//class MainMenuController(private var gameViewModel: GameViewModel) {
 
 	@FXML
 	var menuFileNew: MenuItem? = null
@@ -111,6 +115,7 @@ class MainMenuController {
 		)
 		val selectedFile = fileChooser.showOpenDialog(this.mainToolbarOpen?.parent?.scene?.window)
 		println(selectedFile ?: selectedFile.toString())
+
 	}
 
 	@FXML
