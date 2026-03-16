@@ -34,13 +34,14 @@ import io.github.jimbovm.isobel.common.Game
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader
 import io.github.jimbovm.isobel.actor.population.Character
-import io.github.jimbovm.sofia.fxml.EditorController
+import io.github.jimbovm.sofia.controller.EditorController
 import javafx.scene.control.Accordion
 import javafx.scene.control.TitledPane
 
 import io.github.jimbovm.sofia.presenter.editor.AreaRenderer
 import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
 import io.github.jimbovm.sofia.viewmodel.AreaViewModel
+import io.github.jimbovm.sofia.viewmodel.GameViewModel
 
 /**
  * Main launcher for the Sofia GUI.
@@ -62,7 +63,7 @@ class Main() : Application() {
 	/**
 	 * The current game being worked on in this session.
 	 */
-	private var game = Game()
+	private var gameViewModel = GameViewModel(Game())
 
 	fun setUpCanvas(area: Area, areaViewModel: AreaViewModel, areaHeaderViewModel: AreaHeaderViewModel) {
 
@@ -70,11 +71,11 @@ class Main() : Application() {
 		editorLoader.setController(EditorController(areaViewModel, areaHeaderViewModel))
 
 		val editor: TitledPane = editorLoader.load()
-
 		editor.text = area.familiarName
 
 		val editorController: EditorController =
 			editorLoader.getController<EditorController>() as EditorController
+
 		val canvasContainer: Group = editorLoader.namespace["canvasContainer"] as Group
 		canvasContainer.id = "canvasContainer_" + area.id
 
@@ -89,6 +90,8 @@ class Main() : Application() {
 	}
 
 	override fun start(primaryStage: Stage?) {
+
+		// TODO: Start refactoring by removing menu controller from FXML and setting it here
 
 		primaryStage?.apply {
 			icons?.add(Image("img/icon_128x128.png"))
@@ -105,11 +108,13 @@ class Main() : Application() {
 
 	fun displayAreas(scene: Scene) {
 
-		this.game.atlas.areas.add(Area())
-		this.game.atlas.areas.add(Area())
-		this.game.atlas.areas.add(Area())
+		val game = this.gameViewModel.game
 
-		this.game.atlas.areas[0].apply {
+		game.atlas.areas.add(Area())
+		game.atlas.areas.add(Area())
+		game.atlas.areas.add(Area())
+
+		game.atlas.areas[0].apply {
 			familiarName = "Some area"
 			header.background = AreaHeader.Background.NIGHT
 			header.scenery = AreaHeader.Scenery.HILLS
@@ -117,14 +122,14 @@ class Main() : Application() {
 				Character.create(13, 4, Character.Type.GOOMBA, false)
 			)
 		}
-		this.game.atlas.areas[1].apply {
+		game.atlas.areas[1].apply {
 			familiarName = "Some other area"
 			header.scenery = AreaHeader.Scenery.CLOUDS
 			population = mutableListOf(
 				Character.create(12, 3, Character.Type.GREEN_PARATROOPA_HOP, false)
 			)
 		}
-		this.game.atlas.areas[2].apply {
+		game.atlas.areas[2].apply {
 			familiarName = "Some other other area"
 			header.platform = AreaHeader.Platform.MUSHROOM
 			header.scenery = AreaHeader.Scenery.HILLS
@@ -133,7 +138,7 @@ class Main() : Application() {
 			)
 		}
 
-		this.game.atlas.areas.forEach {
+		game.atlas.areas.forEach {
 			setUpCanvas(it, AreaViewModel(it), AreaHeaderViewModel(it.header))
 		}
 	}
