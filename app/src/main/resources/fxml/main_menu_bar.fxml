@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.geometry.Rectangle2D?>
 
 <MenuBar xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
 	<fx:define>
@@ -14,9 +15,224 @@
 			url="@/img/graphics/foreground/smb_sprites_OVERWORLD.png" />
 	</fx:define>
 	<menus>
-		<!--<fx:include fx:id="menuFile" source="file_menu.fxml" />
-		<fx:include fx:id="menuEdit" source="edit_menu.fxml" />
-		<fx:include fx:id="menuInsert" source="insert_menu.fxml" />-->
+		<Menu fx:id="menuFile" text="%main_menu_file">
+			<items>
+				<MenuItem id="menuFileNew" fx:id="menuFileNew" mnemonicParsing="false"
+					text="%main_menu_file_new" onAction="#createNewGame">
+					<graphic>
+						<ImageView
+							pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/document-new.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+				<MenuItem id="menuFileOpen" fx:id="menuFileOpen" mnemonicParsing="false"
+					text="%main_menu_file_open" onAction="#showOpenDialog">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/document-open.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+				<MenuItem id="menuFileSave" fx:id="menuFileSave" mnemonicParsing="false"
+					text="%main_menu_file_save" onAction="#showSaveDialog">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/document-save.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+				<MenuItem id="menuFileSaveAs" fx:id="menuFileSaveAs" mnemonicParsing="false"
+					text="%main_menu_file_save_as">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/document-save-as.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+				<MenuItem id="menuFileExport" fx:id="menuFileExport" mnemonicParsing="false"
+					text="%main_menu_file_export">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/media-nes.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+				<SeparatorMenuItem />
+				<MenuItem id="menuFileClose" fx:id="menuFileClose" mnemonicParsing="false"
+					text="%main_menu_file_close">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/window-close.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+			</items>
+		</Menu>
+		<Menu text="%main_menu_edit">
+			<items>
+				<MenuItem id="menuEditUndo" fx:id="menuEditUndo" mnemonicParsing="false" text="%undo">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/edit-undo.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+				<MenuItem id="menuEditRedo" fx:id="menuEditRedo" mnemonicParsing="false" text="%redo">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/edit-redo.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+				<SeparatorMenuItem />
+				<MenuItem id="menuEditCut" fx:id="menuEditCut" mnemonicParsing="false" text="%cut">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/edit-cut.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+				<MenuItem id="menuEditCopy" fx:id="menuEditCopy" mnemonicParsing="false" text="%copy">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/edit-copy.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+				<MenuItem id="menuEditPaste" fx:id="menuEditPaste" mnemonicParsing="false" text="%paste">
+					<graphic>
+						<ImageView pickOnBounds="true" preserveRatio="true"
+							smooth="false" fitHeight="16" fitWidth="16">
+							<image>
+								<Image url="@/img/icons/edit-paste.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</MenuItem>
+			</items>
+		</Menu>
+		<Menu text="%main_menu_insert">
+			<fx:define>
+				<Image fx:id="sprites"
+					url="@/img/graphics/foreground/smb_sprites_OVERWORLD.png" />
+			</fx:define>
+			<items>
+				<MenuItem mnemonicParsing="false" text="%add_new_area" />
+				<SeparatorMenuItem />
+				<!-- Actors submenus -->
+				<fx:include fx:id="menu_insert_enemies" source="insert_menu_enemies.fxml" />
+				<fx:include fx:id="menu_insert_generators" source="insert_menu_generators.fxml" />
+				<Menu mnemonicParsing="false" text="%tab_blocks_items">
+					<graphic>
+						<ImageView id="icon_blocks_items" fx:id="icon_blocks_items"
+							pickOnBounds="true" preserveRatio="true"
+							smooth="false">
+							<image>
+								<fx:reference source="sprites" />
+							</image>
+							<viewport>
+								<Rectangle2D height="16.0"
+									minX="128.0" minY="32.0"
+									width="16.0" />
+							</viewport>
+						</ImageView>
+					</graphic>
+				</Menu>
+				<Menu mnemonicParsing="false" text="%tab_structures">
+					<graphic>
+						<ImageView id="icon_structures" fx:id="icon_structures"
+							pickOnBounds="true" preserveRatio="true"
+							smooth="false">
+							<image>
+								<fx:reference source="sprites" />
+							</image>
+							<viewport>
+								<Rectangle2D height="16.0"
+									minX="336.0" minY="0.0"
+									width="16.0" />
+							</viewport>
+						</ImageView>
+					</graphic>
+				</Menu>
+				<Menu mnemonicParsing="false" text="%tab_scenery">
+					<graphic>
+						<ImageView id="icon_scenery" fx:id="icon_scenery"
+							pickOnBounds="true" preserveRatio="true"
+							smooth="false">
+							<image>
+								<fx:reference source="sprites" />
+							</image>
+							<viewport>
+								<Rectangle2D height="16.0"
+									minX="224.0" minY="16.0"
+									width="16.0" />
+							</viewport>
+						</ImageView>
+					</graphic>
+				</Menu>
+				<Menu mnemonicParsing="false" text="%tab_fill">
+					<graphic>
+						<ImageView id="icon_terrain_fill" fx:id="icon_terrain_fill"
+							pickOnBounds="true" preserveRatio="true"
+							smooth="false">
+							<image>
+								<fx:reference source="sprites" />
+							</image>
+							<viewport>
+								<Rectangle2D height="16.0"
+									minY="0.0" width="16.0" />
+							</viewport>
+						</ImageView>
+					</graphic>
+				</Menu>
+				<Menu mnemonicParsing="false" text="%tab_exits_loops">
+					<graphic>
+						<ImageView id="icon_exits_loops" fx:id="icon_exits_loops"
+							pickOnBounds="true" preserveRatio="true"
+							smooth="false">
+							<image>
+								<fx:reference source="sprites" />
+							</image>
+							<viewport>
+								<Rectangle2D height="16.0"
+									minX="1270.0" minY="40.0" width="16.0" />
+							</viewport>
+						</ImageView>
+					</graphic>
+				</Menu>
+			</items>
+		</Menu>
 		<Menu mnemonicParsing="false" text="%main_menu_game">
 			<items>
 				<MenuItem mnemonicParsing="false" text="%main_menu_game_scenario" />

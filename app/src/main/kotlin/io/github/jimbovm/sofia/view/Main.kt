@@ -25,6 +25,7 @@ import javafx.scene.Group
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
+import javafx.scene.layout.StackPane
 import javafx.scene.layout.Pane
 import javafx.scene.control.MenuBar
 import javafx.scene.control.ToolBar
@@ -88,6 +89,29 @@ class Main() : Application() {
 		areaList.panes.add(editor)
 	}
 
+	fun setUpMenus() {
+
+		val mainMenuLoader =
+			FXMLLoader(ClassLoader.getSystemResource("fxml/main_menu_bar.fxml"), this.uiBundle)
+		val mainMenuController = MainMenuController(this.gameViewModel)
+		val mainToolbarLoader =
+			FXMLLoader(ClassLoader.getSystemResource("fxml/main_toolbar.fxml"), this.uiBundle)
+		val mainToolbarController = MainToolbarController(this.gameViewModel)
+
+		mainMenuLoader.setController(mainMenuController)
+		mainToolbarLoader.setController(mainToolbarController)
+
+		val mainMenu: MenuBar = mainMenuLoader.load() as MenuBar
+		val mainToolbar: ToolBar = mainToolbarLoader.load() as ToolBar
+
+		val mainMenuContainer: StackPane = mainLoader.namespace["mainMenuContainer"] as StackPane
+		val mainToolbarContainer: StackPane = mainLoader.namespace["mainToolbarContainer"] as StackPane
+
+		mainMenuContainer.children.add(mainMenu)
+		mainToolbarContainer.children.add(mainToolbar)
+
+	}
+
 	override fun start(primaryStage: Stage?) {
 
 		// TODO: Start refactoring by removing menu controller from FXML and setting it here
@@ -102,17 +126,7 @@ class Main() : Application() {
 		primaryStage?.title = "Sofia"
 		primaryStage?.scene = scene
 
-		val mainToolbarLoader =
-			FXMLLoader(ClassLoader.getSystemResource("fxml/main_toolbar.fxml"), this.uiBundle)
-		val mainToolbarController = MainToolbarController(this.gameViewModel)
-
-		mainToolbarLoader.setController(mainToolbarController)
-
-		val mainToolbar: ToolBar = mainToolbarLoader.load() as ToolBar
-
-		val mainToolbarContainer: Group = mainLoader.namespace["mainToolbarContainer"] as Group
-		mainToolbarContainer.children.add(mainToolbar)
-
+		setUpMenus()
 		displayAreas(scene)
 		primaryStage?.show()
 	}

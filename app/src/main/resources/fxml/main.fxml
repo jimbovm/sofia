@@ -9,6 +9,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="main" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17"
@@ -22,8 +23,8 @@
 	</right>
 	<top>
 		<VBox id="menus" fx:id="menus">
-			<!-- <fx:include source="main_menu_bar.fxml" /> -->
-			<Group fx:id="mainToolbarContainer" />
+			<StackPane fx:id="mainMenuContainer" />
+			<StackPane fx:id="mainToolbarContainer" />
 		</VBox>
 	</top>
 	<center>
