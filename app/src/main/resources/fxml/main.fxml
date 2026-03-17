@@ -22,8 +22,8 @@
 	</right>
 	<top>
 		<VBox id="menus" fx:id="menus">
-			<fx:include source="main_menu_bar.fxml" />
-			<fx:include source="main_toolbar.fxml" />
+			<!-- <fx:include source="main_menu_bar.fxml" /> -->
+			<Group fx:id="mainToolbarContainer" />
 		</VBox>
 	</top>
 	<center>

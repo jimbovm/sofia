@@ -19,13 +19,30 @@ SOFTWARE. */
 
 package io.github.jimbovm.sofia.controller
 
-import javafx.fxml.FXML
-import javafx.scene.control.Button
-import javafx.event.ActionEvent
-import javafx.stage.FileChooser
-import javafx.stage.Stage
+import java.util.ResourceBundle
 
-class MainToolbarController {
+import javafx.event.ActionEvent
+import javafx.fxml.FXML
+import javafx.fxml.FXMLLoader
+import javafx.scene.control.Button
+import javafx.scene.control.Menu
+import javafx.scene.control.MenuItem
+import javafx.scene.image.Image
+import javafx.scene.layout.HBox
+import javafx.scene.Scene
+import javafx.stage.FileChooser
+import javafx.stage.Modality
+import javafx.stage.Stage
+import javafx.stage.Window
+
+import io.github.jimbovm.sofia.io.GameIO
+import io.github.jimbovm.sofia.viewmodel.GameViewModel
+
+/**
+ * Controller for both the main menu and main toolbar.
+ */
+class MainToolbarController(private var gameViewModel: GameViewModel) {
+//class MainMenuController(private var gameViewModel: GameViewModel) {
 
 	@FXML
 	val mainToolbarNew: Button? = null
@@ -69,15 +86,41 @@ class MainToolbarController {
 	@FXML
 	val mainToolbarPreferences: Button? = null
 
-	fun initialize() {
+	private val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
+
+	internal val extensionDescription = uiBundle?.getString("extension_description")
+	internal val fileExtensions =
+		listOf(FileChooser.ExtensionFilter(extensionDescription, "fia", "sofia", "isobel"))
+
+	fun initialize() {}
+
+	@FXML
+	fun createNewGame(event: ActionEvent) {
+		System.err.println("New game action; not implemented yet")
 	}
 
 	@FXML
 	fun showOpenDialog(event: ActionEvent) {
 
 		val fileChooser = FileChooser()
-		val selectedFile =
-			fileChooser.showOpenDialog(this.mainToolbarOpen?.scene?.window as Stage)
-		println(selectedFile.toString())
+		fileChooser.title = uiBundle?.getString("dialog_title_open")
+		fileChooser.extensionFilters.addAll(
+			this.fileExtensions
+		)
+		val selectedFile = fileChooser.showOpenDialog(this.mainToolbarOpen?.parent?.scene?.window)
+		println(selectedFile ?: selectedFile.toString())
+
+	}
+
+	@FXML
+	fun showSaveDialog(event: ActionEvent) {
+
+		val fileChooser = FileChooser()
+		fileChooser.extensionFilters.addAll(
+			this.fileExtensions
+		)
+		fileChooser.title = uiBundle?.getString("dialog_title_save")
+		val saveFileName = fileChooser.showSaveDialog(this.mainToolbarSave?.parent?.scene?.window)
+		println(saveFileName ?: saveFileName.toString())
 	}
 }

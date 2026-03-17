@@ -8,16 +8,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<MenuBar xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-	BorderPane.alignment="CENTER" fx:controller="io.github.jimbovm.sofia.controller.MainMenuController">
+<MenuBar xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
 	<fx:define>
 		<Image fx:id="sprites"
 			url="@/img/graphics/foreground/smb_sprites_OVERWORLD.png" />
 	</fx:define>
 	<menus>
-		<fx:include fx:id="menuFile" source="file_menu.fxml" />
+		<!--<fx:include fx:id="menuFile" source="file_menu.fxml" />
 		<fx:include fx:id="menuEdit" source="edit_menu.fxml" />
-		<fx:include fx:id="menuInsert" source="insert_menu.fxml" />
+		<fx:include fx:id="menuInsert" source="insert_menu.fxml" />-->
 		<Menu mnemonicParsing="false" text="%main_menu_game">
 			<items>
 				<MenuItem mnemonicParsing="false" text="%main_menu_game_scenario" />

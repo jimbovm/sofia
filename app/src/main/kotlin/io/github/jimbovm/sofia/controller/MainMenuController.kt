@@ -41,7 +41,7 @@ import io.github.jimbovm.sofia.viewmodel.GameViewModel
 /**
  * Controller for both the main menu and main toolbar.
  */
-class MainMenuController {
+class MainMenuController(private var gameViewModel: GameViewModel) {
 //class MainMenuController(private var gameViewModel: GameViewModel) {
 
 	@FXML

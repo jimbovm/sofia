@@ -26,6 +26,7 @@ import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 import javafx.scene.layout.Pane
+import javafx.scene.control.MenuBar
 import javafx.scene.control.ToolBar
 import javafx.stage.Stage
 import java.util.*
@@ -35,6 +36,8 @@ import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader
 import io.github.jimbovm.isobel.actor.population.Character
 import io.github.jimbovm.sofia.controller.EditorController
+import io.github.jimbovm.sofia.controller.MainMenuController
+import io.github.jimbovm.sofia.controller.MainToolbarController
 import javafx.scene.control.Accordion
 import javafx.scene.control.TitledPane
 
@@ -50,15 +53,11 @@ class Main() : Application() {
 
 	private val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
 	private val mainLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/main.fxml"), this.uiBundle)
-	private val mainMenuLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/main_menu.fxml"), this.uiBundle)
-	private val mainToolbarLoader =
-		FXMLLoader(ClassLoader.getSystemResource("fxml/main_toolbar.fxml"), this.uiBundle)
+
 	private val fileMenuLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/file_menu.fxml"), this.uiBundle)
 	private val actorPaneLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/actor_pane.fxml"), this.uiBundle)
 	private val mainPane: Pane = mainLoader.load()
 	private val scene = Scene(mainPane)
-
-	private val mainToolbar: ToolBar = mainToolbarLoader.load()
 
 	/**
 	 * The current game being worked on in this session.
@@ -102,6 +101,18 @@ class Main() : Application() {
 
 		primaryStage?.title = "Sofia"
 		primaryStage?.scene = scene
+
+		val mainToolbarLoader =
+			FXMLLoader(ClassLoader.getSystemResource("fxml/main_toolbar.fxml"), this.uiBundle)
+		val mainToolbarController = MainToolbarController(this.gameViewModel)
+
+		mainToolbarLoader.setController(mainToolbarController)
+
+		val mainToolbar: ToolBar = mainToolbarLoader.load() as ToolBar
+
+		val mainToolbarContainer: Group = mainLoader.namespace["mainToolbarContainer"] as Group
+		mainToolbarContainer.children.add(mainToolbar)
+
 		displayAreas(scene)
 		primaryStage?.show()
 	}
