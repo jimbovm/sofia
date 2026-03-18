@@ -13,6 +13,7 @@ import io.github.jimbovm.isobel.common.Game
 import io.github.jimbovm.sofia.controller.EditorController
 import io.github.jimbovm.sofia.controller.MainMenuController
 import io.github.jimbovm.sofia.controller.MainToolbarController
+import io.github.jimbovm.sofia.io.GameIO
 import io.github.jimbovm.sofia.presenter.editor.AreaRenderer
 import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
 import io.github.jimbovm.sofia.viewmodel.AreaViewModel
@@ -95,7 +96,6 @@ class Main : Application() {
 	}
 
 	override fun start(primaryStage: Stage?) {
-		// TODO: Start refactoring by removing menu controller from FXML and setting it here
 
 		primaryStage?.apply {
 			icons?.add(Image("img/icon_128x128.png"))

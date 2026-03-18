@@ -6,15 +6,12 @@
 
 package io.github.jimbovm.sofia.io
 
-import io.github.jimbovm.isobel.common.Game
-import jakarta.xml.bind.JAXBContext
-import jakarta.xml.bind.JAXBException
-import jakarta.xml.bind.MarshalException
-import jakarta.xml.bind.UnmarshalException
-import java.io.File
-import java.nio.file.FileSystems
-import java.nio.file.Files
 import java.nio.file.Path
+
+import jakarta.xml.bind.*
+import java.nio.file.Files
+
+import io.github.jimbovm.isobel.common.Game
 
 /**
  * Static utility class encapsulating load, save and export functionality.
@@ -23,7 +20,7 @@ class GameIO {
 
 	companion object {
 
-		private fun context(): JAXBContext = JAXBContext.newInstance("io.github.jimbovm.isobel")
+		private fun context(): JAXBContext = JAXBContext.newInstance(Game::class.java)
 
 		/**
 		 * Load a game from Isobel XML.
@@ -45,6 +42,7 @@ class GameIO {
 			var path = Path.of(file)
 			var writer = Files.newBufferedWriter(path)
 			var marshaller = GameIO.context().createMarshaller()
+			marshaller.setProperty(Marshaller.JAXB_ENCODING, "utf-8");
 
 			marshaller.marshal(game, path.toFile())
 		}

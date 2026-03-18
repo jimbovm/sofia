@@ -22,12 +22,12 @@ import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.Window
 import java.util.ResourceBundle
+import java.io.File
 
 /**
  * Controller for both the main menu and main toolbar.
  */
 class MainMenuController(private var gameViewModel: GameViewModel) {
-// class MainMenuController(private var gameViewModel: GameViewModel) {
 
 	@FXML
 	var menuFileNew: MenuItem? = null
@@ -108,8 +108,16 @@ class MainMenuController(private var gameViewModel: GameViewModel) {
 			this.fileExtensions,
 		)
 		fileChooser.title = uiBundle?.getString("dialog_title_save")
-		val saveFileName = fileChooser.showSaveDialog(this.mainToolbarSave?.parent?.scene?.window)
-		println(saveFileName ?: saveFileName.toString())
+
+		val saveFile = fileChooser.showSaveDialog(this.mainToolbarSave?.parent?.scene?.window)
+
+		if (saveFile != null) {
+			var saveFilePath = saveFile.absolutePath
+			if (!saveFilePath.endsWith(".fia")) {
+				saveFilePath += ".fia"
+			}
+			GameIO.save(gameViewModel.game, saveFilePath)
+		}
 	}
 
 	/**

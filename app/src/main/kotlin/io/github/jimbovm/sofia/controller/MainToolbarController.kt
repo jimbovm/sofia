@@ -102,7 +102,15 @@ class MainToolbarController(private var gameViewModel: GameViewModel) {
 			this.fileExtensions,
 		)
 		fileChooser.title = uiBundle?.getString("dialog_title_save")
-		val saveFileName = fileChooser.showSaveDialog(this.mainToolbarSave?.parent?.scene?.window)
-		println(saveFileName ?: saveFileName.toString())
+
+		val saveFile = fileChooser.showSaveDialog(this.mainToolbarSave?.parent?.scene?.window)
+
+		if (saveFile != null) {
+			var saveFilePath = saveFile.absolutePath
+			if (!saveFilePath.endsWith(".fia")) {
+				saveFilePath += ".fia"
+			}
+			GameIO.save(gameViewModel.game, saveFilePath)
+		}
 	}
 }
