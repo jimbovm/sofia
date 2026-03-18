@@ -9,6 +9,7 @@ plugins {
 	id("org.openjfx.javafxplugin") version "0.1.0"
 	id("com.palantir.git-version") version "4.3.0"
 	id("com.gradleup.shadow") version "9.3.0"
+	id("com.diffplug.spotless") version "8.+"
 }
 
 val gitVersion: groovy.lang.Closure<String> by extra
@@ -56,6 +57,22 @@ kotlin {
 			testImplementation("org.jetbrains.kotlin:kotlin-test")
 			testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 		}
+	}
+}
+
+spotless {
+	
+	kotlin {
+		ktlint().editorConfigOverride(
+			mapOf(
+				"end_of_line" to "lf",
+				"insert_final_newline" to true,
+				"charset" to "utf-8",
+				"indent_style" to "tab"
+			)
+		)
+		licenseHeader("/*\n * SPDX-License-Identifier: MIT-0\n *\n * This file is part of Sofia (https://github.com/jimbovm/sofia).\n */\n\n")
+		
 	}
 }
 

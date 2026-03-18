@@ -1,22 +1,24 @@
-package io.github.jimbovm.sofia.viewmodel;
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
 
-import java.io.File
-import java.nio.file.Files
-import java.nio.file.FileSystems
-import java.nio.file.Path
+package io.github.jimbovm.sofia.viewmodel
 
+import io.github.jimbovm.isobel.common.Game
+import io.github.jimbovm.sofia.io.GameIO
 import jakarta.xml.bind.JAXBContext
 import jakarta.xml.bind.JAXBException
 import jakarta.xml.bind.MarshalException
 import jakarta.xml.bind.UnmarshalException
-
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
-
-import io.github.jimbovm.isobel.common.Game
-
-import io.github.jimbovm.sofia.io.GameIO
+import java.io.File
+import java.nio.file.FileSystems
+import java.nio.file.Files
+import java.nio.file.Path
 
 class GameViewModel(val game: Game) {
 
@@ -24,17 +26,15 @@ class GameViewModel(val game: Game) {
 	val atlas = SimpleObjectProperty(game.atlas)
 	val scenario = SimpleObjectProperty(game.scenario)
 
-	private val modified = false;
+	private val modified = false
 
-	private var openFile = "";
+	private var openFile = ""
 
 	/**
 	 * Load a game from Isobel XML.
 	 */
 	@Throws(JAXBException::class, UnmarshalException::class, IllegalArgumentException::class)
-	fun load(file: String): Game {
-		return GameIO.load(file)
-	}
+	fun load(file: String): Game = GameIO.load(file)
 
 	/**
 	 * Save a game to Isobel XML.

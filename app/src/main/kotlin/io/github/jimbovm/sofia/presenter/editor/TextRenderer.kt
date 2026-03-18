@@ -1,11 +1,15 @@
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
+
 package io.github.jimbovm.sofia.presenter.editor
 
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.sofia.presenter.editor.Sprite
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
-
-import io.github.jimbovm.isobel.common.Area
-
-import io.github.jimbovm.sofia.presenter.editor.Sprite
 
 class TextRenderer : Renderer {
 
@@ -68,12 +72,11 @@ class TextRenderer : Renderer {
 			RIGHT(Sprite(96.0, 16.0, GLYPH_WIDTH, GLYPH_HEIGHT)),
 			HEART(Sprite(104.0, 16.0, GLYPH_WIDTH, GLYPH_HEIGHT)),
 			QUESTION(Sprite(112.0, 16.0, GLYPH_WIDTH, GLYPH_HEIGHT)),
-			CROWN(Sprite(120.0, 16.0, GLYPH_WIDTH, GLYPH_HEIGHT));
+			CROWN(Sprite(120.0, 16.0, GLYPH_WIDTH, GLYPH_HEIGHT)),
 		}
 	}
 
 	private fun getGlyph(glyph: Char): Glyph {
-
 		if (glyph in '0'..'9') {
 			return Glyph.valueOf("NUM_$glyph")
 		}
@@ -101,7 +104,6 @@ class TextRenderer : Renderer {
 	}
 
 	fun render() {
-
 		var dx = xOrigin
 		var dy = yOrigin
 
@@ -130,7 +132,7 @@ class TextRenderer : Renderer {
 				dx,
 				dy,
 				GLYPH_WIDTH,
-				GLYPH_HEIGHT
+				GLYPH_HEIGHT,
 			)
 
 			dx += GLYPH_WIDTH

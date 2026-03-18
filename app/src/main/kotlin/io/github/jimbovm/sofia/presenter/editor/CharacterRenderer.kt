@@ -1,19 +1,23 @@
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
+
 package io.github.jimbovm.sofia.presenter.editor
 
+import io.github.jimbovm.isobel.actor.population.Character
+import io.github.jimbovm.isobel.actor.population.PopulationActor
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.sofia.presenter.editor.Sprite
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
-
-import io.github.jimbovm.isobel.common.Area
-import io.github.jimbovm.isobel.actor.population.PopulationActor
-import io.github.jimbovm.isobel.actor.population.Character
-
-import io.github.jimbovm.sofia.presenter.editor.Sprite
 
 class CharacterRenderer : Renderer {
 
 	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
-	fun render(character: Character): Unit {
+	fun render(character: Character) {
 		when (character.type) {
 			Character.Type.BLOOBER,
 			Character.Type.BOWSER,
@@ -30,13 +34,14 @@ class CharacterRenderer : Renderer {
 			Character.Type.RED_PARATROOPA,
 			Character.Type.RED_TROOPA,
 			Character.Type.SPINY,
-			Character.Type.TOAD_PEACH -> {
+			Character.Type.TOAD_PEACH,
+			-> {
 				this.renderSingleton(character)
 			}
 
 			else -> {
 				if (character.type.toString().contains("SQUAD", false)) {
-					this.renderSquad(character);
+					this.renderSquad(character)
 				} else if (character.type.toString()
 						.contains("FIRE_BAR", false)
 				) {
@@ -50,15 +55,13 @@ class CharacterRenderer : Renderer {
 		}
 	}
 
-	private fun renderSingleton(character: Character): Unit {
-
+	private fun renderSingleton(character: Character) {
 		val characterName = character.type.toString()
 		val characterMetatile = Sprite.Metatile.valueOf(characterName)
 		this.drawSprite(characterMetatile.sprite, character.x, character.y, 0.0, 1.0)
 	}
 
-	private fun renderSquad(squad: Character): Unit {
-
+	private fun renderSquad(squad: Character) {
 		val type = squad.type.toString()
 
 		val metatile =
@@ -71,12 +74,10 @@ class CharacterRenderer : Renderer {
 		}
 	}
 
-	private fun renderFireBar(fireBar: Character): Unit {
-
+	private fun renderFireBar(fireBar: Character) {
 	}
 
-	private fun renderLift(lift: Character): Unit {
-
+	private fun renderLift(lift: Character) {
 		val liftName = lift.toString()
 		val liftType = liftName.substring(5 + liftName.lastIndexOf("LIFT_"))
 		val isShort = liftName.startsWith("SHORT")
@@ -84,7 +85,6 @@ class CharacterRenderer : Renderer {
 		val extent = if (isShort) 1 else 2
 
 		for (x in (lift.x)..(lift.x + extent)) {
-
 			this.drawSprite(Sprite.Metatile.LIFT.sprite, x, lift.y)
 			this.drawSprite(Sprite.Metatile.LIFT.sprite, x, lift.y, 8.0, 0.0)
 		}

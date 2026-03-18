@@ -1,56 +1,41 @@
-/* SPDX-License-Identifier: MIT-0
-
-Ⓒ 2025 Jimbo Brierley.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. */
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
 
 package io.github.jimbovm.sofia.view
 
+import io.github.jimbovm.isobel.actor.population.Character
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.common.AreaHeader
+import io.github.jimbovm.isobel.common.Game
+import io.github.jimbovm.sofia.controller.EditorController
+import io.github.jimbovm.sofia.controller.MainMenuController
+import io.github.jimbovm.sofia.controller.MainToolbarController
+import io.github.jimbovm.sofia.presenter.editor.AreaRenderer
+import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
+import io.github.jimbovm.sofia.viewmodel.AreaViewModel
+import io.github.jimbovm.sofia.viewmodel.GameViewModel
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Group
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
-import javafx.scene.image.Image
-import javafx.scene.layout.StackPane
-import javafx.scene.layout.Pane
+import javafx.scene.control.Accordion
 import javafx.scene.control.MenuBar
+import javafx.scene.control.TitledPane
 import javafx.scene.control.ToolBar
+import javafx.scene.image.Image
+import javafx.scene.layout.Pane
+import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import java.util.*
-
-import io.github.jimbovm.isobel.common.Game
-import io.github.jimbovm.isobel.common.Area
-import io.github.jimbovm.isobel.common.AreaHeader
-import io.github.jimbovm.isobel.actor.population.Character
-import io.github.jimbovm.sofia.controller.EditorController
-import io.github.jimbovm.sofia.controller.MainMenuController
-import io.github.jimbovm.sofia.controller.MainToolbarController
-import javafx.scene.control.Accordion
-import javafx.scene.control.TitledPane
-
-import io.github.jimbovm.sofia.presenter.editor.AreaRenderer
-import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
-import io.github.jimbovm.sofia.viewmodel.AreaViewModel
-import io.github.jimbovm.sofia.viewmodel.GameViewModel
 
 /**
  * Main launcher for the Sofia GUI.
  */
-class Main() : Application() {
+class Main : Application() {
 
 	private val uiBundle: ResourceBundle? = ResourceBundle.getBundle("i18n/sofia_ui")
 	private val mainLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/main.fxml"), this.uiBundle)
@@ -66,7 +51,6 @@ class Main() : Application() {
 	private var gameViewModel = GameViewModel(Game())
 
 	fun setUpCanvas(area: Area, areaViewModel: AreaViewModel, areaHeaderViewModel: AreaHeaderViewModel) {
-
 		val editorLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/editor.fxml"), this.uiBundle)
 		editorLoader.setController(EditorController(areaViewModel, areaHeaderViewModel))
 
@@ -90,7 +74,6 @@ class Main() : Application() {
 	}
 
 	fun setUpMenus() {
-
 		val mainMenuLoader =
 			FXMLLoader(ClassLoader.getSystemResource("fxml/main_menu_bar.fxml"), this.uiBundle)
 		val mainMenuController = MainMenuController(this.gameViewModel)
@@ -109,11 +92,9 @@ class Main() : Application() {
 
 		mainMenuContainer.children.add(mainMenu)
 		mainToolbarContainer.children.add(mainToolbar)
-
 	}
 
 	override fun start(primaryStage: Stage?) {
-
 		// TODO: Start refactoring by removing menu controller from FXML and setting it here
 
 		primaryStage?.apply {
@@ -132,7 +113,6 @@ class Main() : Application() {
 	}
 
 	fun displayAreas(scene: Scene) {
-
 		val game = this.gameViewModel.game
 
 		game.atlas.areas.add(Area())
@@ -144,14 +124,14 @@ class Main() : Application() {
 			header.background = AreaHeader.Background.NIGHT
 			header.scenery = AreaHeader.Scenery.HILLS
 			population = mutableListOf(
-				Character.create(13, 4, Character.Type.GOOMBA, false)
+				Character.create(13, 4, Character.Type.GOOMBA, false),
 			)
 		}
 		game.atlas.areas[1].apply {
 			familiarName = "Some other area"
 			header.scenery = AreaHeader.Scenery.CLOUDS
 			population = mutableListOf(
-				Character.create(12, 3, Character.Type.GREEN_PARATROOPA_HOP, false)
+				Character.create(12, 3, Character.Type.GREEN_PARATROOPA_HOP, false),
 			)
 		}
 		game.atlas.areas[2].apply {
@@ -159,7 +139,7 @@ class Main() : Application() {
 			header.platform = AreaHeader.Platform.MUSHROOM
 			header.scenery = AreaHeader.Scenery.HILLS
 			population = mutableListOf(
-				Character.create(6, 3, Character.Type.LAKITU, false)
+				Character.create(6, 3, Character.Type.LAKITU, false),
 			)
 		}
 

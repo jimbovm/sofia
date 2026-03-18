@@ -1,11 +1,17 @@
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
+
 package io.github.jimbovm.sofia.splash
 
 import javafx.application.Preloader
 import javafx.scene.Scene
-import javafx.scene.web.WebView
 import javafx.scene.image.Image
 import javafx.scene.layout.StackPane
 import javafx.scene.paint.Color
+import javafx.scene.web.WebView
 import javafx.stage.Stage
 import javafx.stage.StageStyle
 
@@ -134,28 +140,28 @@ repeatCount="indefinite" />
 """
 
 	override fun init() {
-		val splashView = WebView();
-		splashView.isContextMenuEnabled = false;
+		val splashView = WebView()
+		splashView.isContextMenuEnabled = false
 		val splashEngine = splashView.engine
 		splashEngine.loadContent(splashSvg, "text/svg")
-		this.parent.children.add(splashView);
+		this.parent.children.add(splashView)
 	}
 
-	override fun start(stage: Stage): Unit {
+	override fun start(stage: Stage) {
 		this.splashStage = stage
 
 		val scene = Scene(parent, 640.0, 480.0)
 		scene.fill = Color.TRANSPARENT
 
-		stage.setScene(scene);
-		stage.initStyle(StageStyle.TRANSPARENT);
-		stage.centerOnScreen();
-		stage.show();
+		stage.setScene(scene)
+		stage.initStyle(StageStyle.TRANSPARENT)
+		stage.centerOnScreen()
+		stage.show()
 	}
 
 	override fun handleStateChangeNotification(notification: StateChangeNotification) {
 		if (notification.type == StateChangeNotification.Type.BEFORE_START) {
-			this.splashStage.close();
+			this.splashStage.close()
 		}
 	}
 }

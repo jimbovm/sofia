@@ -1,26 +1,33 @@
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
+
 package io.github.jimbovm.sofia.presenter.editor
 
+import io.github.jimbovm.isobel.actor.geography.SingletonObject
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.sofia.presenter.editor.Sprite
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
-
-import io.github.jimbovm.isobel.common.Area
-import io.github.jimbovm.isobel.actor.geography.SingletonObject
-
-import io.github.jimbovm.sofia.presenter.editor.Sprite
 
 class SingletonObjectRenderer : Renderer {
 
 	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
-	fun render(singletonObject: SingletonObject): Unit {
+	fun render(singletonObject: SingletonObject) {
 		val objectName = singletonObject.type.toString()
 		val objectNamePrefix = objectName.substring(0, objectName.lastIndexOf("_"))
 		val objectNameSuffix = objectName.substring(objectName.lastIndexOf("_") + 1)
 
 		val objectMetatile = when (objectName) {
 			"QUESTION_BLOCK_USED" -> Sprite.Metatile.QUESTION_BLOCK_USED.sprite
+
 			"JUMPING_BOARD" -> Sprite.Metatile.JUMPING_BOARD.sprite
+
 			"SIDEWAYS_PIPE" -> Sprite.Metatile.SIDEWAYS_PIPE.sprite
+
 			else -> when (objectNamePrefix) {
 				"BRICK", "BRICK_MULTI" -> Sprite.Metatile.BRICK_BLOCK.sprite
 				"HIDDEN_BLOCK" -> Sprite.Metatile.HIDDEN_BLOCK.sprite

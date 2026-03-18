@@ -1,4 +1,10 @@
-package io.github.jimbovm.sofia.viewmodel;
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
+
+package io.github.jimbovm.sofia.viewmodel
 
 import io.github.jimbovm.isobel.common.Area
 import javafx.beans.property.SimpleBooleanProperty
@@ -23,7 +29,5 @@ class AreaViewModel(private val area: Area) {
 		this.area.population = population.get()
 	}
 
-	fun get(): Area {
-		return this.area
-	}
+	fun get(): Area = this.area
 }

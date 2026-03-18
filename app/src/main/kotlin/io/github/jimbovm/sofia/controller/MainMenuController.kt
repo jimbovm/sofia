@@ -1,48 +1,33 @@
-/* SPDX-License-Identifier: MIT-0
-
-Ⓒ 2025 Jimbo Brierley.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. */
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
 
 package io.github.jimbovm.sofia.controller
 
-import java.util.ResourceBundle
-
+import io.github.jimbovm.sofia.io.GameIO
+import io.github.jimbovm.sofia.viewmodel.GameViewModel
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
+import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.Menu
 import javafx.scene.control.MenuItem
 import javafx.scene.image.Image
 import javafx.scene.layout.HBox
-import javafx.scene.Scene
 import javafx.stage.FileChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.Window
-
-import io.github.jimbovm.sofia.io.GameIO
-import io.github.jimbovm.sofia.viewmodel.GameViewModel
+import java.util.ResourceBundle
 
 /**
  * Controller for both the main menu and main toolbar.
  */
 class MainMenuController(private var gameViewModel: GameViewModel) {
-//class MainMenuController(private var gameViewModel: GameViewModel) {
+// class MainMenuController(private var gameViewModel: GameViewModel) {
 
 	@FXML
 	var menuFileNew: MenuItem? = null
@@ -107,23 +92,20 @@ class MainMenuController(private var gameViewModel: GameViewModel) {
 
 	@FXML
 	fun showOpenDialog(event: ActionEvent) {
-
 		val fileChooser = FileChooser()
 		fileChooser.title = uiBundle?.getString("dialog_title_open")
 		fileChooser.extensionFilters.addAll(
-			this.fileExtensions
+			this.fileExtensions,
 		)
 		val selectedFile = fileChooser.showOpenDialog(this.mainToolbarOpen?.parent?.scene?.window)
 		println(selectedFile ?: selectedFile.toString())
-
 	}
 
 	@FXML
 	fun showSaveDialog(event: ActionEvent) {
-
 		val fileChooser = FileChooser()
 		fileChooser.extensionFilters.addAll(
-			this.fileExtensions
+			this.fileExtensions,
 		)
 		fileChooser.title = uiBundle?.getString("dialog_title_save")
 		val saveFileName = fileChooser.showSaveDialog(this.mainToolbarSave?.parent?.scene?.window)
@@ -136,7 +118,6 @@ class MainMenuController(private var gameViewModel: GameViewModel) {
 	 * param[event] A click event received from the associated menu item.
 	 */
 	fun showAboutDialog(event: ActionEvent) {
-
 		val aboutLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/about.fxml"), uiBundle)
 		val aboutPane: HBox = aboutLoader.load()
 

@@ -1,4 +1,10 @@
-package io.github.jimbovm.sofia.viewmodel;
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
+
+package io.github.jimbovm.sofia.viewmodel
 
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader

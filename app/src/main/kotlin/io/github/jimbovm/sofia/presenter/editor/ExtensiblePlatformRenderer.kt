@@ -1,28 +1,30 @@
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
+
 package io.github.jimbovm.sofia.presenter.editor
 
 import io.github.jimbovm.isobel.actor.Extensible
 import io.github.jimbovm.isobel.actor.YPlaceable
-import java.util.ArrayDeque
-import java.util.Deque
-
 import io.github.jimbovm.isobel.actor.geography.BackgroundModifier
 import io.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
 import io.github.jimbovm.isobel.actor.geography.FillSceneryModifier
 import io.github.jimbovm.isobel.actor.geography.GeographyActor
-import javafx.scene.canvas.Canvas
-
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader.Platform
-
 import io.github.jimbovm.sofia.presenter.editor.Renderer
 import io.github.jimbovm.sofia.presenter.editor.Sprite
+import javafx.scene.canvas.Canvas
+import java.util.ArrayDeque
+import java.util.Deque
 
 class ExtensiblePlatformRenderer : Renderer {
 
 	constructor(canvas: Canvas, area: Area) : super(canvas, area)
 
 	private fun drawCannon(x: Int, y: Int, extent: Int) {
-
 		for (section in 0..extent) {
 			when (section) {
 				0 -> drawSprite(Sprite.Metatile.CANNON_TOP.sprite, x, y)
@@ -34,32 +36,36 @@ class ExtensiblePlatformRenderer : Renderer {
 	}
 
 	private fun drawShroom(x: Int, y: Int, extent: Int) {
-
 		val stipeOriginX = x + ((extent + 1) / 2)
 		val stipeOriginY = y + 1
 		if (extent > 1) {
 			for (row in stipeOriginY..15) {
 				when (row) {
 					stipeOriginY -> drawSprite(
-						Sprite.Metatile.STIPE_RING.sprite, stipeOriginX, row
+						Sprite.Metatile.STIPE_RING.sprite,
+						stipeOriginX,
+						row,
 					)
 
 					else -> drawSprite(
-						Sprite.Metatile.STIPE.sprite, stipeOriginX, row
+						Sprite.Metatile.STIPE.sprite,
+						stipeOriginX,
+						row,
 					)
 				}
 			}
 		}
 		drawCap(
-			x, y, extent,
+			x,
+			y,
+			extent,
 			Sprite.Metatile.MUSHROOM_LEFT.sprite,
 			Sprite.Metatile.MUSHROOM_MIDDLE.sprite,
-			Sprite.Metatile.MUSHROOM_RIGHT.sprite
+			Sprite.Metatile.MUSHROOM_RIGHT.sprite,
 		)
 	}
 
 	private fun drawTree(x: Int, y: Int, extent: Int) {
-
 		val trunkOriginX = x + 1
 		val trunkOriginY = y + 1
 		val trunkWidth = extent - 2
@@ -71,15 +77,16 @@ class ExtensiblePlatformRenderer : Renderer {
 			}
 		}
 		drawCap(
-			x, y, extent,
+			x,
+			y,
+			extent,
 			Sprite.Metatile.TREE_LEFT.sprite,
 			Sprite.Metatile.TREE_MIDDLE.sprite,
-			Sprite.Metatile.TREE_RIGHT.sprite
+			Sprite.Metatile.TREE_RIGHT.sprite,
 		)
 	}
 
 	private fun drawCap(x: Int, y: Int, extent: Int, left: Sprite, middle: Sprite, right: Sprite) {
-
 		for (column in x..(x + extent)) {
 			when (column) {
 				x -> drawSprite(left, column, y)
@@ -94,19 +101,19 @@ class ExtensiblePlatformRenderer : Renderer {
 			Platform.MUSHROOM -> this.drawShroom(
 				extensiblePlatform.x,
 				(extensiblePlatform as YPlaceable).y,
-				(extensiblePlatform as Extensible).extent
+				(extensiblePlatform as Extensible).extent,
 			)
 
 			Platform.CANNON -> this.drawCannon(
 				extensiblePlatform.x,
 				(extensiblePlatform as YPlaceable).y,
-				(extensiblePlatform as Extensible).extent
+				(extensiblePlatform as Extensible).extent,
 			)
 
 			Platform.TREE, Platform.CLOUD -> this.drawTree(
 				extensiblePlatform.x,
 				(extensiblePlatform as YPlaceable).y,
-				(extensiblePlatform as Extensible).extent
+				(extensiblePlatform as Extensible).extent,
 			)
 		}
 	}

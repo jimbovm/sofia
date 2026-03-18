@@ -1,15 +1,20 @@
-package io.github.jimbovm.sofia.presenter.editor;
+/*
+ * SPDX-License-Identifier: MIT-0
+ *
+ * This file is part of Sofia (https://github.com/jimbovm/sofia).
+ */
 
-import javafx.scene.canvas.Canvas
+package io.github.jimbovm.sofia.presenter.editor
 
-import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.actor.geography.BackgroundModifier
 import io.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
 import io.github.jimbovm.isobel.actor.geography.FixedStatic
 import io.github.jimbovm.isobel.actor.geography.GeographyActor
-import io.github.jimbovm.isobel.actor.geography.Staircase
 import io.github.jimbovm.isobel.actor.geography.SingletonObject
+import io.github.jimbovm.isobel.actor.geography.Staircase
 import io.github.jimbovm.isobel.actor.population.Character
+import io.github.jimbovm.isobel.common.Area
+import javafx.scene.canvas.Canvas
 
 class AreaRenderer {
 
@@ -70,23 +75,23 @@ class AreaRenderer {
 		}
 	}
 
-	fun render(extensiblePlatform: ExtensiblePlatform): Unit {
+	fun render(extensiblePlatform: ExtensiblePlatform) {
 		this.extensiblePlatformRenderer.render(extensiblePlatform)
 	}
 
-	fun render(staircase: Staircase): Unit {
+	fun render(staircase: Staircase) {
 		this.staircaseRenderer.render(staircase)
 	}
 
-	fun render(fixedStatic: FixedStatic): Unit {
+	fun render(fixedStatic: FixedStatic) {
 		this.fixedStaticRenderer.render(fixedStatic)
 	}
 
-	fun render(singletonObject: SingletonObject): Unit {
+	fun render(singletonObject: SingletonObject) {
 		this.singletonObjectRenderer.render(singletonObject)
 	}
 
-	fun render(character: Character): Unit {
+	fun render(character: Character) {
 		this.characterRenderer.render(character)
 	}
 }
