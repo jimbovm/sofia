@@ -4,7 +4,7 @@
  * This file is part of Sofia (https://github.com/jimbovm/sofia).
  */
 
-package io.github.jimbovm.sofia.presenter.editor
+package io.github.jimbovm.sofia.editor
 
 import io.github.jimbovm.isobel.actor.Extensible
 import io.github.jimbovm.isobel.actor.YPlaceable
@@ -14,8 +14,8 @@ import io.github.jimbovm.isobel.actor.geography.FillSceneryModifier
 import io.github.jimbovm.isobel.actor.geography.GeographyActor
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader.Platform
-import io.github.jimbovm.sofia.presenter.editor.Renderer
-import io.github.jimbovm.sofia.presenter.editor.Sprite
+import io.github.jimbovm.sofia.editor.Renderer
+import io.github.jimbovm.sofia.editor.Sprite
 import javafx.scene.canvas.Canvas
 import java.util.ArrayDeque
 import java.util.Deque

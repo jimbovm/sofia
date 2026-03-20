@@ -8,10 +8,10 @@ package io.github.jimbovm.sofia.controller
 
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader
-import io.github.jimbovm.sofia.presenter.editor.AreaRenderer
+import io.github.jimbovm.sofia.editor.AreaRenderer
 import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
 import io.github.jimbovm.sofia.viewmodel.AreaViewModel
-import io.github.jimbovm.sofia.presenter.editor.Skin
+import io.github.jimbovm.sofia.editor.Skin
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.Group

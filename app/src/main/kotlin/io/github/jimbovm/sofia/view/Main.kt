@@ -13,7 +13,7 @@ import io.github.jimbovm.sofia.controller.EditorController
 import io.github.jimbovm.sofia.controller.MainMenuController
 import io.github.jimbovm.sofia.controller.MainToolbarController
 import io.github.jimbovm.sofia.io.GameIO
-import io.github.jimbovm.sofia.presenter.editor.AreaRenderer
+import io.github.jimbovm.sofia.editor.AreaRenderer
 import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
 import io.github.jimbovm.sofia.viewmodel.AreaViewModel
 import io.github.jimbovm.sofia.viewmodel.GameViewModel
@@ -31,7 +31,7 @@ import javafx.scene.layout.Pane
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import java.util.*
-import io.github.jimbovm.sofia.presenter.editor.Skin
+import io.github.jimbovm.sofia.editor.Skin
 
 
 /**

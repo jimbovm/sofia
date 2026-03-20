@@ -4,13 +4,13 @@
  * This file is part of Sofia (https://github.com/jimbovm/sofia).
  */
 
-package io.github.jimbovm.sofia.presenter.editor
+package io.github.jimbovm.sofia.editor
 
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader.StartPosition
-import io.github.jimbovm.sofia.presenter.editor.Skin
-import io.github.jimbovm.sofia.presenter.editor.Sprite
-import io.github.jimbovm.sofia.presenter.editor.Sprite.Metatile
+import io.github.jimbovm.sofia.editor.Skin
+import io.github.jimbovm.sofia.editor.Sprite
+import io.github.jimbovm.sofia.editor.Sprite.Metatile
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 
