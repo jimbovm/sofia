@@ -4,7 +4,7 @@
  * This file is part of Sofia (https://github.com/jimbovm/sofia).
  */
 
-package io.github.jimbovm.sofia.editor.internal
+package io.github.jimbovm.sofia.editor
 
 import io.github.jimbovm.isobel.actor.geography.Castle
 import io.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
