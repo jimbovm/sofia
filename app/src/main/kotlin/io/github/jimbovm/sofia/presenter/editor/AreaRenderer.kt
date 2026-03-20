@@ -15,23 +15,26 @@ import io.github.jimbovm.isobel.actor.geography.Staircase
 import io.github.jimbovm.isobel.actor.population.Character
 import io.github.jimbovm.isobel.common.Area
 import javafx.scene.canvas.Canvas
+import javafx.application.Platform
 
 class AreaRenderer {
 
 	private val area: Area
 	private val canvas: Canvas
+	private val skin: Skin
 
-	internal val backgroundFillSceneryRenderer: BackgroundFillSceneryRenderer
-	internal val characterRenderer: CharacterRenderer
-	internal val startPositionRenderer: StartPositionRenderer
-	internal val staircaseRenderer: StaircaseRenderer
-	internal val extensiblePlatformRenderer: ExtensiblePlatformRenderer
-	internal val fixedStaticRenderer: FixedStaticRenderer
-	internal val singletonObjectRenderer: SingletonObjectRenderer
-	internal val textRenderer: TextRenderer
+	private val backgroundFillSceneryRenderer: BackgroundFillSceneryRenderer
+	private val characterRenderer: CharacterRenderer
+	private val startPositionRenderer: StartPositionRenderer
+	private val staircaseRenderer: StaircaseRenderer
+	private val extensiblePlatformRenderer: ExtensiblePlatformRenderer
+	private val fixedStaticRenderer: FixedStaticRenderer
+	private val singletonObjectRenderer: SingletonObjectRenderer
+	private val textRenderer: TextRenderer
 
-	constructor(area: Area, canvas: Canvas) {
+	constructor(area: Area, skin: Skin, canvas: Canvas) {
 		this.area = area
+		this.skin = skin
 		this.canvas = canvas
 		this.backgroundFillSceneryRenderer = BackgroundFillSceneryRenderer(canvas, area)
 		this.startPositionRenderer = StartPositionRenderer(canvas, area)
@@ -44,6 +47,16 @@ class AreaRenderer {
 	}
 
 	fun update() {
+		this.backgroundFillSceneryRenderer.reskin()
+		this.startPositionRenderer.reskin()
+		this.characterRenderer.reskin()
+		this.staircaseRenderer.reskin()
+		this.extensiblePlatformRenderer.reskin()
+		this.singletonObjectRenderer.reskin()
+		this.fixedStaticRenderer.reskin()
+		this.textRenderer.reskin()
+
+		this.canvas.graphicsContext2D.fillRect(0.0, 0.0, this.canvas.height, this.canvas.width)
 		this.backgroundFillSceneryRenderer.render()
 		this.startPositionRenderer.render()
 		this.updateGeography()

@@ -22,11 +22,7 @@ class Skin {
 
 	/** Create a new Skin from the properties of an Area object. */
 	constructor(area: Area) {
-		this.environment = area.environment
-		this.scenery = area.header.scenery
-		this.background = area.header.background
-		this.defaultBackground = area.header.background
-		this.platform = area.header.platform
+		this.update(area)
 	}
 
 	/** The area environment. Influences, along with the background and platform settings, how elements are rendered. */
@@ -245,6 +241,17 @@ class Skin {
 			}
 			return color
 		}
+
+	/**
+	 * Update skin properties from an Area instance.
+	 */
+	fun update(area: Area) {
+		this.environment = area.environment
+		this.scenery = area.header.scenery
+		this.background = area.header.background
+		this.defaultBackground = area.header.background
+		this.platform = area.header.platform
+	}
 
 	companion object {
 

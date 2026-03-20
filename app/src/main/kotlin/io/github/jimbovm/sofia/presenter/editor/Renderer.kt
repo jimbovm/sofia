@@ -34,6 +34,10 @@ open class Renderer {
 		canvas.height = 240.0
 	}
 
+	fun reskin() {
+		this.skin.update(this.area)
+	}
+
 	/** Draw a sprite at the given coordinates. */
 	fun drawSprite(tile: Sprite, column: Int, row: Int, sheet: Image = this.skin.spriteSheet) {
 		this.drawSprite(tile, column, row, 0.0, 0.0, sheet)

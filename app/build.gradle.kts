@@ -50,18 +50,19 @@ kotlin {
 	sourceSets {
 		dependencies {
 			implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-
 			implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-			implementation("org.jetbrains.kotlinx:kotlinx-datetime:0+")
-
-			testImplementation("org.jetbrains.kotlin:kotlin-test")
-			testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+			implementation("org.apache.logging.log4j:log4j-api:2+")
+			implementation("org.apache.logging.log4j:log4j-core:2+")
 		}
 	}
 }
 
+tasks.named<JavaExec>("run") {
+	standardOutput = System.out
+	errorOutput = System.err
+}
+
 spotless {
-	
 	kotlin {
 		ktlint().editorConfigOverride(
 			mapOf(

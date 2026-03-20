@@ -6,7 +6,6 @@
 
 package io.github.jimbovm.sofia.view
 
-import io.github.jimbovm.isobel.actor.population.Character
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader
 import io.github.jimbovm.isobel.common.Game
@@ -32,6 +31,8 @@ import javafx.scene.layout.Pane
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import java.util.*
+import io.github.jimbovm.sofia.presenter.editor.Skin
+
 
 /**
  * Main launcher for the Sofia GUI.
@@ -51,23 +52,20 @@ class Main : Application() {
 	 */
 	private var gameViewModel = GameViewModel(Game())
 
-	fun setUpCanvas(area: Area, areaViewModel: AreaViewModel, areaHeaderViewModel: AreaHeaderViewModel) {
+	fun setUpCanvas(areaViewModel: AreaViewModel, areaHeaderViewModel: AreaHeaderViewModel) {
 		val editorLoader = FXMLLoader(ClassLoader.getSystemResource("fxml/editor.fxml"), this.uiBundle)
 		editorLoader.setController(EditorController(areaViewModel, areaHeaderViewModel))
 
 		val editor: TitledPane = editorLoader.load()
-		editor.text = area.familiarName
-
-		val editorController: EditorController =
-			editorLoader.getController<EditorController>() as EditorController
+		editor.text = areaViewModel.familiarName.get()
 
 		val canvasContainer: Group = editorLoader.namespace["canvasContainer"] as Group
-		canvasContainer.id = "canvasContainer_" + area.id
+		canvasContainer.id = "canvasContainer_" + areaViewModel.id.get()
 
 		val canvas = canvasContainer.children.first() as Canvas
-		canvas.id = "canvas_" + area.id
+		canvas.id = "canvas_" + areaViewModel.id.get()
 
-		val areaRenderer = AreaRenderer(area, canvas)
+		val areaRenderer = AreaRenderer(areaViewModel.area, Skin(areaViewModel.area), canvas)
 		areaRenderer.update()
 
 		val areaList: Accordion = scene.lookup("#areaList") as Accordion
@@ -113,38 +111,15 @@ class Main : Application() {
 	}
 
 	fun displayAreas(scene: Scene) {
-		val game = this.gameViewModel.game
-
-		game.atlas.areas.add(Area())
-		game.atlas.areas.add(Area())
-		game.atlas.areas.add(Area())
-
-		game.atlas.areas[0].apply {
-			familiarName = "Some area"
-			header.background = AreaHeader.Background.NIGHT
-			header.scenery = AreaHeader.Scenery.HILLS
-			population = mutableListOf(
-				Character.create(13, 4, Character.Type.GOOMBA, false),
-			)
-		}
-		game.atlas.areas[1].apply {
-			familiarName = "Some other area"
-			header.scenery = AreaHeader.Scenery.CLOUDS
-			population = mutableListOf(
-				Character.create(12, 3, Character.Type.GREEN_PARATROOPA_HOP, false),
-			)
-		}
-		game.atlas.areas[2].apply {
-			familiarName = "Some other other area"
-			header.platform = AreaHeader.Platform.MUSHROOM
-			header.scenery = AreaHeader.Scenery.HILLS
-			population = mutableListOf(
-				Character.create(6, 3, Character.Type.LAKITU, false),
-			)
-		}
+		val game = Game()
+		game.atlas.add(Area());
+		game.atlas.add(Area());
+		game.atlas.add(Area());
+		game.atlas.add(Area());
+		game.atlas.add(Area());
 
 		game.atlas.areas.forEach {
-			setUpCanvas(it, AreaViewModel(it), AreaHeaderViewModel(it.header))
+			setUpCanvas(AreaViewModel(it), AreaHeaderViewModel(it.header))
 		}
 	}
 

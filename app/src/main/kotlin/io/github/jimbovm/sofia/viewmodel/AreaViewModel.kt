@@ -11,7 +11,7 @@ import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 
-class AreaViewModel(private val area: Area) {
+class AreaViewModel(val area: Area) {
 
 	val id = SimpleStringProperty(area.id)
 	val familiarName = SimpleStringProperty(area.familiarName)
@@ -20,6 +20,13 @@ class AreaViewModel(private val area: Area) {
 	val environment = SimpleObjectProperty(area.environment)
 	val geography = SimpleObjectProperty(area.geography)
 	val population = SimpleObjectProperty(area.population)
+
+	init {
+		environment.addListener { _, _, new ->
+			this.area.environment = new
+			println(this.area.toString())
+		}
+	}
 
 	fun commit() {
 		this.area.familiarName = familiarName.get()
