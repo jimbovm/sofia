@@ -48,6 +48,9 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 	lateinit var environmentChoiceBox: ChoiceBox<Area.Environment>
 
 	@FXML
+	lateinit var backgroundChoiceBox: ChoiceBox<AreaHeader.Background>
+
+	@FXML
 	lateinit var fillChoiceBox: ChoiceBox<AreaHeader.Fill>
 
 	@FXML
@@ -65,7 +68,7 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 	private lateinit var areaRenderer: AreaRenderer
 
 	private fun redraw() {
-		log.info("Redrawing area ${areaViewModel.area}")
+		log.trace("Redrawing area ${areaViewModel.area}")
 		areaRenderer.update()
 	}
 
@@ -79,6 +82,9 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 
 		environmentChoiceBox.items = FXCollections.observableArrayList(Area.Environment.values().toList())
 		environmentChoiceBox.value = areaViewModel.environment.get()
+
+		backgroundChoiceBox.items = FXCollections.observableArrayList(AreaHeader.Background.values().toList())
+		backgroundChoiceBox.value = areaHeaderViewModel.background.get()
 
 		sceneryChoiceBox.items = FXCollections.observableArrayList(AreaHeader.Scenery.values().toList())
 		sceneryChoiceBox.value = areaHeaderViewModel.scenery.get()
@@ -103,6 +109,7 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 		timeChoiceBox.value = areaHeaderViewModel.ticks.get()
 
 		autowalkCheckBox.selectedProperty().bindBidirectional(areaHeaderViewModel.autowalk)
+		backgroundChoiceBox.valueProperty().bindBidirectional(areaHeaderViewModel.background)
 		environmentChoiceBox.valueProperty().bindBidirectional(areaViewModel.environment)
 		fillChoiceBox.valueProperty().bindBidirectional(areaHeaderViewModel.fill)
 		platformChoiceBox.valueProperty().bindBidirectional(areaHeaderViewModel.platform)
@@ -111,6 +118,7 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 		timeChoiceBox.valueProperty().bindBidirectional(areaHeaderViewModel.ticks)
 
 		autowalkCheckBox.selectedProperty().addListener { _, _, _ -> this.redraw() }
+		backgroundChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
 		environmentChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
 		fillChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
 		platformChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }

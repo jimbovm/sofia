@@ -22,8 +22,7 @@
 			orientation="VERTICAL" fx:id="editorSplitPane">
 			<items>
 				<ToolBar xmlns="http://javafx.com/javafx/17"
-					xmlns:fx="http://javafx.com/fxml/1" prefHeight="40.0"
-					prefWidth="200.0" fx:id="editorToolbar">
+					xmlns:fx="http://javafx.com/fxml/1" fx:id="editorToolbar">
 					<items>
 						<Label
 							text="%editor_toolbar_environment">
@@ -35,6 +34,14 @@
 						<ChoiceBox fx:id="environmentChoiceBox">
 							<tooltip>
 								<Tooltip text="%editor_toolbar_environment_tooltip" />
+							</tooltip>
+						</ChoiceBox>
+						<Label
+							text="%editor_toolbar_background">
+						</Label>
+						<ChoiceBox fx:id="backgroundChoiceBox">
+							<tooltip>
+								<Tooltip text="%editor_toolbar_background_tooltip" />
 							</tooltip>
 						</ChoiceBox>
 						<Label
@@ -92,7 +99,7 @@
 							layoutY="16.0"
 							text="%editor_toolbar_fill">
 						</Label>
-						<ChoiceBox fx:id="fillChoiceBox">
+						<ChoiceBox fx:id="fillChoiceBox" prefWidth="200">
 							<tooltip>
 								<Tooltip text="%editor_toolbar_fill_tooltip" />
 							</tooltip>
