@@ -1,11 +1,11 @@
-![sofia_logo.svg](app/src/main/resources/img/sofia_logo.svg "Sofia logo")
-# Sofia
+# ![sofia_logo.svg](app/src/main/resources/img/splash.svg "Sofia")
 
 Sofia ~~is~~ _will be_ a cross-platform GUI application for working with the data of 1985's most popular platform game. Written in [Kotlin](https://kotlinlang.org/), It uses [Isobel](https://github.com/jimbovm/isobel) as a backend, and [JavaFX](https://openjfx.io/) for its GUI functionality. When complete, Sofia will allow users to create "mods" in the form of original levels that can be loaded by the original game, including on real hardware. It will also have comprehensive internationalization support to enable the interface to be translated into any natural language. 
 
-Like its backend, Sofia is open source, licensed under a public domain-equivalent MIT-0 licence (see [LICENCE.md]() for terms and [NOTICE.md]() for bundled components and dependencies with different licences) and targets the Java Virtual Machine, so it will run anywhere.
+Like its backend, Sofia is open source, licensed under a public domain-equivalent MIT-0 licence (see [LICENCE.md](LICENCE.md) for terms and [NOTICE.md](NOTICE.md) for bundled components and dependencies with different licences) and targets the Java Virtual Machine, so it will run anywhere.
 
-**⚠ Warning:** Sofia is incomplete to the point of being not much more than a glorified mockup at present, and not even close to being ready for general use. Work is proceeding apace but as I'm effectively learning Kotlin, JavaFX and FXML as I develop around other commitments, there's a long way to go to reach the MVP stage. Fortunately, because Isobel does most of the work and is largely complete and well tested, wiring everything together when the time comes should be a reasonably straightforward process.
+> [!CAUTION]
+> Sofia is incomplete to the point of being not much more than a glorified mockup at present, and not even close to being ready for general use. Work is proceeding apace but as I'm effectively learning Kotlin, JavaFX and FXML as I develop around other commitments, there's a long way to go to reach the MVP stage. Fortunately, because Isobel does most of the work and is largely complete and well tested, wiring everything together when the time comes should be a reasonably straightforward process.
 
 ## Build instructions
 
