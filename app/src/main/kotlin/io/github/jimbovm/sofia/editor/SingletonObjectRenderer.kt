@@ -12,9 +12,9 @@ import io.github.jimbovm.sofia.editor.Sprite
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 
-class SingletonObjectRenderer : Renderer {
+class SingletonObjectRenderer : BaseRenderer {
 
-	constructor(canvas: Canvas, area: Area) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area, skin: Skin) : super(canvas, area, skin)
 
 	fun render(singletonObject: SingletonObject) {
 		val objectName = singletonObject.type.toString()

@@ -108,6 +108,13 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 		startPositionChoiceBox.valueProperty().bindBidirectional(areaHeaderViewModel.startPosition)
 		timeChoiceBox.valueProperty().bindBidirectional(areaHeaderViewModel.ticks)
 
+		autowalkCheckBox.selectedProperty().addListener { _, _, _ -> this.redraw() }
 		environmentChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
+		fillChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
+		platformChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
+		sceneryChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
+		platformChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
+		startPositionChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
+		timeChoiceBox.valueProperty().addListener { _, _, _ -> this.redraw() }
 	}
 }

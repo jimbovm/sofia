@@ -13,9 +13,9 @@ import io.github.jimbovm.sofia.editor.Sprite
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 
-class CharacterRenderer : Renderer {
+class CharacterRenderer : BaseRenderer {
 
-	constructor(canvas: Canvas, area: Area) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area, skin: Skin) : super(canvas, area, skin)
 
 	fun render(character: Character) {
 		when (character.type) {

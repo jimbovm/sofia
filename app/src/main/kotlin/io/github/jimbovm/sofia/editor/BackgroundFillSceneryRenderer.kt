@@ -18,7 +18,7 @@ import java.util.*
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-class BackgroundFillSceneryRenderer : Renderer {
+class BackgroundFillSceneryRenderer : BaseRenderer {
 
 	companion object {
 
@@ -51,7 +51,7 @@ class BackgroundFillSceneryRenderer : Renderer {
 	}
 
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas, area: Area) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area, skin: Skin) : super(canvas, area, skin)
 
 	private fun drawScenery(scenery: AreaHeader.Scenery, column: Int, xOffset: Double) {
 		if (scenery == AreaHeader.Scenery.NONE) {

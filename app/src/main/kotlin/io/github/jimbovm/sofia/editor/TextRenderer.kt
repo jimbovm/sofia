@@ -11,13 +11,13 @@ import io.github.jimbovm.sofia.editor.Sprite
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 
-class TextRenderer : Renderer {
+class TextRenderer : BaseRenderer {
 
 	var xOrigin = 0.0
 	var yOrigin = 0.0
 	var text = "TEST"
 
-	constructor(canvas: Canvas, area: Area) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area, skin: Skin) : super(canvas, area, skin)
 
 	companion object {
 		private const val GLYPH_WIDTH = 8.0

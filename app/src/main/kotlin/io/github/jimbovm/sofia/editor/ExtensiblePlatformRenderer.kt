@@ -14,15 +14,15 @@ import io.github.jimbovm.isobel.actor.geography.FillSceneryModifier
 import io.github.jimbovm.isobel.actor.geography.GeographyActor
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader.Platform
-import io.github.jimbovm.sofia.editor.Renderer
+import io.github.jimbovm.sofia.editor.BaseRenderer
 import io.github.jimbovm.sofia.editor.Sprite
 import javafx.scene.canvas.Canvas
 import java.util.ArrayDeque
 import java.util.Deque
 
-class ExtensiblePlatformRenderer : Renderer {
+class ExtensiblePlatformRenderer : BaseRenderer {
 
-	constructor(canvas: Canvas, area: Area) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area, skin: Skin) : super(canvas, area, skin)
 
 	private fun drawCannon(x: Int, y: Int, extent: Int) {
 		for (section in 0..extent) {

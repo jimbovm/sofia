@@ -18,10 +18,10 @@ import sun.awt.X11.XRenderDirectFormat
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-class StaircaseRenderer : Renderer {
+class StaircaseRenderer : BaseRenderer {
 
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas, area: Area) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area, skin: Skin) : super(canvas, area, skin)
 
 	fun render(staircase: Staircase) {
 		for ((height, xCursor) in (0..staircase.extent).withIndex()) {

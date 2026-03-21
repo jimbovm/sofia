@@ -36,25 +36,18 @@ class AreaRenderer {
 		this.area = area
 		this.skin = skin
 		this.canvas = canvas
-		this.backgroundFillSceneryRenderer = BackgroundFillSceneryRenderer(canvas, area)
-		this.startPositionRenderer = StartPositionRenderer(canvas, area)
-		this.characterRenderer = CharacterRenderer(canvas, area)
-		this.staircaseRenderer = StaircaseRenderer(canvas, area)
-		this.extensiblePlatformRenderer = ExtensiblePlatformRenderer(canvas, area)
-		this.singletonObjectRenderer = SingletonObjectRenderer(canvas, area)
-		this.fixedStaticRenderer = FixedStaticRenderer(canvas, area)
-		this.textRenderer = TextRenderer(canvas, area)
+		this.backgroundFillSceneryRenderer = BackgroundFillSceneryRenderer(canvas, area, skin)
+		this.startPositionRenderer = StartPositionRenderer(canvas, area, skin)
+		this.characterRenderer = CharacterRenderer(canvas, area, skin)
+		this.staircaseRenderer = StaircaseRenderer(canvas, area, skin)
+		this.extensiblePlatformRenderer = ExtensiblePlatformRenderer(canvas, area, skin)
+		this.singletonObjectRenderer = SingletonObjectRenderer(canvas, area, skin)
+		this.fixedStaticRenderer = FixedStaticRenderer(canvas, area, skin)
+		this.textRenderer = TextRenderer(canvas, area, skin)
 	}
 
 	fun update() {
-		this.backgroundFillSceneryRenderer.reskin()
-		this.startPositionRenderer.reskin()
-		this.characterRenderer.reskin()
-		this.staircaseRenderer.reskin()
-		this.extensiblePlatformRenderer.reskin()
-		this.singletonObjectRenderer.reskin()
-		this.fixedStaticRenderer.reskin()
-		this.textRenderer.reskin()
+		skin.update(area)
 
 		this.canvas.graphicsContext2D.fillRect(0.0, 0.0, this.canvas.height, this.canvas.width)
 		this.backgroundFillSceneryRenderer.render()

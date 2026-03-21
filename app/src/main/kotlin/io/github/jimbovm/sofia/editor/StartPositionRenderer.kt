@@ -17,14 +17,14 @@ import javafx.scene.image.Image
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-class StartPositionRenderer : Renderer {
+class StartPositionRenderer : BaseRenderer {
 
 	private val brosSheet: Image = Image("img/graphics/foreground/smb_bros.png")
 	private val marioStand = Sprite(0.0, 0.0, 15.0, 16.0)
 	private val marioFall = Sprite(16.0, 0.0, 15.0, 16.0)
 
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas, area: Area, skin: Skin = Skin(area)) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area, skin: Skin) : super(canvas, area, skin)
 
 	fun render() {
 		when (this.area.header.startPosition) {

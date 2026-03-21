@@ -24,10 +24,6 @@ class AreaHeaderViewModel(private val header: AreaHeader) {
 	private val log = LogManager.getRootLogger();
 
 	init {
-		scenery.addListener { _, old, new ->
-			this.header.scenery = new
-			log.debug(String.format("%s->%s", old, new));
-		}
 
 		background.addListener { _, old, new ->
 			this.header.background = new
@@ -42,6 +38,11 @@ class AreaHeaderViewModel(private val header: AreaHeader) {
 		platform.addListener { _, old, new ->
 			this.header.platform = new
 			log.debug(String.format("%s->%s", old, new))
+		}
+
+		scenery.addListener { _, old, new ->
+			this.header.scenery = new
+			log.debug(String.format("%s->%s", old, new));
 		}
 
 		startPosition.addListener { _, old, new ->

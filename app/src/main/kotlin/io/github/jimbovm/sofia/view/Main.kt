@@ -9,6 +9,7 @@ package io.github.jimbovm.sofia.view
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader
 import io.github.jimbovm.isobel.common.Game
+import io.github.jimbovm.isobel.actor.population.Character
 import io.github.jimbovm.sofia.controller.EditorController
 import io.github.jimbovm.sofia.controller.MainMenuController
 import io.github.jimbovm.sofia.controller.MainToolbarController
@@ -111,12 +112,35 @@ class Main : Application() {
 	}
 
 	fun displayAreas(scene: Scene) {
-		val game = Game()
-		game.atlas.add(Area());
-		game.atlas.add(Area());
-		game.atlas.add(Area());
-		game.atlas.add(Area());
-		game.atlas.add(Area());
+		val game = this.gameViewModel.game
+
+		game.atlas.areas.add(Area())
+		game.atlas.areas.add(Area())
+		game.atlas.areas.add(Area())
+
+		game.atlas.areas[0].apply {
+			familiarName = "Some area"
+			header.background = AreaHeader.Background.NIGHT
+			header.scenery = AreaHeader.Scenery.HILLS
+			population = mutableListOf(
+				Character.create(13, 4, Character.Type.GOOMBA, false),
+			)
+		}
+		game.atlas.areas[1].apply {
+			familiarName = "Some other area"
+			header.scenery = AreaHeader.Scenery.CLOUDS
+			population = mutableListOf(
+				Character.create(12, 3, Character.Type.GREEN_PARATROOPA_HOP, false),
+			)
+		}
+		game.atlas.areas[2].apply {
+			familiarName = "Some other other area"
+			header.platform = AreaHeader.Platform.MUSHROOM
+			header.scenery = AreaHeader.Scenery.HILLS
+			population = mutableListOf(
+				Character.create(6, 3, Character.Type.LAKITU, false),
+			)
+		}
 
 		game.atlas.areas.forEach {
 			setUpCanvas(AreaViewModel(it), AreaHeaderViewModel(it.header))

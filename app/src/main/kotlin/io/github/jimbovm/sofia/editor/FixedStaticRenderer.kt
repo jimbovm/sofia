@@ -11,9 +11,9 @@ import io.github.jimbovm.isobel.common.Area
 import javafx.scene.canvas.Canvas
 import java.util.*
 
-class FixedStaticRenderer : Renderer {
+class FixedStaticRenderer : BaseRenderer {
 
-	constructor(canvas: Canvas, area: Area) : super(canvas, area)
+	constructor(canvas: Canvas, area: Area, skin: Skin) : super(canvas, area, skin)
 
 	fun render(fixedStatic: FixedStatic) {
 		val axeY = 8

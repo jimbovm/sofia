@@ -15,7 +15,7 @@ import kotlin.math.max
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.
  */
-open class Renderer {
+open class BaseRenderer {
 
 	internal var area: Area = Area()
 	internal var canvas: Canvas = Canvas()
@@ -23,7 +23,7 @@ open class Renderer {
 	internal var pages: Int get() = this.calculatePages(this.area)
 
 	/** Create a new renderer object. */
-	constructor(canvas: Canvas, area: Area, skin: Skin = Skin(area)) {
+	constructor(canvas: Canvas, area: Area, skin: Skin) {
 
 		this.canvas = canvas
 		this.skin = skin
@@ -32,10 +32,6 @@ open class Renderer {
 
 		canvas.width = 256.0 * this.pages
 		canvas.height = 240.0
-	}
-
-	fun reskin() {
-		this.skin.update(this.area)
 	}
 
 	/** Draw a sprite at the given coordinates. */

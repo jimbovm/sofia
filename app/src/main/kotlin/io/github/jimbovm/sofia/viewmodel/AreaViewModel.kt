@@ -10,8 +10,11 @@ import io.github.jimbovm.isobel.common.Area
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
+import org.apache.logging.log4j.LogManager;
 
 class AreaViewModel(val area: Area) {
+
+	private val log = LogManager.getRootLogger()
 
 	val id = SimpleStringProperty(area.id)
 	val familiarName = SimpleStringProperty(area.familiarName)
@@ -24,7 +27,7 @@ class AreaViewModel(val area: Area) {
 	init {
 		environment.addListener { _, _, new ->
 			this.area.environment = new
-			println(this.area.toString())
+			log.trace(this.area.toString())
 		}
 	}
 
