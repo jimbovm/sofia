@@ -6,13 +6,14 @@
 
 package io.github.jimbovm.sofia.viewmodel
 
-import javafx.beans.property.SimpleBooleanProperty
-import javafx.beans.property.SimpleObjectProperty
-import javafx.beans.property.SimpleStringProperty
 import java.io.File
 import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Path
+
+import javafx.beans.property.SimpleBooleanProperty
+import javafx.beans.property.SimpleObjectProperty
+import javafx.beans.property.SimpleStringProperty
 
 import jakarta.xml.bind.JAXBContext
 import jakarta.xml.bind.JAXBException

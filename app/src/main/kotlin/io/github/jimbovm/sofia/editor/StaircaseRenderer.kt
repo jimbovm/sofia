@@ -6,9 +6,10 @@
 
 package io.github.jimbovm.sofia.editor
 
+import sun.awt.X11.XRenderDirectFormat
+
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
-import sun.awt.X11.XRenderDirectFormat
 
 import io.github.jimbovm.isobel.actor.geography.Staircase
 import io.github.jimbovm.isobel.common.Area

@@ -6,9 +6,10 @@
 
 package io.github.jimbovm.sofia.viewmodel
 
-import javafx.beans.property.SimpleObjectProperty
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
+
+import javafx.beans.property.SimpleObjectProperty
 
 import io.github.jimbovm.isobel.common.AreaHeader
 

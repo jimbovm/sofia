@@ -6,6 +6,8 @@
 
 package io.github.jimbovm.sofia.controller
 
+import org.apache.logging.log4j.LogManager
+
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.Group
@@ -14,7 +16,6 @@ import javafx.scene.control.CheckBox
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TitledPane
 import javafx.scene.control.ToolBar
-import org.apache.logging.log4j.LogManager
 
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader

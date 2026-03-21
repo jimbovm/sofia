@@ -6,6 +6,8 @@
 
 package io.github.jimbovm.sofia.view
 
+import java.util.*
+
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Group
@@ -19,7 +21,6 @@ import javafx.scene.image.Image
 import javafx.scene.layout.Pane
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
-import java.util.*
 
 import io.github.jimbovm.isobel.actor.population.Character
 import io.github.jimbovm.isobel.common.Area

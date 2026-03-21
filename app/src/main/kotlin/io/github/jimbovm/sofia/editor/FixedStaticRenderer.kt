@@ -6,8 +6,9 @@
 
 package io.github.jimbovm.sofia.editor
 
-import javafx.scene.canvas.Canvas
 import java.util.*
+
+import javafx.scene.canvas.Canvas
 
 import io.github.jimbovm.isobel.actor.geography.FixedStatic
 import io.github.jimbovm.isobel.common.Area

@@ -6,13 +6,14 @@
 
 package io.github.jimbovm.sofia.controller
 
+import java.io.IOException
+import java.util.Properties
+
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.text.Text
 import javafx.stage.Stage
-import java.io.IOException
-import java.util.Properties
 
 /**
  * Controller for the About Sofia pane.
