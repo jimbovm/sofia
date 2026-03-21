@@ -6,10 +6,12 @@
 
 package io.github.jimbovm.sofia.editor
 
-import io.github.jimbovm.isobel.common.Area
-import io.github.jimbovm.sofia.editor.Sprite
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
+
+import io.github.jimbovm.isobel.common.Area
+
+import io.github.jimbovm.sofia.editor.Sprite
 
 class TextRenderer : BaseRenderer {
 

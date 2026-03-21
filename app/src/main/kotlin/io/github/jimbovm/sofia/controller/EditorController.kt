@@ -6,12 +6,6 @@
 
 package io.github.jimbovm.sofia.controller
 
-import io.github.jimbovm.isobel.common.Area
-import io.github.jimbovm.isobel.common.AreaHeader
-import io.github.jimbovm.sofia.editor.AreaRenderer
-import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
-import io.github.jimbovm.sofia.viewmodel.AreaViewModel
-import io.github.jimbovm.sofia.editor.Skin
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.Group
@@ -20,11 +14,19 @@ import javafx.scene.control.CheckBox
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.TitledPane
 import javafx.scene.control.ToolBar
-import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.LogManager
+
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.common.AreaHeader
+
+import io.github.jimbovm.sofia.editor.AreaRenderer
+import io.github.jimbovm.sofia.editor.Skin
+import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
+import io.github.jimbovm.sofia.viewmodel.AreaViewModel
 
 class EditorController(private val areaViewModel: AreaViewModel, private val areaHeaderViewModel: AreaHeaderViewModel) {
 
-	private val log = LogManager.getRootLogger();
+	private val log = LogManager.getRootLogger()
 
 	@FXML
 	lateinit var editor: TitledPane
@@ -68,8 +70,7 @@ class EditorController(private val areaViewModel: AreaViewModel, private val are
 
 	@FXML
 	fun initialize() {
-
-		val skin = Skin(areaViewModel.area);
+		val skin = Skin(areaViewModel.area)
 		areaRenderer = AreaRenderer(areaViewModel.area, skin, canvas)
 		areaRenderer.update()
 

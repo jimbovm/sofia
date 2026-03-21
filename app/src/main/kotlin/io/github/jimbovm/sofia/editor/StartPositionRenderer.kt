@@ -6,13 +6,15 @@
 
 package io.github.jimbovm.sofia.editor
 
+import javafx.scene.canvas.Canvas
+import javafx.scene.image.Image
+
 import io.github.jimbovm.isobel.common.Area
 import io.github.jimbovm.isobel.common.AreaHeader.StartPosition
+
 import io.github.jimbovm.sofia.editor.Skin
 import io.github.jimbovm.sofia.editor.Sprite
 import io.github.jimbovm.sofia.editor.Sprite.Metatile
-import javafx.scene.canvas.Canvas
-import javafx.scene.image.Image
 
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.

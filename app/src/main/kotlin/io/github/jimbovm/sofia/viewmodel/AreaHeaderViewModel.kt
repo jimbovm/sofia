@@ -6,10 +6,11 @@
 
 package io.github.jimbovm.sofia.viewmodel
 
-import io.github.jimbovm.isobel.common.AreaHeader
 import javafx.beans.property.SimpleObjectProperty
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
+
+import io.github.jimbovm.isobel.common.AreaHeader
 
 class AreaHeaderViewModel(private val header: AreaHeader) {
 
@@ -21,18 +22,18 @@ class AreaHeaderViewModel(private val header: AreaHeader) {
 	val startPosition = SimpleObjectProperty(header.startPosition)
 	val ticks = SimpleObjectProperty(header.ticks)
 
-	private val log = LogManager.getRootLogger();
+	private val log = LogManager.getRootLogger()
 
 	init {
 
 		background.addListener { _, old, new ->
 			this.header.background = new
-			log.debug(String.format("%s->%s", old, new));
+			log.debug(String.format("%s->%s", old, new))
 		}
 
 		fill.addListener { _, old, new ->
 			this.header.fill = new
-			log.debug(String.format("%s->%s", old, new));
+			log.debug(String.format("%s->%s", old, new))
 		}
 
 		platform.addListener { _, old, new ->
@@ -42,17 +43,17 @@ class AreaHeaderViewModel(private val header: AreaHeader) {
 
 		scenery.addListener { _, old, new ->
 			this.header.scenery = new
-			log.debug(String.format("%s->%s", old, new));
+			log.debug(String.format("%s->%s", old, new))
 		}
 
 		startPosition.addListener { _, old, new ->
 			this.header.startPosition = new
-			log.debug(String.format("%s->%s", old, new));
+			log.debug(String.format("%s->%s", old, new))
 		}
 
 		ticks.addListener { _, old, new ->
 			this.header.ticks = new
-			log.debug(String.format("%s->%s", old, new));
+			log.debug(String.format("%s->%s", old, new))
 		}
 	}
 

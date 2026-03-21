@@ -6,8 +6,6 @@
 
 package io.github.jimbovm.sofia.controller
 
-import io.github.jimbovm.sofia.io.GameIO
-import io.github.jimbovm.sofia.viewmodel.GameViewModel
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -21,8 +19,11 @@ import javafx.stage.FileChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.Window
-import java.util.ResourceBundle
 import java.io.File
+import java.util.ResourceBundle
+
+import io.github.jimbovm.sofia.io.GameIO
+import io.github.jimbovm.sofia.viewmodel.GameViewModel
 
 /**
  * Controller for both the main menu and main toolbar.

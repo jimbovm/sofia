@@ -6,9 +6,10 @@
 
 package io.github.jimbovm.sofia
 
-import io.github.jimbovm.sofia.view.Main
 import java.io.IOException
 import java.util.*
+
+import io.github.jimbovm.sofia.view.Main
 
 /**
  * Entry point for the Sofia GUI.

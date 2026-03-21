@@ -6,18 +6,6 @@
 
 package io.github.jimbovm.sofia.view
 
-import io.github.jimbovm.isobel.common.Area
-import io.github.jimbovm.isobel.common.AreaHeader
-import io.github.jimbovm.isobel.common.Game
-import io.github.jimbovm.isobel.actor.population.Character
-import io.github.jimbovm.sofia.controller.EditorController
-import io.github.jimbovm.sofia.controller.MainMenuController
-import io.github.jimbovm.sofia.controller.MainToolbarController
-import io.github.jimbovm.sofia.io.GameIO
-import io.github.jimbovm.sofia.editor.AreaRenderer
-import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
-import io.github.jimbovm.sofia.viewmodel.AreaViewModel
-import io.github.jimbovm.sofia.viewmodel.GameViewModel
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Group
@@ -32,8 +20,21 @@ import javafx.scene.layout.Pane
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import java.util.*
-import io.github.jimbovm.sofia.editor.Skin
 
+import io.github.jimbovm.isobel.actor.population.Character
+import io.github.jimbovm.isobel.common.Area
+import io.github.jimbovm.isobel.common.AreaHeader
+import io.github.jimbovm.isobel.common.Game
+
+import io.github.jimbovm.sofia.controller.EditorController
+import io.github.jimbovm.sofia.controller.MainMenuController
+import io.github.jimbovm.sofia.controller.MainToolbarController
+import io.github.jimbovm.sofia.editor.AreaRenderer
+import io.github.jimbovm.sofia.editor.Skin
+import io.github.jimbovm.sofia.io.GameIO
+import io.github.jimbovm.sofia.viewmodel.AreaHeaderViewModel
+import io.github.jimbovm.sofia.viewmodel.AreaViewModel
+import io.github.jimbovm.sofia.viewmodel.GameViewModel
 
 /**
  * Main launcher for the Sofia GUI.
@@ -95,7 +96,6 @@ class Main : Application() {
 	}
 
 	override fun start(primaryStage: Stage?) {
-
 		primaryStage?.apply {
 			icons?.add(Image("img/icon_128x128.png"))
 			icons?.add(Image("img/icon_64x64.png"))

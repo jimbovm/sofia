@@ -6,12 +6,14 @@
 
 package io.github.jimbovm.sofia.editor
 
+import javafx.scene.canvas.Canvas
+import javafx.scene.image.Image
+
 import io.github.jimbovm.isobel.actor.population.Character
 import io.github.jimbovm.isobel.actor.population.PopulationActor
 import io.github.jimbovm.isobel.common.Area
+
 import io.github.jimbovm.sofia.editor.Sprite
-import javafx.scene.canvas.Canvas
-import javafx.scene.image.Image
 
 class CharacterRenderer : BaseRenderer {
 
@@ -35,7 +37,7 @@ class CharacterRenderer : BaseRenderer {
 			Character.Type.RED_TROOPA,
 			Character.Type.SPINY,
 			Character.Type.TOAD_PEACH,
-				-> {
+			-> {
 				this.renderSingleton(character)
 			}
 

@@ -6,10 +6,14 @@
 
 package io.github.jimbovm.sofia.io
 
+import java.nio.file.Files
 import java.nio.file.Path
 
-import jakarta.xml.bind.*
-import java.nio.file.Files
+import jakarta.xml.bind.JAXBContext
+import jakarta.xml.bind.JAXBException
+import jakarta.xml.bind.MarshalException
+import jakarta.xml.bind.Marshaller
+import jakarta.xml.bind.UnmarshalException
 
 import io.github.jimbovm.isobel.common.Game
 
@@ -42,7 +46,7 @@ class GameIO {
 			var path = Path.of(file)
 			var writer = Files.newBufferedWriter(path)
 			var marshaller = GameIO.context().createMarshaller()
-			marshaller.setProperty(Marshaller.JAXB_ENCODING, "utf-8");
+			marshaller.setProperty(Marshaller.JAXB_ENCODING, "utf-8")
 
 			marshaller.marshal(game, path.toFile())
 		}

@@ -6,11 +6,12 @@
 
 package io.github.jimbovm.sofia.viewmodel
 
-import io.github.jimbovm.isobel.common.Area
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
-import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.LogManager
+
+import io.github.jimbovm.isobel.common.Area
 
 class AreaViewModel(val area: Area) {
 

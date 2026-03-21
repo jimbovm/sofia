@@ -6,14 +6,16 @@
 
 package io.github.jimbovm.sofia.editor
 
-import io.github.jimbovm.isobel.actor.geography.Staircase
-import io.github.jimbovm.isobel.common.Area
-import io.github.jimbovm.sofia.editor.Skin
-import io.github.jimbovm.sofia.editor.Sprite
-import io.github.jimbovm.sofia.editor.Sprite.Metatile
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 import sun.awt.X11.XRenderDirectFormat
+
+import io.github.jimbovm.isobel.actor.geography.Staircase
+import io.github.jimbovm.isobel.common.Area
+
+import io.github.jimbovm.sofia.editor.Skin
+import io.github.jimbovm.sofia.editor.Sprite
+import io.github.jimbovm.sofia.editor.Sprite.Metatile
 
 /**
  * Encapsulates functionality for rendering terrain fill actors in Sofia's editor.

@@ -52,7 +52,7 @@ data class Dimensions(
 				Character.Type.GREEN_PARATROOPA_HOP,
 				Character.Type.GREEN_PARATROOPA_HOVER,
 				Character.Type.RED_PARATROOPA,
-					-> return Dimensions(1, 2)
+				-> return Dimensions(1, 2)
 
 				else -> return Dimensions(1, 1)
 			}

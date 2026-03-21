@@ -6,10 +6,11 @@
 
 package io.github.jimbovm.sofia.editor
 
-import io.github.jimbovm.isobel.actor.geography.FixedStatic
-import io.github.jimbovm.isobel.common.Area
 import javafx.scene.canvas.Canvas
 import java.util.*
+
+import io.github.jimbovm.isobel.actor.geography.FixedStatic
+import io.github.jimbovm.isobel.common.Area
 
 class FixedStaticRenderer : BaseRenderer {
 

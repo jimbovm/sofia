@@ -66,10 +66,12 @@ spotless {
 	kotlin {
 		ktlint().editorConfigOverride(
 			mapOf(
+				"indent_style" to "tab",
+				"insert_spaces" to "false",
 				"end_of_line" to "lf",
 				"insert_final_newline" to true,
 				"charset" to "utf-8",
-				"indent_style" to "tab"
+				"ij_kotlin_imports_layout" to "*,java.**,|,javax.**,|,jakarta.**,|,kotlin.**,|,*,|,io.github.jimbovm.isobel.**,|,io.github.jimbovm.sofia.**"
 			)
 		)
 		licenseHeader("/*\n * SPDX-License-Identifier: MIT-0\n *\n * This file is part of Sofia (https://github.com/jimbovm/sofia).\n */\n\n")

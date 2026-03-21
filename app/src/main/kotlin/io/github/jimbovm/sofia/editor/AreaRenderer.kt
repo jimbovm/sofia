@@ -6,6 +6,9 @@
 
 package io.github.jimbovm.sofia.editor
 
+import javafx.application.Platform
+import javafx.scene.canvas.Canvas
+
 import io.github.jimbovm.isobel.actor.geography.BackgroundModifier
 import io.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
 import io.github.jimbovm.isobel.actor.geography.FixedStatic
@@ -14,8 +17,6 @@ import io.github.jimbovm.isobel.actor.geography.SingletonObject
 import io.github.jimbovm.isobel.actor.geography.Staircase
 import io.github.jimbovm.isobel.actor.population.Character
 import io.github.jimbovm.isobel.common.Area
-import javafx.scene.canvas.Canvas
-import javafx.application.Platform
 
 class AreaRenderer {
 
