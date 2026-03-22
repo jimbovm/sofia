@@ -63,9 +63,9 @@ class AreaRenderer {
 		this.updateGeography()
 		this.updatePopulation()
 		textRenderer.apply {
-			xOrigin = 216.0
+			xOrigin = 200.0
 			yOrigin = 16.0
-			text = "TIME\n ${area.header.ticks}"
+			text = "TIME\n " + String.format("%03d", area.header.ticks)
 			render()
 		}
 	}
