@@ -10,6 +10,7 @@ import javafx.application.Platform
 import javafx.scene.canvas.Canvas
 
 import io.github.jimbovm.isobel.actor.geography.BackgroundModifier
+import io.github.jimbovm.isobel.actor.geography.Column
 import io.github.jimbovm.isobel.actor.geography.ExtensiblePlatform
 import io.github.jimbovm.isobel.actor.geography.FixedExtensible
 import io.github.jimbovm.isobel.actor.geography.FixedStatic
@@ -20,6 +21,8 @@ import io.github.jimbovm.isobel.actor.geography.Staircase
 import io.github.jimbovm.isobel.actor.geography.UprightPipe
 import io.github.jimbovm.isobel.actor.population.Character
 import io.github.jimbovm.isobel.common.Area
+
+import io.github.jimbovm.sofia.editor.ColumnRenderer
 
 class AreaRenderer {
 
@@ -37,6 +40,7 @@ class AreaRenderer {
 	private val textRenderer: TextRenderer
 	private val uprightPipeRenderer: UprightPipeRenderer
 	private val rowRenderer: RowRenderer
+	private val columnRenderer: ColumnRenderer
 
 	constructor(area: Area, skin: Skin, canvas: Canvas) {
 		this.area = area
@@ -52,6 +56,7 @@ class AreaRenderer {
 		this.textRenderer = TextRenderer(canvas, area, skin)
 		this.uprightPipeRenderer = UprightPipeRenderer(canvas, area, skin)
 		this.rowRenderer = RowRenderer(canvas, area, skin)
+		this.columnRenderer = ColumnRenderer(canvas, area, skin)
 	}
 
 	fun update() {
@@ -80,6 +85,7 @@ class AreaRenderer {
 				is UprightPipe -> this.render(geographyActor)
 				is Row -> this.render(geographyActor)
 				is FixedExtensible -> this.render(geographyActor)
+				is Column -> this.render(geographyActor)
 			}
 		}
 	}
@@ -122,5 +128,9 @@ class AreaRenderer {
 
 	fun render(pipe: UprightPipe) {
 		this.uprightPipeRenderer.render(pipe)
+	}
+
+	fun render(column: Column) {
+		this.columnRenderer.render(column)
 	}
 }
