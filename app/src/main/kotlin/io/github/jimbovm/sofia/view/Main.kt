@@ -6,6 +6,7 @@
 
 package io.github.jimbovm.sofia.view
 
+import io.github.jimbovm.isobel.actor.geography.FixedExtensible
 import java.util.*
 
 import javafx.application.Application
@@ -123,6 +124,7 @@ class Main : Application() {
 			familiarName = "Some area"
 			header.background = AreaHeader.Background.NIGHT
 			header.scenery = AreaHeader.Scenery.HILLS
+			geography = listOf(FixedExtensible.create(0, FixedExtensible.Type.BRIDGE_Y7, 17))
 			population = mutableListOf(
 				Character.create(13, 4, Character.Type.GOOMBA, false),
 			)
